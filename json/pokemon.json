@@ -1,0 +1,47 @@
+[
+    {
+        "nom": "Salameche",
+        "type": "Feu",
+        "pv": 50,
+        "attaque": 60,
+        "defense": 50,
+        "lvl": 5,
+        "xp": 0
+    },
+    {
+        "nom": "Carapuce",
+        "type": "Eau",
+        "pv": 50,
+        "attaque": 50,
+        "defense": 65,
+        "lvl": 5,
+        "xp": 0
+    },
+    {
+        "nom": "Bulbizarre",
+        "type": "Plante",
+        "pv": 45,
+        "attaque": 49,
+        "defense": 49,
+        "lvl": 5,
+        "xp": 0
+    },
+    {
+        "nom": "Pikachu",
+        "type": "Electrik",
+        "pv": 35,
+        "attaque": 55,
+        "defense": 30,
+        "lvl": 5,
+        "xp": 0
+    },
+    {
+        "nom": "Evoli",
+        "type": "Normal",
+        "pv": 55,
+        "attaque": 55,
+        "defense": 50,
+        "lvl": 5,
+        "xp": 0
+    }
+]
