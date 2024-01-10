@@ -13,7 +13,7 @@
         "defense" : "30",
         "puissance attaque" : "40",
         "point de vie" : "100",
-        "image" : "pokemon/images/pokemon/bulbizarre_vert_bleu.gif"
+        "image" : "pokemon/images/pokemon/bulbizzar_vert_bleu.gif"
     },
     {
         "nom" : "Carapuce",
@@ -24,7 +24,7 @@
         "image" : "pokemon/images/pokemon/carapuce.gif"
     },
     {
-        "nom" : "Salamèche",
+        "nom" : "Salameche",
         "type" : "Feu",
         "defense" : "50",
         "puissance attaque" : "20",

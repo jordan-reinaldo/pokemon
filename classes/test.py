@@ -6,7 +6,6 @@ import json
 with open ("pokemon/json/pokedex.json", "r") as fichier: #ouvrir le fichier pokedex.json en mode lecture
     donneesPokedex = json.load(fichier) #charger les données du fichier pokedex.json dans la variable donnees
 
-
 class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de fonctions (méthodes) #objet = instance de la classe (ex: pokedex = Pokedex(800, 800))
     def __init__(self, largeur, hauteur):
         pg.init()
@@ -150,7 +149,6 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
 
             pg.display.flip()
             
-
 fenetre = Pokedex(800, 800)
 
 fenetre.menuPokedex()
