@@ -13,7 +13,8 @@ class Menu_principal:
         self.__fenetre = pygame.display.set_mode((800, 800))
         pygame.display.set_caption("Pokemon Arena-Fighter")
         self.__bg = pygame.image.load("images/background/bg_menu_principal.png").convert()
-
+        
+    
         # cree titre du jeu
         self.__titre_principal = pygame.image.load("titre/Pokemon_titre.png").convert_alpha()
         self.__titre_principal_rect = self.__titre_principal.get_rect()
@@ -52,6 +53,9 @@ class Menu_principal:
         self.couleur_origine = (55, 93, 170)
         self.couleur_changement = (255, 255, 255) 
 
+    # ajout son boutons
+        self.son_bouton = pygame.mixer.Sound("musique/voicy-pikachu01.mp3")
+
 
     # méthode afficher
     def afficher_menu(self):
@@ -83,6 +87,8 @@ class Menu_principal:
 # test de la classe
 menu = Menu_principal()
 
+
+
 running = True
 while running:
     menu.afficher_menu()
@@ -93,12 +99,18 @@ while running:
             sys.exit()
         elif event.type == MOUSEBUTTONDOWN:
             if event.button == 1:
-                if menu.lancer_jeu_rect.collidepoint(event.pos):
+                if menu.lancer_jeu_rect.collidepoint(event.pos): 
                     print("lancer le jeu")
+                    menu.son_bouton.play()
+                    
                 elif menu.ajouter_pokemon_rect.collidepoint(event.pos):
                     print("ajouter un pokemon")
+                    menu.son_bouton.play()
                 elif menu.pokedex_rect.collidepoint(event.pos):
                     print("pokedex")
+                    menu.son_bouton.play()
+
+
         
 
 
