@@ -30,7 +30,8 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
 
         self.son_clic = pg.mixer.Sound("pokemon/musique/BEEP_touche.mp3")
 
-        font = pg.font.SysFont("nsimsun", 20)
+        font_chemin = "pokemon/police/Retro_Gaming.ttf"
+        font = pg.font.Font(font_chemin, 25)
         # font.set_bold(True)
         self.acces_pokedex = font.render("Pokedex", True, (255, 0, 0))
         self.rect_acces_pokedex = self.acces_pokedex.get_rect(topleft = (350, 500))
@@ -94,7 +95,8 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             image_redimensionnee = pg.transform.scale(image_pokemon, (125, 125))
             self.fenetre.blit(image_redimensionnee, (350, 190))
 
-            font = pg.font.SysFont("nsimsun", 20)
+            font_chemin = "pokemon/police/Retro_Gaming.ttf"
+            font = pg.font.Font(font_chemin, 16)
             # font.set_bold(True)
 
             nom_pokemon = font.render(f"Nom : {pokemon["nom"]}", True, (0, 0, 0))
