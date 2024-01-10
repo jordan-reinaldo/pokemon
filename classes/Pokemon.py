@@ -19,7 +19,9 @@ class Pokemon:
         Pokemon.tous_pokemons.append(self) # Ajout du Pokémon nouvellement créé à la liste de tous les Pokémon
 
     def utiliser_attaque(self, cible):
-        return Combat.calculer_degats(self, self.attaque_de_base, cible)
+        nom_attaque = self.attaque_de_base.nom
+        degats = Combat.calculer_degats(self, self.attaque_de_base, cible)
+        return nom_attaque, degats
 
     @staticmethod
     def import_json(filename):
