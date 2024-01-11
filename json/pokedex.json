@@ -5,7 +5,17 @@
         "defense" : "20",
         "puissance attaque" : "50",
         "point de vie" : "100",
-        "image" : "images/pokemon/pikachu.png"
+        "image" : "images/pokemon/pikachu.png",
+        "evolution" : [
+            {
+                "nom" : "Raichu",
+                "type" : "Electrique",
+                "defense" : "30",
+                "puissance attaque" : "60",
+                "point de vie" : "100",
+                "image" : "images/pokemon/raichu.png"
+            }
+        ]
     },
     {
         "nom" : "Bulbizarre",
@@ -13,7 +23,17 @@
         "defense" : "30",
         "puissance attaque" : "40",
         "point de vie" : "100",
-        "image" : "images/pokemon/bulbizarre.png"
+        "image" : "images/pokemon/bulbizarre.png",
+        "evolution" : [
+            {
+                "nom" : "Herbizarre",
+                "type" : "Plante",
+                "defense" : "40",
+                "puissance attaque" : "50",
+                "point de vie" : "100",
+                "image" : "images/pokemon/herbizarre.png"
+            }
+        ]
     },
     {
         "nom" : "Carapuce",
@@ -21,7 +41,17 @@
         "defense" : "40",
         "puissance attaque" : "30",
         "point de vie" : "100",
-        "image" : "images/pokemon/carapuce.png"
+        "image" : "images/pokemon/carapuce.png",
+        "evolution" : [
+            {
+                "nom" : "Carabaffe",
+                "type" : "Eau",
+                "defense" : "50",
+                "puissance attaque" : "40",
+                "point de vie" : "100",
+                "image" : "images/pokemon/carabaffe.png"
+            }
+        ]
     },
     {
         "nom" : "Salameche",
@@ -29,7 +59,17 @@
         "defense" : "50",
         "puissance attaque" : "20",
         "point de vie" : "100",
-        "image" : "images/pokemon/salameche.png"
+        "image" : "images/pokemon/salameche.png",
+        "evolution" : [
+            {
+                "nom" : "Reptincel",
+                "type" : "Feu",
+                "defense" : "60",
+                "puissance attaque" : "30",
+                "point de vie" : "100",
+                "image" : "images/pokemon/reptincel.png"
+            }
+        ]
     },
     {
         "nom" : "Evoli",
@@ -37,6 +77,70 @@
         "defense" : "60",
         "puissance attaque" : "10",
         "point de vie" : "100",
-        "image" : "images/pokemon/evoli.png"
+        "image" : "images/pokemon/evoli.png",
+        "evolution" : [
+            {
+                "nom" : "Phyllali",
+                "type" : "Eau",
+                "defense" : "70",
+                "puissance attaque" : "20",
+                "point de vie" : "100",
+                "image" : "images/pokemon/phyllali.png"
+            }
+        ]
+    },
+    {
+        "nom" : "Osselait",
+        "type" : "Sol",
+        "defense" : "70",
+        "puissance attaque" : "10",
+        "point de vie" : "100",
+        "image" : "images/pokemon/osselait.png",
+        "evolution" : [
+            {
+                "nom" : "Ossatueur",
+                "type" : "Sol",
+                "defense" : "80",
+                "puissance attaque" : "20",
+                "point de vie" : "100",
+                "image" : "images/pokemon/ossatueur.png"
+            }
+        ]
+    },
+    {
+        "nom" : "Rattata",
+        "type" : "Normal",
+        "defense" : "80",
+        "puissance attaque" : "10",
+        "point de vie" : "100",
+        "image" : "images/pokemon/rattata.png",
+        "evolution" : [
+            {
+                "nom" : "Rattatac",
+                "type" : "Normal",
+                "defense" : "90",
+                "puissance attaque" : "20",
+                "point de vie" : "100",
+                "image" : "images/pokemon/rattatac.png"
+            }
+        ]
+    },
+    {
+        "nom" : "Roucoul",
+        "type" : "Feu",
+        "defense" : "60",
+        "puissance attaque" : "30",
+        "point de vie" : "100",
+        "image" : "images/pokemon/roucoul.png",
+        "evolution" : [
+            {
+                "nom" : "Roucoups",
+                "type" : "Feu",
+                "defense" : "70",
+                "puissance attaque" : "40",
+                "point de vie" : "100",
+                "image" : "images/pokemon/roucoups.png"
+            }
+        ]
     }
 ]
