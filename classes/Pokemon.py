@@ -1,6 +1,6 @@
 import json
 from .Type import Type
-from .Combat import Combat
+from .Attaque import Attaque
 
 class Pokemon:
     tous_pokemons = []  # Attribut de classe pour stocker tous les Pokémon chargés
@@ -59,4 +59,9 @@ class Pokemon:
         self.pv = self.pv_max  # Soigner le Pokémon à ses nouveaux PV max
         self.attaque += 5  # Augmenter l'attaque
         self.defense += 5  # Augmenter la défense
-        print(f"{self.nom} est monté au niveau {self.lvl}!")
+        nouvelle_attaque = Attaque.assigner_attaque_base(self)
+        if nouvelle_attaque.nom != self.attaque_de_base.nom:
+            self.attaque_de_base = nouvelle_attaque
+            print(f"{self.nom} est monté au niveau {self.lvl} et a appris une nouvelle attaque : {self.attaque_de_base.nom}!")
+        else:
+            print(f"{self.nom} est monté au niveau {self.lvl}")

@@ -104,16 +104,16 @@ class Attaque:
         else:
             return Attaque("Psyko", 90, Type.psy())
         
-
-    def assigner_attaque_base(pokemon):
+    @classmethod
+    def assigner_attaque_base(cls, pokemon):
         # Configuration de l'attaque de base du Pokémon en fonction de son type et du niveau du Pokémon
         type_pokemon = pokemon.type.nom.lower()
         niveau = pokemon.lvl
         method_name = f'attaque_{type_pokemon}'
-        
+    
         # On récupère la méthode correspondant au type du Pokémon si elle existe
-        if hasattr(Attaque, method_name):
-            return getattr(Attaque, method_name)(niveau)
+        if hasattr(cls, method_name):
+            return getattr(cls, method_name)(niveau)
         else:
-            # Retourne None ou une attaque par défaut si le type n'est pas géré
+        # Retourne None ou une attaque par défaut si le type n'est pas géré
             return None
