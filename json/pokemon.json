@@ -5,9 +5,19 @@
         "pv": 50,
         "attaque": 60,
         "defense": 50,
-        "lvl": 7,
+        "lvl": 5,
         "xp": 0,
         "xp_necessaire": 20
+    },
+    {
+        "nom": "Reptincel",
+        "type": "Feu",
+        "pv": 80,
+        "attaque": 75,
+        "defense": 65,
+        "lvl": 7,
+        "xp": 0,
+        "xp_necessaire": 50
     },
     {
         "nom": "Carapuce",
@@ -16,6 +26,16 @@
         "attaque": 50,
         "defense": 65,
         "lvl": 5,
+        "xp": 0,
+        "xp_necessaire": 50
+    },
+    {
+        "nom": "Carabaffe",
+        "type": "Eau",
+        "pv": 65,
+        "attaque": 65,
+        "defense": 80,
+        "lvl": 7,
         "xp": 0,
         "xp_necessaire": 50
     },
@@ -30,6 +50,16 @@
         "xp_necessaire": 50
     },
     {
+        "nom": "Herbizarre",
+        "type": "Plante",
+        "pv": 60,
+        "attaque": 62,
+        "defense": 63,
+        "lvl": 7,
+        "xp": 0,
+        "xp_necessaire": 50
+    },
+    {
         "nom": "Pikachu",
         "type": "Electrik",
         "pv": 35,
@@ -40,12 +70,32 @@
         "xp_necessaire": 50
     },
     {
+        "nom": "Raichu",
+        "type": "Electrik",
+        "pv": 60,
+        "attaque": 90,
+        "defense": 55,
+        "lvl": 100,
+        "xp": 0,
+        "xp_necessaire": 50
+    },
+    {
         "nom": "Evoli",
         "type": "Normal",
         "pv": 55,
         "attaque": 55,
         "defense": 50,
         "lvl": 5,
+        "xp": 0,
+        "xp_necessaire": 50
+    },
+    {
+        "nom": "Phyllali",
+        "type": "Plante",
+        "pv": 65,
+        "attaque": 60,
+        "defense": 110,
+        "lvl": 7,
         "xp": 0,
         "xp_necessaire": 50
     }

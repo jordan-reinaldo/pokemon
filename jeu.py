@@ -17,7 +17,7 @@ def choisir_pokemon(liste_pokemons):
 
 # Importez vos modules/classes nécessaires ici
 
-def jeu():
+def main():
     # Charger tous les Pokémon à partir du fichier JSON
     Pokemon.import_json("json/pokemon.json")
     mon_pokemon = None  # Initialisation de la variable pour stocker le Pokémon choisi
@@ -40,7 +40,7 @@ def jeu():
         # Soin du Pokémon avant le combat
         mon_pokemon.soigner()
 
-        # Sélection aléatoire d'un adversaire différent du Pokémon choisi
+        # Sélection aléatoire d'un adversaire, qui pourrait être le même que le Pokémon du joueur
         adversaire = random.choice(Pokemon.tous_pokemons)
         adversaire.attaque_de_base = Attaque.assigner_attaque_base(adversaire)
         adversaire.soigner()
@@ -57,12 +57,10 @@ def jeu():
                 # Demander si le joueur veut choisir un nouveau Pokémon
                 changer_pokemon = input("Voulez-vous choisir un nouveau Pokémon ? (oui/non) : ").lower()
                 if changer_pokemon == 'oui':
-                    mon_pokemon = None  # Le joueur peut choisir un nouveau Pokémon
+                    mon_pokemon = None
                 else:
                     print("Merci d'avoir joué ! À bientôt.")
                     break
-        else:
-            print(f"{mon_pokemon.nom} est K.O. !")
 
 if __name__ == "__main__":
-    jeu()
+    main()
