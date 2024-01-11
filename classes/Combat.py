@@ -1,4 +1,5 @@
 import time
+
 class Combat:
 
     XP_PAR_VICTOIRE = 20
@@ -28,34 +29,38 @@ class Combat:
     @staticmethod
     def lancer_combat(pokemon1, pokemon2):
         print(f"Le combat commence entre {pokemon1.nom} et {pokemon2.nom} !")
+        a_fui = False  # Indicateur de fuite ajouté
 
         while True:  # Boucle infinie qui ne sera interrompue que par une fuite ou un K.O.
-            time.sleep(1)
-            # Demander au joueur de choisir une action pour le Pokémon 1
+            time.sleep(1)  # Petite pause pour simuler le temps de réflexion/lecture
             action = input(f"{pokemon1.nom}, que voulez-vous faire ? 'attaquer' ou 'fuir' : ").lower()
+            
             if action == 'fuir':
                 print(f"{pokemon1.nom} a fui le combat.")
-                print(f"Le {pokemon2.nom} adverse est déclaré vainqueur par forfait !")
-                return pokemon2.nom  # Pokémon 2 est déclaré vainqueur si le Pokémon 1 fuit
+                a_fui = True  # On marque que le joueur a fui
+                break  # Sortir de la boucle de combat
+            
             elif action == 'attaquer':
-                # Pokémon 1 attaque le Pokémon 2
                 degats = Combat.calculer_degats(pokemon1, pokemon1.attaque_de_base, pokemon2)
-                Combat.appliquer_degats(pokemon2, degats)
-                print(f"{pokemon1.nom} attaque {pokemon2.nom} avec {pokemon1.attaque_de_base.nom}, infligeant {degats} dégâts. PV restants de {pokemon2.nom} : {pokemon2.pv}")
+                pv_restants = Combat.appliquer_degats(pokemon2, degats)
+                print(f"{pokemon1.nom} attaque {pokemon2.nom} avec {pokemon1.attaque_de_base.nom}, infligeant {degats} dégâts. PV restants de {pokemon2.nom} : {pv_restants}")
                 if pokemon2.pv <= 0:
                     print(f"{pokemon1.nom} a gagné {Combat.XP_PAR_VICTOIRE} points d'XP!")
                     pokemon1.gagner_xp(Combat.XP_PAR_VICTOIRE)
                     print(f"{pokemon1.nom} est le vainqueur du combat !")
-                    return pokemon1.nom
+                    break  # Sortir de la boucle de combat
+            
             else:
                 print("Action non reconnue. Veuillez choisir 'attaquer' ou 'fuir'.")
-                continue  # Continue la boucle si l'action n'est pas reconnue
+                continue  # Continuer la boucle si l'action n'est pas reconnue
 
+            # Au tour de l'adversaire d'attaquer
             time.sleep(1)
-            # Pokémon 2 attaque le Pokémon 1
             degats = Combat.calculer_degats(pokemon2, pokemon2.attaque_de_base, pokemon1)
-            Combat.appliquer_degats(pokemon1, degats)
-            print(f"{pokemon2.nom} attaque {pokemon1.nom} avec {pokemon2.attaque_de_base.nom}, infligeant {degats} dégâts. PV restants de {pokemon1.nom} : {pokemon1.pv}")
+            pv_restants = Combat.appliquer_degats(pokemon1, degats)
+            print(f"{pokemon2.nom} attaque {pokemon1.nom} avec {pokemon2.attaque_de_base.nom}, infligeant {degats} dégâts. PV restants de {pokemon1.nom} : {pv_restants}")
             if pokemon1.pv <= 0:
                 print(f"Le {pokemon2.nom} adverse a gagné le combat !")
-                return pokemon2.nom
+                break  # Sortir de la boucle de combat
+        
+        return pokemon1.nom if pokemon1.pv > 0 else pokemon2.nom, a_fui
