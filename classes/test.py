@@ -3,7 +3,9 @@ import cv2
 import numpy as np
 import json
 
-with open ("pokemon/json/pokedex.json", "r") as fichier: #ouvrir le fichier pokedex.json en mode lecture
+
+
+with open ("json/pokedex.json", "r") as fichier: #ouvrir le fichier pokedex.json en mode lecture
     donneesPokedex = json.load(fichier) #charger les données du fichier pokedex.json dans la variable donnees
 
 class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de fonctions (méthodes) #objet = instance de la classe (ex: pokedex = Pokedex(800, 800))
@@ -13,12 +15,12 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
         self.hauteur = hauteur
         self.fenetre = pg.display.set_mode((self.largeur, self.hauteur)) #set_mode = définir le mode d'affichage de la fenêtre 
         pg.display.set_caption("Pokedex")
-        self.image_fond = pg.image.load("pokemon/images/pokedex/paysage.jpg")
+        self.image_fond = pg.image.load("images/pokedex/paysage.jpg")
         
-        self.imagePokedex = pg.image.load("pokemon/images/pokedex/pokedex1.png")
+        self.imagePokedex = pg.image.load("images/pokedex/pokedex1.png")
         self.imagePokedex_redimensionnee = pg.transform.scale(self.imagePokedex, (800, 600))
 
-        self.imageTitrePokedex = pg.image.load("pokemon/images/pokedex/titrePokedex.png")
+        self.imageTitrePokedex = pg.image.load("images/pokedex/titrePokedex.png")
         self.imageTitrePokedex_redimensionnee = pg.transform.scale(self.imageTitrePokedex, (300, 100))
         
         self.fleche_gauche = pg.Rect(110, 520, 50, 25)
@@ -31,9 +33,9 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
         self.couleur_fleche_haut = (255, 0, 0)
         self.couleur_fleche_bas = (255, 0, 0)
 
-        self.son_clic = pg.mixer.Sound("pokemon/musique/BEEP_touche.mp3")
+        self.son_clic = pg.mixer.Sound("musique/BEEP_touche.mp3")
 
-        font_chemin = "pokemon/police/Retro_Gaming.ttf"
+        font_chemin = "police/Retro_Gaming.ttf"
         font = pg.font.Font(font_chemin, 25)
         # font.set_bold(True)
         self.acces_pokedex = font.render("Pokedex", True, (255, 0, 0))
@@ -43,6 +45,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
 
         self.index_pokemon = 0 #index du pokemon 
         self.pokemon_affiche = 0 #numéro du pokemon affiché
+
 
         self.afficher = True #afficher = True : afficher le pokedex ; afficher = False : ne pas afficher le pokedex
 
@@ -95,10 +98,10 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             pokemon = donneesPokedex[index_pokemon]
             chemin_image = pokemon["image"]
             image_pokemon = pg.image.load(chemin_image)
-            image_redimensionnee = pg.transform.scale(image_pokemon, (125, 125))
-            self.fenetre.blit(image_redimensionnee, (350, 190))
+            image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
+            self.fenetre.blit(image_redimensionnee, (310, 125))
 
-            font_chemin = "pokemon/police/Retro_Gaming.ttf"
+            font_chemin = "police/Retro_Gaming.ttf"
             font = pg.font.Font(font_chemin, 16)
             # font.set_bold(True)
 
@@ -150,8 +153,8 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                             print("Clic sur Pokedex")
                         elif self.rect_quitter_pokedex.collidepoint(evenement.pos):
                             self.son_clic.play()
-                            self.afficher = False
                             print("Clic sur Quitter")
+                    
 
             pg.display.flip()
 

@@ -5,7 +5,7 @@
         "defense" : "20",
         "puissance attaque" : "50",
         "point de vie" : "100",
-        "image" : "pokemon/images/pokemon/pikachu.gif"
+        "image" : "images/pokemon/pikachu.png"
     },
     {
         "nom" : "Bulbizarre",
@@ -13,7 +13,7 @@
         "defense" : "30",
         "puissance attaque" : "40",
         "point de vie" : "100",
-        "image" : "pokemon/images/pokemon/bulbizzar_vert_bleu.gif"
+        "image" : "images/pokemon/bulbizarre.png"
     },
     {
         "nom" : "Carapuce",
@@ -21,7 +21,7 @@
         "defense" : "40",
         "puissance attaque" : "30",
         "point de vie" : "100",
-        "image" : "pokemon/images/pokemon/carapuce.gif"
+        "image" : "images/pokemon/carapuce.png"
     },
     {
         "nom" : "Salameche",
@@ -29,7 +29,7 @@
         "defense" : "50",
         "puissance attaque" : "20",
         "point de vie" : "100",
-        "image" : "pokemon/images/pokemon/salameche.gif"
+        "image" : "images/pokemon/salameche.png"
     },
     {
         "nom" : "Evoli",
@@ -37,6 +37,6 @@
         "defense" : "60",
         "puissance attaque" : "10",
         "point de vie" : "100",
-        "image" : "pokemon/images/pokemon/evoli.gif"
+        "image" : "images/pokemon/evoli.png"
     }
 ]
