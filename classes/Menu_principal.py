@@ -9,6 +9,7 @@ class Menu_principal:
     # constructeur de la classe
     def __init__(self):
         pygame.init()
+        
         # Créer la fenêtre
         self.__fenetre = pygame.display.set_mode((800, 800))
         pygame.display.set_caption("Pokemon Arena-Fighter")
