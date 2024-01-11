@@ -31,32 +31,52 @@ def choisir_pokemon(liste_pokemons):
         print("Choix non valide, veuillez réessayer.")
         return choisir_pokemon(liste_pokemons)  # Récursivité pour forcer un choix valide
 
+# Importez vos modules/classes nécessaires ici
+
 def main():
     # Charger tous les Pokémon à partir du fichier JSON
     Pokemon.import_json("json/pokemon.json")
+    mon_pokemon = None  # Initialisation de la variable pour stocker le Pokémon choisi
 
     while True:  # Boucle principale du jeu
-        if Pokemon.tous_pokemons:
-            mon_pokemon = choisir_pokemon(Pokemon.tous_pokemons)
-            mon_pokemon.attaque_de_base = assigner_attaque_base(mon_pokemon)
-            print(f"Votre Pokémon choisi est : {mon_pokemon.nom} (PV: {mon_pokemon.pv})")
-
-            # Sélection aléatoire d'un adversaire différent du Pokémon choisi
-            adversaire = random.choice([p for p in Pokemon.tous_pokemons if p != mon_pokemon])
-            adversaire.attaque_de_base = assigner_attaque_base(adversaire)
-            print(f"Vous rencontrez : {adversaire.nom} (PV: {adversaire.pv})")
-
-            # Lancement du combat
-            Combat.lancer_combat(mon_pokemon, adversaire)
-
-            # Demander au joueur s'il veut relancer un combat
-            rejouer = input("Voulez-vous relancer un combat ? (oui/non) : ").lower()
-            if rejouer != 'oui':
-                print("Merci d'avoir joué ! À bientôt.")
-                break
-        else:
+        if not Pokemon.tous_pokemons:
             print("Aucun Pokémon n'a été chargé du fichier JSON.")
             break
+
+        # Si le joueur n'a pas encore de Pokémon ou choisit de changer, il en sélectionne un nouveau
+        if mon_pokemon is None:
+            mon_pokemon = choisir_pokemon(Pokemon.tous_pokemons)
+            mon_pokemon.attaque_de_base = assigner_attaque_base(mon_pokemon)
+
+        # Soin du Pokémon avant le combat
+        mon_pokemon.soigner()
+        print(f"Votre Pokémon choisi est : {mon_pokemon.nom} (PV: {mon_pokemon.pv})")
+
+        # Sélection aléatoire d'un adversaire différent du Pokémon choisi
+        adversaire = random.choice([p for p in Pokemon.tous_pokemons if p != mon_pokemon])
+        adversaire.attaque_de_base = assigner_attaque_base(adversaire)
+        adversaire.soigner()
+        print(f"Vous rencontrez : {adversaire.nom} (PV: {adversaire.pv})")
+
+        # Lancement du combat
+        Combat.lancer_combat(mon_pokemon, adversaire)
+
+        # Vérifier si le Pokémon du joueur a survécu au combat
+        if mon_pokemon.pv <= 0:
+            print(f"{mon_pokemon.nom} est K.O. !")
+            mon_pokemon = None  # Le joueur doit choisir un nouveau Pokémon
+            continue  # Retourner au début de la boucle
+
+        # Demander au joueur s'il veut relancer un combat avec le même Pokémon
+        rejouer = input("Voulez-vous combattre un nouvel adversaire avec le même Pokémon ? (oui/non) : ").lower()
+        if rejouer != 'oui':
+            # Demander si le joueur veut choisir un nouveau Pokémon
+            changer_pokemon = input("Voulez-vous choisir un nouveau Pokémon ? (oui/non) : ").lower()
+            if changer_pokemon == 'oui':
+                mon_pokemon = None  # Le joueur peut choisir un nouveau Pokémon
+            else:
+                print("Merci d'avoir joué ! À bientôt.")
+                break
 
 if __name__ == "__main__":
     main()
