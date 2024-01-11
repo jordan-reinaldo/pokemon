@@ -50,28 +50,3 @@ class Pokemon:
 
     def __str__(self):
         return f"{self.nom} ({self.type.nom}) - PV: {self.pv} Attaque: {self.attaque} Défense: {self.defense} Niveau: {self.lvl} XP: {self.xp}"
-    
-    
-    def gagner_xp(self, quantite):
-        self.xp += quantite
-        print(f"{self.nom} a gagné {quantite} XP.")
-        self.verifier_niveau()
-
-    def verifier_niveau(self):
-        if self.xp >= self.xp_necessaire:
-            self.xp -= self.xp_necessaire
-            self.lvl += 1
-            self.xp_necessaire = self.calculer_xp_necessaire()  # Une méthode pour calculer le nouvel XP nécessaire
-            self.augmenter_stats()
-            print(f"{self.nom} est monté au niveau {self.lvl}!")
-
-    def augmenter_stats(self):
-        # Augmentez les statistiques selon votre logique de jeu. Exemple simple :
-        self.pv_max += 10
-        self.attaque += 2
-        self.defense += 2
-        self.soigner()  # Soigner le Pokémon après la montée de niveau
-
-    def calculer_xp_necessaire(self):
-        # Implémentez votre formule pour calculer l'XP nécessaire pour le prochain niveau. Exemple simple :
-        return 100 * self.lvl
