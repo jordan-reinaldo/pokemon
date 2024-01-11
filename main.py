@@ -46,7 +46,7 @@ def main():
         # Si le joueur n'a pas encore de Pokémon ou choisit de changer, il en sélectionne un nouveau
         if mon_pokemon is None:
             mon_pokemon = choisir_pokemon(Pokemon.tous_pokemons)
-            mon_pokemon.attaque_de_base = assigner_attaque_base(mon_pokemon)
+            mon_pokemon.attaque_de_base = Attaque.assigner_attaque_base(mon_pokemon)
 
         # Soin du Pokémon avant le combat
         mon_pokemon.soigner()
@@ -54,7 +54,7 @@ def main():
 
         # Sélection aléatoire d'un adversaire différent du Pokémon choisi
         adversaire = random.choice([p for p in Pokemon.tous_pokemons if p != mon_pokemon])
-        adversaire.attaque_de_base = assigner_attaque_base(adversaire)
+        adversaire.attaque_de_base = Attaque.assigner_attaque_base(adversaire)
         adversaire.soigner()
         print(f"Vous rencontrez : {adversaire.nom} (PV: {adversaire.pv})")
 
