@@ -17,6 +17,9 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
         
         self.imagePokedex = pg.image.load("pokemon/images/pokedex/pokedex1.png")
         self.imagePokedex_redimensionnee = pg.transform.scale(self.imagePokedex, (800, 600))
+
+        self.imageTitrePokedex = pg.image.load("pokemon/images/pokedex/titrePokedex.png")
+        self.imageTitrePokedex_redimensionnee = pg.transform.scale(self.imageTitrePokedex, (300, 100))
         
         self.fleche_gauche = pg.Rect(110, 520, 50, 25)
         self.fleche_droite = pg.Rect(175, 520, 50, 25)
@@ -34,9 +37,9 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
         font = pg.font.Font(font_chemin, 25)
         # font.set_bold(True)
         self.acces_pokedex = font.render("Pokedex", True, (255, 0, 0))
-        self.rect_acces_pokedex = self.acces_pokedex.get_rect(topleft = (350, 500))
-        self.quitter_pokedex = font.render("Quitter", True, (255, 0, 0))
-        self.rect_quitter_pokedex = self.quitter_pokedex.get_rect(topleft = (350, 550))
+        self.rect_acces_pokedex = self.acces_pokedex.get_rect(topleft = (270, 500))
+        self.revenir_menu_pokedex = font.render("Revenir au menu", True, (255, 0, 0))
+        self.rect_quitter_pokedex = self.revenir_menu_pokedex.get_rect(topleft = (270, 550))
 
         self.index_pokemon = 0 #index du pokemon 
         self.pokemon_affiche = 0 #numéro du pokemon affiché
@@ -57,7 +60,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
 
         return blurred_surface
 
-    def gererClics(self):
+    def gererDéfilementPokemon(self):
         for evenement in pg.event.get():
             if evenement.type == pg.QUIT:
                 self.afficher = False
@@ -124,7 +127,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite)
             pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut)
             pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas)
-            self.gererClics() 
+            self.gererDéfilementPokemon() 
             pg.display.flip() #rafraichir l'affichage
 
     def menuPokedex(self):
@@ -132,8 +135,9 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             image_floue = self.flouterImage(self.image_fond)
             self.fenetre.blit(image_floue, (0, 0))
             self.fenetre.blit(self.imagePokedex_redimensionnee, (0, 80))
-            self.fenetre.blit(self.acces_pokedex, (350, 500))  # Affichage du bouton
-            self.fenetre.blit(self.quitter_pokedex, (350, 550))  # Affichage du bouton
+            self.fenetre.blit(self.acces_pokedex, (270, 500))  # Affichage du bouton
+            self.fenetre.blit(self.revenir_menu_pokedex, (270, 550))  # Affichage du bouton
+            self.fenetre.blit(self.imageTitrePokedex_redimensionnee, (250, 185))
 
             for evenement in pg.event.get():
                 if evenement.type == pg.QUIT:
@@ -150,6 +154,8 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                             print("Clic sur Quitter")
 
             pg.display.flip()
+
+
             
 fenetre = Pokedex(800, 800)
 
