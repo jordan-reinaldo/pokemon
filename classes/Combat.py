@@ -1,5 +1,8 @@
 import time
 class Combat:
+
+    XP_PAR_VICTOIRE = 20
+
     @staticmethod
     def calculer_degats(attaquant, attaque, defenseur):
         # Calcul du coefficient d'efficacité en fonction des types
@@ -40,6 +43,8 @@ class Combat:
                 Combat.appliquer_degats(pokemon2, degats)
                 print(f"{pokemon1.nom} attaque {pokemon2.nom} avec {pokemon1.attaque_de_base.nom}, infligeant {degats} dégâts. PV restants de {pokemon2.nom} : {pokemon2.pv}")
                 if pokemon2.pv <= 0:
+                    print(f"{pokemon1.nom} a gagné {Combat.XP_PAR_VICTOIRE} points d'XP!")
+                    pokemon1.gagner_xp(Combat.XP_PAR_VICTOIRE)
                     print(f"{pokemon1.nom} est le vainqueur du combat !")
                     return pokemon1.nom
             else:

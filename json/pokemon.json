@@ -5,9 +5,9 @@
         "pv": 50,
         "attaque": 60,
         "defense": 50,
-        "lvl": 8,
+        "lvl": 7,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 20
     },
     {
         "nom": "Carapuce",
