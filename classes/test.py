@@ -4,7 +4,6 @@ import numpy as np
 import json
 
 
-
 with open ("json/pokedex.json", "r") as fichier: #ouvrir le fichier pokedex.json en mode lecture
     donneesPokedex = json.load(fichier) #charger les données du fichier pokedex.json dans la variable donnees
 
@@ -89,14 +88,10 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                     elif self.fleche_haut.collidepoint(evenement.pos):
                         self.son_clic.play()
                         self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
-                        
-                        
                         print("Clic gauche sur la flèche haut")
                     elif self.fleche_bas.collidepoint(evenement.pos):
                         self.son_clic.play()
-                        self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
-                        
-                        
+                        self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution) 
                         print("Clic gauche sur la flèche bas")
 
     def afficherPokemon(self, index_pokemon):
@@ -127,7 +122,9 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             pointDeVie_pokemon = font.render(f"Point de vie : {pokemon["point de vie"]}", True, (0, 0, 0))
             self.fenetre.blit(pointDeVie_pokemon, (270, 580))
 
-    def afficherEvolutionPokemon(self, index_pokemon, index_evolution): #afficher l'évolution du pokemon 
+        
+    def afficherEvolutionPokemon(self, index_pokemon, index_evolution): #afficher l'évolution du pokemon
+         
         if 0 <= index_pokemon < len(donneesPokedex): # Vérifie si l'index est dans la plage valide
             self.index_pokemon = index_pokemon
             pokemon = donneesPokedex[index_pokemon]
@@ -191,7 +188,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                             print("Clic sur Pokedex")
                         elif self.rect_quitter_pokedex.collidepoint(evenement.pos):
                             self.son_clic.play()
-                            print("Clic sur Quitter")
+                            print("Clic sur Quitter") 
                     
 
             pg.display.flip()
