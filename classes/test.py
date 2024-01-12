@@ -27,10 +27,10 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
         self.fleche_haut = pg.Rect(155, 475, 25, 50)
         self.fleche_bas = pg.Rect(155, 540, 25, 50)
         
-        self.couleur_fleche_gauche = (255, 0, 0)
-        self.couleur_fleche_droite = (255, 0, 0)
-        self.couleur_fleche_haut = (255, 0, 0)
-        self.couleur_fleche_bas = (255, 0, 0)
+        self.couleur_fleche_gauche = (200, 0, 0)
+        self.couleur_fleche_droite = (200, 0, 0)
+        self.couleur_fleche_haut = (200, 0, 0)
+        self.couleur_fleche_bas = (200, 0, 0)
 
         self.son_clic = pg.mixer.Sound("musique/BEEP_touche.mp3")
 
@@ -62,8 +62,17 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
         blurred_surface = pg.surfarray.make_surface(blurred_image)
 
         return blurred_surface
+    
+    def diminuerLuminositeFleche(self, fleche):
+        border_radius = 5
+        fleche_couleur_temp = tuple(max(component - 50, 0) for component in self.couleur_fleche_bas)
+        pg.draw.rect(self.fenetre, fleche_couleur_temp, fleche, border_radius=border_radius)
+        pg.display.flip()
+        pg.time.wait(100)  # Attendre pendant 100 millisecondes (ajustez selon vos besoins)
+        pg.draw.rect(self.fenetre, self.couleur_fleche_bas, fleche, border_radius=border_radius)
 
-    def gererDéfilementGaucheDroitePokemon(self):
+
+    def gererDéfilementPokemon(self):
         for evenement in pg.event.get():
             if evenement.type == pg.QUIT:
                 self.afficher = False
@@ -71,6 +80,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                 if evenement.button == 1:
                     if self.fleche_gauche.collidepoint(evenement.pos):
                         self.son_clic.play()
+                        self.diminuerLuminositeFleche(self.fleche_gauche)
                         self.afficherPokemon(self.index_pokemon - 1)
                         self.pokemon_affiche -= 1
                         if self.pokemon_affiche < 0:
@@ -79,6 +89,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                         print("Clic gauche sur la flèche gauche")
                     elif self.fleche_droite.collidepoint(evenement.pos):
                         self.son_clic.play()
+                        self.diminuerLuminositeFleche(self.fleche_droite)
                         self.afficherPokemon(self.index_pokemon + 1)
                         self.pokemon_affiche += 1
                         if self.pokemon_affiche > len(donneesPokedex) - 1:
@@ -87,10 +98,12 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                         print("Clic gauche sur la flèche droite")
                     elif self.fleche_haut.collidepoint(evenement.pos):
                         self.son_clic.play()
+                        self.diminuerLuminositeFleche(self.fleche_haut)
                         self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
                         print("Clic gauche sur la flèche haut")
                     elif self.fleche_bas.collidepoint(evenement.pos):
                         self.son_clic.play()
+                        self.diminuerLuminositeFleche(self.fleche_bas)
                         self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution) 
                         print("Clic gauche sur la flèche bas")
 
@@ -148,8 +161,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                 defense_pokemon = font.render(f"Défense : {evolution['defense']}", True, (0, 0, 0))
                 self.fenetre.blit(defense_pokemon, (270, 520))
 
-                puissance_pokemon = font.render(f"Puissance d'attaque : {evolution['puissance attaque']}", True,
-                                               (0, 0, 0))
+                puissance_pokemon = font.render(f"Puissance d'attaque : {evolution['puissance attaque']}", True,(0, 0, 0))
                 self.fenetre.blit(puissance_pokemon, (270, 550))
 
                 pointDeVie_pokemon = font.render(f"Point de vie : {evolution['point de vie']}", True, (0, 0, 0))
@@ -161,11 +173,12 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             self.fenetre.blit(image_floue, (0, 0)) #afficher l'image floutée
             self.fenetre.blit(self.imagePokedex_redimensionnee, (0, 80)) #afficher l'image du pokedex
             self.afficherPokemon(self.pokemon_affiche)
-            pg.draw.rect(self.fenetre, self.couleur_fleche_gauche, self.fleche_gauche)
-            pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite)
-            pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut)
-            pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas)
-            self.gererDéfilementGaucheDroitePokemon() 
+            border_radius = 10
+            pg.draw.rect(self.fenetre, self.couleur_fleche_gauche, self.fleche_gauche, border_radius=border_radius)
+            pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite, border_radius=border_radius)
+            pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut, border_radius=border_radius)
+            pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas, border_radius=border_radius)
+            self.gererDéfilementPokemon() 
             pg.display.flip() #rafraichir l'affichage
 
     def menuPokedex(self):
