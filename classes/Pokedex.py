@@ -120,6 +120,37 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             pointDeVie_pokemon = font.render(f"Point de vie : {pokemon["point de vie"]}", True, (0, 0, 0))
             self.fenetre.blit(pointDeVie_pokemon, (270, 580))
 
+    def afficherEvolutionPokemon(self, index_pokemon, index_evolution):
+        if 0 <= index_pokemon < len(donneesPokedex):
+            self.index_pokemon = index_pokemon
+            pokemon = donneesPokedex[index_pokemon]
+
+            if 0 <= index_evolution < len(pokemon["evolution"]):
+                evolution = pokemon["evolution"][index_evolution]
+                chemin_image = evolution["image"]
+                image_pokemon = pg.image.load(chemin_image)
+                image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
+                self.fenetre.blit(image_redimensionnee, (310, 125))
+
+                font_chemin = "police/Retro_Gaming.ttf"
+                font = pg.font.Font(font_chemin, 16)
+
+                nom_pokemon = font.render(f"Nom : {evolution['nom']}", True, (0, 0, 0))
+                self.fenetre.blit(nom_pokemon, (270, 460))
+
+                type_pokemon = font.render(f"Type : {evolution['type']}", True, (0, 0, 0))
+                self.fenetre.blit(type_pokemon, (270, 490))
+
+                defense_pokemon = font.render(f"Défense : {evolution['defense']}", True, (0, 0, 0))
+                self.fenetre.blit(defense_pokemon, (270, 520))
+
+                puissance_pokemon = font.render(f"Puissance d'attaque : {evolution['puissance attaque']}", True,
+                                               (0, 0, 0))
+                self.fenetre.blit(puissance_pokemon, (270, 550))
+
+                pointDeVie_pokemon = font.render(f"Point de vie : {evolution['point de vie']}", True, (0, 0, 0))
+                self.fenetre.blit(pointDeVie_pokemon, (270, 580))
+
     def afficherPokedex(self): #afficher le pokedex 
         while self.afficher: #tant que self.afficher = True
             image_floue = self.flouterImage(self.image_fond) #flouter l'image de fond du pokedex (paysage.jpg) 

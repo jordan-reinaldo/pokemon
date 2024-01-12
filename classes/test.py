@@ -45,8 +45,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
 
         self.index_pokemon = 0 #index du pokemon 
         self.pokemon_affiche = 0 #numéro du pokemon affiché
-
-        self.etat_evolution = 0 #état d'évolution du pokemon (0 = pas d'évolution ; 1 = 1ère évolution ; 2 = 2ème évolution ; 3 = 3ème évolution)
+        self.index_evolution = 0 #index de l'évolution du pokemon
 
 
         self.afficher = True #afficher = True : afficher le pokedex ; afficher = False : ne pas afficher le pokedex
@@ -65,25 +64,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
 
         return blurred_surface
 
-    def afficherPokemonEvolution(self, etat_evolution):
-        if 0 <= self.pokemon_affiche < len(donneesPokedex): # Vérifie si l'index est dans la plage valide
-            pokemon = donneesPokedex[self.pokemon_affiche]
-            if "evolution" in pokemon and 0 <= etat_evolution < len(pokemon["evolution"]): 
-                evolution = pokemon["evolution"][etat_evolution]
-                chemin_image = evolution["image"]
-                image_evolution = pg.image.load(chemin_image)
-                image_redimensionnee = pg.transform.scale(image_evolution, (210, 210))
-                self.fenetre.blit(image_redimensionnee, (310, 125))
-            else:
-                # Si pas d'évolution, afficher le Pokémon actuel
-                chemin_image = pokemon["image"]
-                image_pokemon = pg.image.load(chemin_image)
-                image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
-                self.fenetre.blit(image_redimensionnee, (310, 125))
-
-        pg.display.flip()
-
-    def gererDéfilementPokemon(self):
+    def gererDéfilementGaucheDroitePokemon(self):
         for evenement in pg.event.get():
             if evenement.type == pg.QUIT:
                 self.afficher = False
@@ -91,33 +72,32 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                 if evenement.button == 1:
                     if self.fleche_gauche.collidepoint(evenement.pos):
                         self.son_clic.play()
+                        self.afficherPokemon(self.index_pokemon - 1)
                         self.pokemon_affiche -= 1
                         if self.pokemon_affiche < 0:
+                            self.afficherPokemon(len(donneesPokedex) - 1)  # Afficher le dernier Pokémon
                             self.pokemon_affiche = len(donneesPokedex) - 1
-                        self.etat_evolution = 0
-                        self.afficherPokemon(self.pokemon_affiche)
                         print("Clic gauche sur la flèche gauche")
                     elif self.fleche_droite.collidepoint(evenement.pos):
                         self.son_clic.play()
+                        self.afficherPokemon(self.index_pokemon + 1)
                         self.pokemon_affiche += 1
                         if self.pokemon_affiche > len(donneesPokedex) - 1:
+                            self.afficherPokemon(0)  # Afficher le premier Pokémon
                             self.pokemon_affiche = 0
-                        self.etat_evolution = 0
-                        self.afficherPokemon(self.pokemon_affiche)
                         print("Clic gauche sur la flèche droite")
                     elif self.fleche_haut.collidepoint(evenement.pos):
                         self.son_clic.play()
-                        self.etat_evolution += 1
+                        self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
+                        
+                        
                         print("Clic gauche sur la flèche haut")
-                        self.afficherPokemonEvolution(self.etat_evolution)
                     elif self.fleche_bas.collidepoint(evenement.pos):
                         self.son_clic.play()
-                        if self.etat_evolution > 0:
-                            self.etat_evolution -= 1
+                        self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
+                        
+                        
                         print("Clic gauche sur la flèche bas")
-
-        # Déplacer cette ligne en dehors de la boucle d'événements pour éviter les problèmes d'affichage
-        self.afficherPokemonEvolution(self.etat_evolution)
 
     def afficherPokemon(self, index_pokemon):
         if 0 <= index_pokemon < len(donneesPokedex):  # Vérifie si l'index est dans la plage valide
@@ -147,7 +127,36 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             pointDeVie_pokemon = font.render(f"Point de vie : {pokemon["point de vie"]}", True, (0, 0, 0))
             self.fenetre.blit(pointDeVie_pokemon, (270, 580))
 
+    def afficherEvolutionPokemon(self, index_pokemon, index_evolution): #afficher l'évolution du pokemon 
+        if 0 <= index_pokemon < len(donneesPokedex): # Vérifie si l'index est dans la plage valide
+            self.index_pokemon = index_pokemon
+            pokemon = donneesPokedex[index_pokemon]
 
+            if 0 <= index_evolution < len(pokemon["evolution"]): # Vérifie si l'index est dans la plage valide
+                evolution = pokemon["evolution"][index_evolution]
+                chemin_image = evolution["image"]
+                image_pokemon = pg.image.load(chemin_image)
+                image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
+                self.fenetre.blit(image_redimensionnee, (310, 125))
+
+                font_chemin = "police/Retro_Gaming.ttf"
+                font = pg.font.Font(font_chemin, 16)
+
+                nom_pokemon = font.render(f"Nom : {evolution['nom']}", True, (0, 0, 0))
+                self.fenetre.blit(nom_pokemon, (270, 460))
+
+                type_pokemon = font.render(f"Type : {evolution['type']}", True, (0, 0, 0))
+                self.fenetre.blit(type_pokemon, (270, 490))
+
+                defense_pokemon = font.render(f"Défense : {evolution['defense']}", True, (0, 0, 0))
+                self.fenetre.blit(defense_pokemon, (270, 520))
+
+                puissance_pokemon = font.render(f"Puissance d'attaque : {evolution['puissance attaque']}", True,
+                                               (0, 0, 0))
+                self.fenetre.blit(puissance_pokemon, (270, 550))
+
+                pointDeVie_pokemon = font.render(f"Point de vie : {evolution['point de vie']}", True, (0, 0, 0))
+                self.fenetre.blit(pointDeVie_pokemon, (270, 580))
 
     def afficherPokedex(self): #afficher le pokedex 
         while self.afficher: #tant que self.afficher = True
@@ -159,7 +168,7 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
             pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite)
             pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut)
             pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas)
-            self.gererDéfilementPokemon() 
+            self.gererDéfilementGaucheDroitePokemon() 
             pg.display.flip() #rafraichir l'affichage
 
     def menuPokedex(self):
@@ -184,9 +193,11 @@ class Pokedex: #classe Pokedex #classe = modèle de données (attributs) et de f
                             self.son_clic.play()
                             print("Clic sur Quitter")
                     
+
             pg.display.flip()
 
 
+            
 fenetre = Pokedex(800, 800)
 
 fenetre.menuPokedex()
