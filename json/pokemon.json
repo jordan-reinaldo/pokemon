@@ -1,0 +1,114 @@
+[
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Rattata",
+"type": "Normal",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Osselait",
+"type": "sol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Osselait",
+"type": "sol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Osselait",
+"type": "sol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Rattata",
+"type": "Normal",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Rattata",
+"type": "Normal",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Rattata",
+"type": "Normal",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Rattata",
+"type": "Normal",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 100,
+"niveau": 1,
+"attaque": 20,
+"defense": 20
+}
+]

@@ -4,6 +4,8 @@ from pygame.locals import *
 import sys
 
 
+
+
 # classe Menu_principal
 class Menu_principal:
     # constructeur de la classe
@@ -39,7 +41,7 @@ class Menu_principal:
         self.lancer_jeu_rect.y = 250
 
         # Bouton ajouter pokemon
-
+        
         self.ajouter_pokemon = self.police.render("Ajouter un pokemon", True, (0, 0, 0))
         self.ajouter_pokemon_rect = self.ajouter_pokemon.get_rect()
         self.ajouter_pokemon_rect.x = 300
@@ -72,6 +74,7 @@ class Menu_principal:
 
         if self.ajouter_pokemon_rect.collidepoint(pygame.mouse.get_pos()):
             self.ajouter_pokemon = self.police.render("Ajouter un pokemon", True, self.couleur_changement)
+            
         else:
             self.ajouter_pokemon = self.police.render("Ajouter un pokemon", True, self.couleur_origine)
         self.__fenetre.blit(self.ajouter_pokemon, self.ajouter_pokemon_rect)
@@ -107,6 +110,8 @@ while running:
                 elif menu.ajouter_pokemon_rect.collidepoint(event.pos):
                     print("ajouter un pokemon")
                     menu.son_bouton.play()
+                    
+
                 elif menu.pokedex_rect.collidepoint(event.pos):
                     print("pokedex")
                     menu.son_bouton.play()

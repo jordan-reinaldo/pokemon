@@ -5,7 +5,7 @@ import sys
 import json
 import time
 
-class Ajouter_Pokemon:
+class AjouterPokemon:
     def __init__(self):
         # Initialisation de pygame
         pygame.init()
@@ -160,16 +160,17 @@ class Ajouter_Pokemon:
             else:
                 self.message_affiche = False
                 
-    def lancer(self):
 
-        ajout_pokemon = Ajouter_Pokemon()
+                
+
+
+# Test du code
+if __name__ == "__main__":
+    ajout_pokemon = AjouterPokemon()
     
-        while True:
+    while True:
         
-            ajout_pokemon.afficher()
-            ajout_pokemon.gerer_evenements()
-            pygame.display.flip()
-            ajout_pokemon.clock.tick(60)  # 30 FPS
-
-test = Ajouter_Pokemon()
-test.lancer()
+        ajout_pokemon.afficher()
+        ajout_pokemon.gerer_evenements()
+        pygame.display.flip()
+        ajout_pokemon.clock.tick(60)  # 30 FPS
