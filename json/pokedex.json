@@ -6,6 +6,7 @@
         "puissance attaque" : "50",
         "point de vie" : "100",
         "image" : "images/pokemon/pikachu.png",
+        "cri" : "musique/pikachu.ogg",
         "evolution" : [
             {
                 "nom" : "Raichu",
@@ -13,6 +14,7 @@
                 "defense" : "30",
                 "puissance attaque" : "60",
                 "point de vie" : "100",
+                "cri" : "musique/raichu.ogg",
                 "image" : "images/pokemon/raichu.png"
             }
         ]
@@ -24,6 +26,7 @@
         "puissance attaque" : "40",
         "point de vie" : "100",
         "image" : "images/pokemon/bulbizarre.png",
+        "cri" : "musique/bulbizarre.ogg",
         "evolution" : [
             {
                 "nom" : "Herbizarre",
@@ -31,6 +34,7 @@
                 "defense" : "40",
                 "puissance attaque" : "50",
                 "point de vie" : "100",
+                "cri" : "musique/herbizarre.ogg",
                 "image" : "images/pokemon/herbizarre.png"
             }
         ]
@@ -42,6 +46,7 @@
         "puissance attaque" : "30",
         "point de vie" : "100",
         "image" : "images/pokemon/carapuce.png",
+        "cri" : "musique/carapuce.ogg",
         "evolution" : [
             {
                 "nom" : "Carabaffe",
@@ -49,6 +54,7 @@
                 "defense" : "50",
                 "puissance attaque" : "40",
                 "point de vie" : "100",
+                "cri" : "musique/carabaffe.ogg",
                 "image" : "images/pokemon/carabaffe.png"
             }
         ]
@@ -60,6 +66,7 @@
         "puissance attaque" : "20",
         "point de vie" : "100",
         "image" : "images/pokemon/salameche.png",
+        "cri" : "musique/salameche.ogg",
         "evolution" : [
             {
                 "nom" : "Reptincel",
@@ -67,6 +74,7 @@
                 "defense" : "60",
                 "puissance attaque" : "30",
                 "point de vie" : "100",
+                "cri" : "musique/reptincel.ogg",
                 "image" : "images/pokemon/reptincel.png"
             }
         ]
@@ -78,6 +86,7 @@
         "puissance attaque" : "10",
         "point de vie" : "100",
         "image" : "images/pokemon/evoli.png",
+        "cri" : "musique/evoli.ogg",
         "evolution" : [
             {
                 "nom" : "Phyllali",
@@ -85,6 +94,7 @@
                 "defense" : "70",
                 "puissance attaque" : "20",
                 "point de vie" : "100",
+                "cri" : "musique/phyllali.ogg",
                 "image" : "images/pokemon/phyllali.png"
             }
         ]
@@ -96,6 +106,7 @@
         "puissance attaque" : "10",
         "point de vie" : "100",
         "image" : "images/pokemon/osselait.png",
+        "cri" : "musique/osselait.ogg",
         "evolution" : [
             {
                 "nom" : "Ossatueur",
@@ -103,6 +114,7 @@
                 "defense" : "80",
                 "puissance attaque" : "20",
                 "point de vie" : "100",
+                "cri" : "musique/ossatueur.ogg",
                 "image" : "images/pokemon/ossatueur.png"
             }
         ]
@@ -114,6 +126,7 @@
         "puissance attaque" : "10",
         "point de vie" : "100",
         "image" : "images/pokemon/rattata.png",
+        "cri" : "musique/rattata.ogg",
         "evolution" : [
             {
                 "nom" : "Rattatac",
@@ -121,6 +134,7 @@
                 "defense" : "90",
                 "puissance attaque" : "20",
                 "point de vie" : "100",
+                "cri" : "musique/rattatac.ogg",
                 "image" : "images/pokemon/rattatac.png"
             }
         ]
@@ -131,6 +145,7 @@
         "defense" : "60",
         "puissance attaque" : "30",
         "point de vie" : "100",
+        "cri" : "musique/roucoul.ogg",
         "image" : "images/pokemon/roucoul.png",
         "evolution" : [
             {
@@ -139,6 +154,7 @@
                 "defense" : "70",
                 "puissance attaque" : "40",
                 "point de vie" : "100",
+                "cri" : "musique/roucoups.ogg",
                 "image" : "images/pokemon/roucoups.png"
             }
         ]
