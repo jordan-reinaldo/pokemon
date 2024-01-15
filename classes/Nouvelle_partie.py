@@ -21,7 +21,7 @@ class Nouvelle_partie:
 
         self.nom_dresseur = font.render("Nom du dresseur", True, (200, 0, 0))
         self.nom_dresseur_rect = self.nom_dresseur.get_rect(topleft=(270, 150))
-        self.input_box = pg.Rect(250, 200, 290, 50)
+        self.input_box = pg.Rect(300, 200, 290, 50)
         self.is_input_active = False
         self.texte = ""
         self.font = pg.font.Font(None, 36)
