@@ -5,19 +5,19 @@ import sys
 import json
 import time
 
-class AjouterPokemon:
+class Ajouter_Pokemon:
     def __init__(self):
         # Initialisation de pygame
         pygame.init()
         
         # Crée la fenêtre
         self.fenetre = pygame.display.set_mode((800, 800))
-        pygame.display.set_caption("Ajouter un pokemon")
+        pygame.display.set_caption("Ajouter un Pokémon")
         
         # Horloge
         self.clock = pygame.time.Clock()
 
-        # Chargement bg, titre, police, cadre texte
+        # Chargement du fond, du titre, de la police, du cadre de texte
         self.bg = pygame.image.load("images/background/bg_ajout_pokemon1.png").convert()
         self.titre = pygame.image.load("titre/ajoute_ton_pokemon.png").convert_alpha()
         self.police = pygame.font.Font("police/Pokemon Solid.ttf", 30)
@@ -38,8 +38,9 @@ class AjouterPokemon:
             (570, 380)
         ]
 
-        # Rectangles des silhouettes
-        self.rectangles_silhouettes = [pygame.Rect(pos, (self.silhouettes[i].get_width(), self.silhouettes[i].get_height())) for i, pos in enumerate(self.positions_silhouettes)]
+        # ellipse pour les silhouettes
+        self.ellipse_silhouettes = [pygame.Rect(pos, (self.silhouettes[i].get_width(), self.silhouettes[i].get_height())) for i, pos in enumerate(self.positions_silhouettes)]
+
 
         # Initialisation des attributs
         self.nom = [
@@ -53,12 +54,13 @@ class AjouterPokemon:
             "sol"
         ]
 
-        self.vie = 100
-        self.niveau = 1
-        self.attaque = 20
-        self.defense = 20
+        self.vie = 50
+        self.niveau = 5
+        self.attaque = [60, 55,45]
+        self.defense = [25, 30, 50]
 
         self.index_pokemon = None
+        self.surbrillance_silhouette = None  # Ajout de la variable pour la surbrillance
         self.message_affiche = False
         self.temps_affichage_message = 0
 
@@ -67,46 +69,57 @@ class AjouterPokemon:
             with open("json/pokemon.json", "r") as f:
                 pokemon = json.load(f)
 
-            new_pokemon = {
+            nouveau_pokemon = {
                 "nom": self.nom[self.index_pokemon],
                 "type": self.type[self.index_pokemon],
                 "vie": self.vie,
                 "niveau": self.niveau,
-                "attaque": self.attaque,
-                "defense": self.defense
+                "attaque": self.attaque[self.index_pokemon],
+                "defense": self.defense[self.index_pokemon]
             }
 
-            pokemon.append(new_pokemon)
+            pokemon.append(nouveau_pokemon)
 
             with open("json/pokemon.json", "w") as f:
                 json.dump(pokemon, f, indent=-1)
-    
+
+            
     def gerer_evenements(self):
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
-
             elif event.type == MOUSEBUTTONDOWN:
-                for i, rect in enumerate(self.rectangles_silhouettes):
+                for i, rect in enumerate(self.ellipse_silhouettes):
                     if rect.collidepoint(event.pos):
                         self.index_pokemon = i
                         self.pour_ajouter_fichier()
                         self.message_affiche = True
-                        
                         pygame.display.flip()
+
+            elif event.type == MOUSEMOTION:
+                self.surbrillance_silhouette = None  # Réinitialiser la surbrillance
+                for i, rect in enumerate(self.ellipse_silhouettes):
+                    if rect.collidepoint(event.pos):
+                        # La souris est sur la silhouette
+                        self.surbrillance_silhouette = i
                         
 
+            
+                   
     def afficher(self):
-        # Affiche bg, titre
+        # Affiche le fond, le titre
         self.fenetre.blit(self.bg, (0, 0))
         self.fenetre.blit(self.titre, (110, 240))
 
         # Affiche les silhouettes
         for i, silhouette in enumerate(self.silhouettes):
+            if self.surbrillance_silhouette == i:
+                # Ajoute une surbrillance si la souris est sur la silhouette
+                pygame.draw.ellipse(self.fenetre, (255, 204, 1), (self.positions_silhouettes[i][0] - 5, self.positions_silhouettes[i][1] - 5, silhouette.get_width() + 20, silhouette.get_height() + 20), 5)
             self.fenetre.blit(silhouette, self.positions_silhouettes[i])
 
-        # Affiche cadre texte
+        # Affiche le cadre de texte
         for i in range(3):
             self.fenetre.blit(self.cadre_texte, (20 + i * 270, 530))
 
@@ -152,25 +165,23 @@ class AjouterPokemon:
         self.texte = self.police2.render(f"Défense : {self.defense}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (590, 715))
 
-    # Afficher le message si nécessaire
+        # Affiche le message si nécessaire
         if self.message_affiche:
-            if pygame.time.get_ticks() - self.temps_affichage_message < 8000:
-                self.texte = self.police.render(f"Le pokemon {self.nom[self.index_pokemon]} est ajouté !", True, (0, 0,0))
+            if pygame.time.get_ticks() - self.temps_affichage_message < 3000:
+                self.texte = self.police.render(f"Le Pokémon {self.nom[self.index_pokemon]} a été ajouté !", True, (0, 0, 0))
                 self.fenetre.blit(self.texte, (200, 350))
             else:
                 self.message_affiche = False
-                
 
-                
+            pygame.display.flip()
 
+    def lancer(self):
+        while True:
+            self.gerer_evenements()
+            self.afficher()
+            pygame.display.flip()
+            self.clock.tick(30)  
 
-# Test du code
-if __name__ == "__main__":
-    ajout_pokemon = AjouterPokemon()
-    
-    while True:
-        
-        ajout_pokemon.afficher()
-        ajout_pokemon.gerer_evenements()
-        pygame.display.flip()
-        ajout_pokemon.clock.tick(60)  # 30 FPS
+# Instancier la classe Ajouter_Pokemon et lancer le programme
+test = Ajouter_Pokemon()
+test.lancer()

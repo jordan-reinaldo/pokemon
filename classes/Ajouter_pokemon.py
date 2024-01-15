@@ -1,4 +1,4 @@
-import os
+
 import pygame
 from pygame.locals import *
 import sys
@@ -12,12 +12,13 @@ class Ajouter_Pokemon:
         
         # Crée la fenêtre
         self.fenetre = pygame.display.set_mode((800, 800))
-        pygame.display.set_caption("Ajouter un pokemon")
+        pygame.display.set_caption("Ajouter un Pokémon")
+        pygame.display.set_icon(pygame.image.load("images/logo/logopokeball.png"))
         
         # Horloge
         self.clock = pygame.time.Clock()
 
-        # Chargement bg, titre, police, cadre texte
+        # Chargement du fond, du titre, de la police, du cadre de texte
         self.bg = pygame.image.load("images/background/bg_ajout_pokemon1.png").convert()
         self.titre = pygame.image.load("titre/ajoute_ton_pokemon.png").convert_alpha()
         self.police = pygame.font.Font("police/Pokemon Solid.ttf", 30)
@@ -38,8 +39,8 @@ class Ajouter_Pokemon:
             (570, 380)
         ]
 
-        # Rectangles des silhouettes
-        self.rectangles_silhouettes = [pygame.Rect(pos, (self.silhouettes[i].get_width(), self.silhouettes[i].get_height())) for i, pos in enumerate(self.positions_silhouettes)]
+        # ellipse pour les silhouettes
+        self.ellipse_silhouettes = [pygame.Rect(pos, (self.silhouettes[i].get_width(), self.silhouettes[i].get_height())) for i, pos in enumerate(self.positions_silhouettes)]
 
         # Initialisation des attributs
         self.nom = [
@@ -57,56 +58,112 @@ class Ajouter_Pokemon:
         self.niveau = 1
         self.attaque = 20
         self.defense = 20
+        self.xp = 0
 
         self.index_pokemon = None
+        self.surbrillance_silhouette = None  
         self.message_affiche = False
         self.temps_affichage_message = 0
 
     def pour_ajouter_fichier(self):
+        # enrigister dans le fichier pokemon.json
         if self.index_pokemon is not None:
             with open("json/pokemon.json", "r") as f:
                 pokemon = json.load(f)
 
-            new_pokemon = {
+            # verifier si pokemon existe deja
+                for p in pokemon:
+                    if p["nom"] == self.nom[self.index_pokemon]:
+                        print("deja existant")
+                        return
+
+            nouveau_pokemon = {
                 "nom": self.nom[self.index_pokemon],
                 "type": self.type[self.index_pokemon],
                 "vie": self.vie,
                 "niveau": self.niveau,
                 "attaque": self.attaque,
-                "defense": self.defense
+                "defense": self.defense,
+                "xp": self.xp,
+                "xp_necessaire": 50,
+                "image": f"images/pokemon/{self.nom[self.index_pokemon]}.png"
             }
 
-            pokemon.append(new_pokemon)
+            pokemon.append(nouveau_pokemon)
 
             with open("json/pokemon.json", "w") as f:
                 json.dump(pokemon, f, indent=-1)
-    
+
+
+            # enrigister dans le fichier pokedex.json
+            with open("json/pokedex.json", "r") as f:
+                pokedex = json.load(f)
+
+            # verifier si pokemon existe deja
+                for p in pokedex:
+                    if p["nom"] == self.nom[self.index_pokemon]:
+                        print("existe deja") 
+                        return
+                        
+
+            nouveau_pokedex = {
+                "nom": self.nom[self.index_pokemon],
+                "type": self.type[self.index_pokemon],
+                "vie": self.vie,
+                "niveau": self.niveau,
+                "attaque": self.attaque,
+                "defense": self.defense,
+                "image": f"images/pokemon/{self.nom[self.index_pokemon]}.png"
+
+            }
+
+            pokedex.append(nouveau_pokedex)
+
+
+            with open("json/pokedex.json", "w") as f:
+                json.dump(pokedex, f, indent=-1)
+
+
+        pygame.display.flip()
+       
+
+            
     def gerer_evenements(self):
+
         for event in pygame.event.get():
             if event.type == QUIT:
                 pygame.quit()
                 sys.exit()
 
             elif event.type == MOUSEBUTTONDOWN:
-                for i, rect in enumerate(self.rectangles_silhouettes):
+                for i, rect in enumerate(self.ellipse_silhouettes):
                     if rect.collidepoint(event.pos):
                         self.index_pokemon = i
                         self.pour_ajouter_fichier()
                         self.message_affiche = True
-                        
                         pygame.display.flip()
                         
+            elif event.type == MOUSEMOTION:
+                self.surbrillance_silhouette = None  # Réinitialise la surbrillance
+                for i, rect in enumerate(self.ellipse_silhouettes):
+                    if rect.collidepoint(event.pos):
+                        # La souris est sur la silhouette
+                        self.surbrillance_silhouette = i
 
+         
     def afficher(self):
-        # Affiche bg, titre
+        # Affiche le fond, le titre
         self.fenetre.blit(self.bg, (0, 0))
         self.fenetre.blit(self.titre, (110, 240))
 
         # Affiche les silhouettes
         for i, silhouette in enumerate(self.silhouettes):
+            if self.surbrillance_silhouette == i:
+                # Ajoute une surbrillance si la souris est sur la silhouette
+                pygame.draw.ellipse(self.fenetre, (255, 204, 1), (self.positions_silhouettes[i][0] - 10, self.positions_silhouettes[i][1] - 5, silhouette.get_width() + 20, silhouette.get_height() + 20), 5)
             self.fenetre.blit(silhouette, self.positions_silhouettes[i])
 
-        # Affiche cadre texte
+        # Affiche le cadre de texte
         for i in range(3):
             self.fenetre.blit(self.cadre_texte, (20 + i * 270, 530))
 
@@ -152,24 +209,27 @@ class Ajouter_Pokemon:
         self.texte = self.police2.render(f"Défense : {self.defense}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (590, 715))
 
-    # Afficher le message si nécessaire
+        # Affiche le message si nécessaire
         if self.message_affiche:
-            if pygame.time.get_ticks() - self.temps_affichage_message < 8000:
-                self.texte = self.police.render(f"Le pokemon {self.nom[self.index_pokemon]} est ajouté !", True, (0, 0,0))
-                self.fenetre.blit(self.texte, (200, 350))
-            else:
-                self.message_affiche = False
-                
+                if pygame.time.get_ticks() - self.temps_affichage_message < 5000 :
+                    self.texte = self.police.render(f"Le Pokémon {self.nom[self.index_pokemon]} a été ajouté !", True, (0, 0, 0))
+                    self.fenetre.blit(self.texte, (200, 350))
+
+                else:
+                    self.message_affiche = False
+
+           
+
     def lancer(self):
-
-        ajout_pokemon = Ajouter_Pokemon()
-    
+        pygame.display.flip()
         while True:
-        
-            ajout_pokemon.afficher()
-            ajout_pokemon.gerer_evenements()
+            
+            self.afficher()
+            self.gerer_evenements()
             pygame.display.flip()
-            ajout_pokemon.clock.tick(60)  # 30 FPS
+            self.clock.tick(30)
+            
 
+# Instancier la classe Ajouter_Pokemon et lancer le programme
 test = Ajouter_Pokemon()
 test.lancer()
