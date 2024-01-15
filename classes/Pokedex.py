@@ -43,6 +43,10 @@ class Pokedex:
         self.revenir_menu_pokedex = font.render("Revenir au menu", True, (255, 0, 0))
         self.rect_quitter_pokedex = self.revenir_menu_pokedex.get_rect(topleft=(270, 550))
 
+        self.retour_menu = font.render("Retour", True, (255, 0, 0))
+        self.rect_retour_menu = self.retour_menu.get_rect(topleft=(450, 620))
+
+
         self.index_pokemon = 0
         self.pokemon_affiche = 0
         self.index_evolution = 0
@@ -105,6 +109,10 @@ class Pokedex:
                     elif self.cercle.collidepoint(evenement.pos):
                         self.cri_pokemon(self.index_pokemon)
                         print("Clic gauche sur le cercle")
+                    elif self.rect_retour_menu.collidepoint(evenement.pos):
+                        self.son_clic.play()
+                        self.menuPokedex()
+                        print("Clic gauche sur retour")
 
     def afficherPokemon(self, index_pokemon):
         if 0 <= index_pokemon < len(donneesPokedex):
@@ -132,6 +140,9 @@ class Pokedex:
 
             pointDeVie_pokemon = font.render(f"Point de vie : {pokemon['point de vie']}", True, (0, 0, 0))
             self.fenetre.blit(pointDeVie_pokemon, (270, 580))
+
+            retour = font.render(f"Retour", True, (0, 200, 0))
+            self.fenetre.blit(retour, (450, 620))
 
     def afficherEvolutionPokemon(self, index_pokemon, index_evolution):
         if 0 <= index_pokemon < len(donneesPokedex):
@@ -162,6 +173,8 @@ class Pokedex:
 
                 pointDeVie_pokemon = font.render(f"Point de vie : {evolution['point de vie']}", True, (0, 0, 0))
                 self.fenetre.blit(pointDeVie_pokemon, (270, 580))
+
+                
             
     def cri_pokemon(self, index_pokemon):
         if "cri" in donneesPokedex[index_pokemon]:
