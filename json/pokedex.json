@@ -1,6 +1,6 @@
 [
     {
-        "nom" : "Pikachu",
+        "nom" : "   Pikachu",
         "type" : "Electrique",
         "defense" : "20",
         "puissance attaque" : "50",
@@ -40,7 +40,7 @@
         ]
     },
     {
-        "nom" : "Carapuce",
+        "nom" : " Carapuce",
         "type" : "Eau",
         "defense" : "40",
         "puissance attaque" : "30",
@@ -80,7 +80,7 @@
         ]
     },
     {
-        "nom" : "Evoli",
+        "nom" : "     Evoli",
         "type" : "Normal",
         "defense" : "60",
         "puissance attaque" : "10",
@@ -100,7 +100,7 @@
         ]
     },
     {
-        "nom" : "Osselait",
+        "nom" : "  Osselait",
         "type" : "Sol",
         "defense" : "70",
         "puissance attaque" : "10",
@@ -120,7 +120,7 @@
         ]
     },
     {
-        "nom" : "Rattata",
+        "nom" : "   Rattata",
         "type" : "Normal",
         "defense" : "80",
         "puissance attaque" : "10",
@@ -140,8 +140,8 @@
         ]
     },
     {
-        "nom" : "Roucoul",
-        "type" : "Feu",
+        "nom" : "   Roucoul",
+        "type" : "Vol",
         "defense" : "60",
         "puissance attaque" : "30",
         "point de vie" : "100",
@@ -150,7 +150,7 @@
         "evolution" : [
             {
                 "nom" : "Roucoups",
-                "type" : "Feu",
+                "type" : "Vol",
                 "defense" : "70",
                 "puissance attaque" : "40",
                 "point de vie" : "100",
