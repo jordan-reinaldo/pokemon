@@ -14,6 +14,7 @@ class Nouvelle_partie:
         self.hauteur = hauteur
         self.fenetre = pg.display.set_mode((self.largeur, self.hauteur))
         pg.display.set_caption("Pokemon - Nouvelle partie")
+        pg.display.set_icon(pg.image.load("images/logo/logopokeball.png"))
         self.image_fond = pg.image.load("images/background/paysage_pokemon_nouvelle_partie.jpg")
         self.image_fond_redimensionne = pg.transform.scale(self.image_fond, (800, 800))
 
@@ -23,7 +24,7 @@ class Nouvelle_partie:
         font_chemin = "police/Pokemon Solid.ttf"
         font = pg.font.Font(font_chemin, 30)
 
-        self.nom_dresseur = pg.image.load("images/background/nom-dresseur.png")
+        self.nom_dresseur = pg.image.load("titre/nom-dresseur.png")
         self.nom_dresseur = pg.transform.scale(self.nom_dresseur, (400, 100))
         
         self.input_box = pg.Rect(300, 100, 290, 50)
@@ -31,11 +32,13 @@ class Nouvelle_partie:
         self.texte = ""
         self.font = pg.font.Font(None, 36)
 
-        self.fleche_gauche = pg.image.load("images/background/fleche-gauche.png")
+        self.fleche_gauche = pg.image.load("images/bouton/fleche-gauche.png")
         self.fleche_gauche = pg.transform.scale(self.fleche_gauche, (40, 40))
 
-        self.fleche_droite = pg.image.load("images/background/fleche-droite.png")
+        self.fleche_droite = pg.image.load("images/bouton/fleche-droite.png")
         self.fleche_droite = pg.transform.scale(self.fleche_droite, (40, 40))
+
+
 
         self.index_pokemon = 0
         
@@ -112,7 +115,7 @@ class Nouvelle_partie:
             self.fenetre.blit(self.fleche_gauche, (200, 400))
             self.fenetre.blit(self.fleche_droite, (550, 400))
 
-            chemin_bouton_retour = "images/background/bouton-retour.png"
+            chemin_bouton_retour = "images/bouton/bouton-retour.png"
             bouton_retour = pg.image.load(chemin_bouton_retour)
             bouton_retour_redimensionne = pg.transform.scale(bouton_retour, (110, 50))
             self.fenetre.blit(bouton_retour_redimensionne, (680, 720))

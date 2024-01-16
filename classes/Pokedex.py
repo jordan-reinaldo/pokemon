@@ -13,6 +13,7 @@ class Pokedex: # Je crée une classe Pokedex
         self.hauteur = hauteur # Je crée une variable hauteur
         self.fenetre = pg.display.set_mode((self.largeur, self.hauteur)) # Je crée une fenêtre
         pg.display.set_caption("Pokedex") # Je donne un titre à ma fenêtre
+        pg.display.set_icon(pg.image.load("images/logo/logopokeball.png"))
         self.image_fond = pg.image.load("images/pokedex/paysage.jpg") # Je charge l'image de fond
 
         self.imagePokedex = pg.image.load("images/pokedex/pokedex1.png") # Je charge l'image du pokedex
@@ -99,12 +100,12 @@ class Pokedex: # Je crée une classe Pokedex
                     elif self.fleche_haut.collidepoint(evenement.pos):
                         self.son_clic.play()
                         self.diminuerLuminositeFleche(self.fleche_haut)
-                        self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
+                        
                         print("Clic gauche sur la flèche haut")
                     elif self.fleche_bas.collidepoint(evenement.pos):
                         self.son_clic.play()
                         self.diminuerLuminositeFleche(self.fleche_bas)
-                        self.afficherEvolutionPokemon(self.index_pokemon, self.index_evolution)
+                       
                         print("Clic gauche sur la flèche bas")
                     elif self.cercle.collidepoint(evenement.pos):
                         self.cri_pokemon(self.index_pokemon)
