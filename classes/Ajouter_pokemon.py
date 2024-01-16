@@ -87,11 +87,11 @@ class Ajouter_pokemon:
             nouveau_pokemon = {
                 "nom": self.nom[self.index_pokemon],
                 "type": self.type[self.index_pokemon],
-                "vie": self.vie,
-                "niveau": self.niveau,
+                "vie": self.vie[self.index_pokemon],
+                "niveau": self.niveau[self.index_pokemon],
                 "attaque": self.attaque[self.index_pokemon],
                 "defense": self.defense[self.index_pokemon],
-                "xp": self.xp,
+                "xp": self.xp[self.index_pokemon],
                 "xp_necessaire": 50,
                 "image": f"images/pokemon/{self.nom[self.index_pokemon]}.png"
             }
