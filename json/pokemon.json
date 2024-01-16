@@ -110,5 +110,16 @@
 "xp": 0,
 "xp_necessaire": 50,
 "image": "images/pokemon/Rattata.png"
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 50,
+"niveau": 5,
+"attaque": 60,
+"defense": 25,
+"xp": 0,
+"xp_necessaire": 50,
+"image": "images/pokemon/Roucool.png"
 }
 ]
