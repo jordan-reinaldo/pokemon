@@ -117,20 +117,6 @@ class Nouvelle_partie:
             bouton_retour_redimensionne = pg.transform.scale(bouton_retour, (110, 50))
             self.fenetre.blit(bouton_retour_redimensionne, (680, 720))
 
-    # def gererDéfilementPokemon(self):
-    #     for evenement in pg.event.get():
-    #         if evenement.type == pg.QUIT:
-    #             pg.quit()
-    #             quit()
-    #         elif evenement.type == pg.MOUSEBUTTONDOWN:
-    #             if evenement.button == 1:
-    #                 if 200 <= evenement.pos[0] <= 240 and 400 <= evenement.pos[1] <= 440:
-    #                     self.afficherPokemon(self.index_pokemon - 1)
-    #                 elif 550 <= evenement.pos[0] <= 590 and 400 <= evenement.pos[1] <= 440:
-    #                     self.afficherPokemon(self.index_pokemon + 1)
-    #                 elif 535 <= evenement.pos[0] <= 600 and 743 <= evenement.pos[1] <= 760:
-    #                     print("Lancer la partie")
-    #                     return True
     
     def choix_pokemon_aleatoire(self):
         pokemon_aleatoire = random.choice(donneesPokedex)

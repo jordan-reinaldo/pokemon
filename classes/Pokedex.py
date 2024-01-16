@@ -3,90 +3,90 @@ import cv2
 import numpy as np
 import json
 
-with open("json/pokedex.json", "r") as fichier:
-    donneesPokedex = json.load(fichier)
+with open("json/pokedex.json", "r") as fichier: # J'ouvre le fichier json
+    donneesPokedex = json.load(fichier) # Je charge les données du fichier json dans une variable
 
-class Pokedex:
-    def __init__(self, largeur, hauteur):
-        pg.init()
-        self.largeur = largeur
-        self.hauteur = hauteur
-        self.fenetre = pg.display.set_mode((self.largeur, self.hauteur))
-        pg.display.set_caption("Pokedex")
-        self.image_fond = pg.image.load("images/pokedex/paysage.jpg")
+class Pokedex: # Je crée une classe Pokedex
+    def __init__(self, largeur, hauteur): # Je crée une méthode constructeur
+        pg.init() # J'initialise pygame
+        self.largeur = largeur # Je crée une variable largeur
+        self.hauteur = hauteur # Je crée une variable hauteur
+        self.fenetre = pg.display.set_mode((self.largeur, self.hauteur)) # Je crée une fenêtre
+        pg.display.set_caption("Pokedex") # Je donne un titre à ma fenêtre
+        self.image_fond = pg.image.load("images/pokedex/paysage.jpg") # Je charge l'image de fond
 
-        self.imagePokedex = pg.image.load("images/pokedex/pokedex1.png")
-        self.imagePokedex_redimensionnee = pg.transform.scale(self.imagePokedex, (800, 600))
+        self.imagePokedex = pg.image.load("images/pokedex/pokedex1.png") # Je charge l'image du pokedex
+        self.imagePokedex_redimensionnee = pg.transform.scale(self.imagePokedex, (800, 600)) # Je redimensionne l'image du pokedex
 
-        self.imageTitrePokedex = pg.image.load("images/pokedex/titrePokedex.png")
-        self.imageTitrePokedex_redimensionnee = pg.transform.scale(self.imageTitrePokedex, (300, 100))
+        self.imageTitrePokedex = pg.image.load("images/pokedex/titrePokedex.png") # Je charge l'image du titre du pokedex
+        self.imageTitrePokedex_redimensionnee = pg.transform.scale(self.imageTitrePokedex, (300, 100)) # Je redimensionne l'image du titre du pokedex
 
-        self.fleche_gauche = pg.Rect(110, 520, 50, 25)
-        self.fleche_droite = pg.Rect(175, 520, 50, 25)
-        self.fleche_haut = pg.Rect(155, 475, 25, 50)
-        self.fleche_bas = pg.Rect(155, 540, 25, 50)
-        self.cercle = pg.draw.circle(self.fenetre, (255, 0, 0), (155, 520), 25)
+        self.fleche_gauche = pg.Rect(110, 520, 50, 25) # Je crée un rectangle pour la flèche gauche
+        self.fleche_droite = pg.Rect(175, 520, 50, 25) # Je crée un rectangle pour la flèche droite
+        self.fleche_haut = pg.Rect(155, 475, 25, 50) # Je crée un rectangle pour la flèche haut
+        self.fleche_bas = pg.Rect(155, 540, 25, 50) # Je crée un rectangle pour la flèche bas
+        self.cercle = pg.draw.circle(self.fenetre, (255, 0, 0), (155, 520), 25) # Je crée un cercle
 
-        self.couleur_fleche_gauche = (200, 0, 0)
-        self.couleur_fleche_droite = (200, 0, 0)
-        self.couleur_fleche_haut = (200, 0, 0)
-        self.couleur_fleche_bas = (200, 0, 0)
-        self.couleur_cercle = (200, 0, 0)
+        self.couleur_fleche_gauche = (200, 0, 0) # Je crée une variable couleur pour la flèche gauche
+        self.couleur_fleche_droite = (200, 0, 0) # Je crée une variable couleur pour la flèche droite
+        self.couleur_fleche_haut = (200, 0, 0) # Je crée une variable couleur pour la flèche haut
+        self.couleur_fleche_bas = (200, 0, 0) # Je crée une variable couleur pour la flèche bas
+        self.couleur_cercle = (200, 0, 0) # Je crée une variable couleur pour le cercle
 
-        self.son_clic = pg.mixer.Sound("musique/BEEP_touche.mp3")
+        self.son_clic = pg.mixer.Sound("musique/BEEP_touche.mp3") # Je charge le son du clic
 
-        font_chemin = "police/Retro_Gaming.ttf"
-        font = pg.font.Font(font_chemin, 25)
+        font_chemin = "police/Retro_Gaming.ttf" # Je crée une variable pour le chemin de la police
+        font = pg.font.Font(font_chemin, 25) # Je crée une variable pour la police
 
-        self.acces_pokedex = font.render("Pokedex", True, (255, 0, 0))
-        self.rect_acces_pokedex = self.acces_pokedex.get_rect(topleft=(270, 500))
-        self.revenir_menu_pokedex = font.render("Revenir au menu", True, (255, 0, 0))
-        self.rect_quitter_pokedex = self.revenir_menu_pokedex.get_rect(topleft=(270, 550))
+        self.acces_pokedex = font.render("Pokedex", True, (255, 0, 0)) # Je crée une variable pour le texte "Pokedex"
+        self.rect_acces_pokedex = self.acces_pokedex.get_rect(topleft=(270, 500)) # Je crée un rectangle pour le texte "Pokedex"
+        self.revenir_menu_pokedex = font.render("Revenir au menu", True, (255, 0, 0)) # Je crée une variable pour le texte "Revenir au menu"
+        self.rect_quitter_pokedex = self.revenir_menu_pokedex.get_rect(topleft=(270, 550)) # Je crée un rectangle pour le texte "Revenir au menu"
 
-        self.retour_menu = font.render("Retour", True, (255, 0, 0))
-        self.rect_retour_menu = self.retour_menu.get_rect(topleft=(450, 620))
+        self.retour_menu = font.render("Retour", True, (255, 0, 0)) # Je crée une variable pour le texte "Retour"
+        self.rect_retour_menu = self.retour_menu.get_rect(topleft=(450, 620)) # Je crée un rectangle pour le texte "Retour"
 
 
-        self.index_pokemon = 0
-        self.pokemon_affiche = 0
-        self.index_evolution = 0
+        self.index_pokemon = 0 # Je crée une variable pour l'index du pokemon
+        self.pokemon_affiche = 0 # Je crée une variable pour le pokemon affiché
+        self.index_evolution = 0 # Je crée une variable pour l'index de l'évolution du pokemon
 
-        self.afficher = True
+        self.afficher = True # Je crée une variable pour afficher la fenêtre
 
-    def flouterImage(self, image):
-        image_np = pg.surfarray.array3d(image)
-        image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+    def flouterImage(self, image): # Je crée une méthode pour flouter l'image
+        image_np = pg.surfarray.array3d(image) # Je crée une variable pour l'image #surfarray.array3d(image) correspond à la conversion de l'image en tableau numpy
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR) # Je crée une variable pour l'image #cvtColor correspond à la méthode de conversion #RGB2BGR correspond à la conversion de RGB en BGR
 
-        blurred_image = cv2.GaussianBlur(image_np, (25, 25), 0)
+        blurred_image = cv2.GaussianBlur(image_np, (25, 25), 0) # Je crée une variable pour l'image #cv2.GaussianBlur(image_np, (25, 25), 0) correspond à la conversion de l'image en flou #GaussianBlur correspond à la méthode de flou #25 correspond à la taille du flou #0 correspond à la valeur du flou
 
-        blurred_image = cv2.cvtColor(blurred_image, cv2.COLOR_BGR2RGB)
-        blurred_surface = pg.surfarray.make_surface(blurred_image)
+        blurred_image = cv2.cvtColor(blurred_image, cv2.COLOR_BGR2RGB) 
+        blurred_surface = pg.surfarray.make_surface(blurred_image) # Je crée une variable pour l'image #pg.surfarray.make_surface(blurred_image) correspond à la conversion de l'image en surface
 
-        return blurred_surface
+        return blurred_surface # Je retourne l'image floutée #return correspond à la valeur de retour
 
-    def diminuerLuminositeFleche(self, fleche):
-        border_radius = 5
-        fleche_couleur_temp = tuple(max(component - 50, 0) for component in self.couleur_fleche_bas)
-        pg.draw.rect(self.fenetre, fleche_couleur_temp, fleche, border_radius=border_radius)
-        pg.display.flip()
-        pg.time.wait(100)
-        pg.draw.rect(self.fenetre, self.couleur_fleche_bas, fleche, border_radius=border_radius)
+    def diminuerLuminositeFleche(self, fleche): # Je crée une méthode pour diminuer la luminosité de la flèche (il me servira à faire un effet lorsque je clique dessus)
+        border_radius = 5 # Je crée une variable pour le rayon de la bordure (afin de faire un effet de clique)
+        fleche_couleur_temp = tuple(max(component - 50, 0) for component in self.couleur_fleche_bas) # Je crée une variable pour la couleur temporaire de la flèche
+        pg.draw.rect(self.fenetre, fleche_couleur_temp, fleche, border_radius=border_radius) # Je crée un rectangle pour la flèche
+        pg.display.flip() # Je rafraîchis l'écran
+        pg.time.wait(100) # Je fais une pause de 100 millisecondes
+        pg.draw.rect(self.fenetre, self.couleur_fleche_bas, fleche, border_radius=border_radius) # Je crée un rectangle pour la flèche
 
-    def gererDéfilementPokemon(self):
-        for evenement in pg.event.get():
-            if evenement.type == pg.QUIT:
-                self.afficher = False
-            elif evenement.type == pg.MOUSEBUTTONDOWN:
-                if evenement.button == 1:
-                    if self.fleche_gauche.collidepoint(evenement.pos):
-                        self.son_clic.play()
-                        self.diminuerLuminositeFleche(self.fleche_gauche)
-                        self.afficherPokemon(self.index_pokemon - 1)
-                        self.pokemon_affiche -= 1
-                        if self.pokemon_affiche < 0:
-                            self.afficherPokemon(len(donneesPokedex) - 1)
-                            self.pokemon_affiche = len(donneesPokedex) - 1
-                        print("Clic gauche sur la flèche gauche")
+    def gererDéfilementPokemon(self): # Je crée une méthode pour gérer le défilement des pokemon
+        for evenement in pg.event.get(): # Je crée une boucle pour les évènements
+            if evenement.type == pg.QUIT: # Si l'évènement est de quitter
+                self.afficher = False # Je crée une variable pour fermer la fenêtre #self.afficher = False correspond à la fermeture de la fenêtre
+            elif evenement.type == pg.MOUSEBUTTONDOWN: # Si l'évènement est un clic de souris
+                if evenement.button == 1: # Si le clic est un clic gauche #evenement.button == 1 correspond au clic gauche
+                    if self.fleche_gauche.collidepoint(evenement.pos): # Si le clic est sur la flèche gauche #collidepoint correspond à la méthode pour vérifier si le clic est sur la flèche gauche
+                        self.son_clic.play() # Je joue le son du clic
+                        self.diminuerLuminositeFleche(self.fleche_gauche) # Je diminue la luminosité de la flèche gauche
+                        self.afficherPokemon(self.index_pokemon - 1) # J'affiche le pokemon précédent
+                        self.pokemon_affiche -= 1 # Je crée une variable pour le pokemon affiché #self.pokemon_affiche -= 1 correspond à l'index du pokemon affiché
+                        if self.pokemon_affiche < 0: # Si le pokemon affiché est inférieur à 0
+                            self.afficherPokemon(len(donneesPokedex) - 1) # J'affiche le dernier pokemon
+                            self.pokemon_affiche = len(donneesPokedex) - 1 # self.pokemon_affiche = len(donneesPokedex) - 1 correspond à l'index du dernier pokemon
+                        print("Clic gauche sur la flèche gauche") 
                     elif self.fleche_droite.collidepoint(evenement.pos):
                         self.son_clic.play()
                         self.diminuerLuminositeFleche(self.fleche_droite)
@@ -109,14 +109,14 @@ class Pokedex:
                     elif self.cercle.collidepoint(evenement.pos):
                         self.cri_pokemon(self.index_pokemon)
                         print("Clic gauche sur le cercle")
-                    elif self.rect_retour_menu.collidepoint(evenement.pos):
-                        self.son_clic.play()
-                        self.menuPokedex()
+                    elif self.rect_retour_menu.collidepoint(evenement.pos): # Si le clic est sur le texte "Retour"
+                        self.son_clic.play() # Je joue le son du clic
+                        self.menuPokedex() # Je retourne au menu du pokedex
                         print("Clic gauche sur retour")
 
-    def afficherPokemon(self, index_pokemon):
-        if 0 <= index_pokemon < len(donneesPokedex):
-            self.index_pokemon = index_pokemon
+    def afficherPokemon(self, index_pokemon): # Je crée une méthode pour afficher le pokemon
+        if 0 <= index_pokemon < len(donneesPokedex): # Si l'index du pokemon est compris entre 0 et le nombre de pokemon dans le pokedex
+            self.index_pokemon = index_pokemon # Je crée une variable pour l'index du pokemon #self.index_pokemon = index_pokemon correspond à l'index du pokemon
             pokemon = donneesPokedex[index_pokemon]
             chemin_image = pokemon["image"]
             image_pokemon = pg.image.load(chemin_image)
