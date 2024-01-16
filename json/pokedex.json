@@ -2,18 +2,18 @@
     {
         "nom" : "   Pikachu",
         "type" : "Electrique",
-        "defense" : "20",
-        "puissance attaque" : "50",
-        "point de vie" : "100",
+        "defense" : "30",
+        "puissance attaque" : "55",
+        "point de vie" : "35",
         "image" : "images/pokemon/pikachu.png",
-        "cri" : "musique/pikachu.ogg",
+        "cri" : "musique/pikachu.mp3",
         "evolution" : [
             {
                 "nom" : "Raichu",
                 "type" : "Electrique",
-                "defense" : "30",
-                "puissance attaque" : "60",
-                "point de vie" : "100",
+                "defense" : "55",
+                "puissance attaque" : "90",
+                "point de vie" : "60",
                 "cri" : "musique/raichu.ogg",
                 "image" : "images/pokemon/raichu.png"
             }
@@ -22,18 +22,18 @@
     {
         "nom" : "Bulbizarre",
         "type" : "Plante",
-        "defense" : "30",
-        "puissance attaque" : "40",
-        "point de vie" : "100",
+        "defense" : "49",
+        "puissance attaque" : "49",
+        "point de vie" : "45",
         "image" : "images/pokemon/bulbizarre.png",
-        "cri" : "musique/bulbizarre.ogg",
+        "cri" : "musique/bulbizarre.mp3",
         "evolution" : [
             {
                 "nom" : "Herbizarre",
                 "type" : "Plante",
-                "defense" : "40",
-                "puissance attaque" : "50",
-                "point de vie" : "100",
+                "defense" : "63",
+                "puissance attaque" : "62",
+                "point de vie" : "60",
                 "cri" : "musique/herbizarre.ogg",
                 "image" : "images/pokemon/herbizarre.png"
             }
@@ -42,18 +42,18 @@
     {
         "nom" : " Carapuce",
         "type" : "Eau",
-        "defense" : "40",
-        "puissance attaque" : "30",
-        "point de vie" : "100",
+        "defense" : "65",
+        "puissance attaque" : "50",
+        "point de vie" : "50",
         "image" : "images/pokemon/carapuce.png",
-        "cri" : "musique/carapuce.ogg",
+        "cri" : "musique/carapuce.mp3",
         "evolution" : [
             {
                 "nom" : "Carabaffe",
                 "type" : "Eau",
-                "defense" : "50",
-                "puissance attaque" : "40",
-                "point de vie" : "100",
+                "defense" : "80",
+                "puissance attaque" : "65",
+                "point de vie" : "65",
                 "cri" : "musique/carabaffe.ogg",
                 "image" : "images/pokemon/carabaffe.png"
             }
@@ -63,17 +63,17 @@
         "nom" : "Salameche",
         "type" : "Feu",
         "defense" : "50",
-        "puissance attaque" : "20",
-        "point de vie" : "100",
+        "puissance attaque" : "60",
+        "point de vie" : "50",
         "image" : "images/pokemon/salameche.png",
         "cri" : "musique/salameche.ogg",
         "evolution" : [
             {
                 "nom" : "Reptincel",
                 "type" : "Feu",
-                "defense" : "60",
-                "puissance attaque" : "30",
-                "point de vie" : "100",
+                "defense" : "65",
+                "puissance attaque" : "75",
+                "point de vie" : "80",
                 "cri" : "musique/reptincel.ogg",
                 "image" : "images/pokemon/reptincel.png"
             }
@@ -82,18 +82,18 @@
     {
         "nom" : "     Evoli",
         "type" : "Normal",
-        "defense" : "60",
-        "puissance attaque" : "10",
-        "point de vie" : "100",
+        "defense" : "50",
+        "puissance attaque" : "55",
+        "point de vie" : "55",
         "image" : "images/pokemon/evoli.png",
         "cri" : "musique/evoli.ogg",
         "evolution" : [
             {
                 "nom" : "Phyllali",
                 "type" : "Eau",
-                "defense" : "70",
-                "puissance attaque" : "20",
-                "point de vie" : "100",
+                "defense" : "110",
+                "puissance attaque" : "60",
+                "point de vie" : "65",
                 "cri" : "musique/phyllali.ogg",
                 "image" : "images/pokemon/phyllali.png"
             }
@@ -102,9 +102,9 @@
     {
         "nom" : "  Osselait",
         "type" : "Sol",
-        "defense" : "70",
-        "puissance attaque" : "10",
-        "point de vie" : "100",
+        "defense" : "50",
+        "puissance attaque" : "45",
+        "point de vie" : "50",
         "image" : "images/pokemon/osselait.png",
         "cri" : "musique/osselait.ogg",
         "evolution" : [
@@ -113,7 +113,7 @@
                 "type" : "Sol",
                 "defense" : "80",
                 "puissance attaque" : "20",
-                "point de vie" : "100",
+                "point de vie" : "60",
                 "cri" : "musique/ossatueur.ogg",
                 "image" : "images/pokemon/ossatueur.png"
             }
@@ -122,9 +122,9 @@
     {
         "nom" : "   Rattata",
         "type" : "Normal",
-        "defense" : "80",
-        "puissance attaque" : "10",
-        "point de vie" : "100",
+        "defense" : "30",
+        "puissance attaque" : "55",
+        "point de vie" : "50",
         "image" : "images/pokemon/rattata.png",
         "cri" : "musique/rattata.ogg",
         "evolution" : [
@@ -133,7 +133,7 @@
                 "type" : "Normal",
                 "defense" : "90",
                 "puissance attaque" : "20",
-                "point de vie" : "100",
+                "point de vie" : "60",
                 "cri" : "musique/rattatac.ogg",
                 "image" : "images/pokemon/rattatac.png"
             }
@@ -142,9 +142,9 @@
     {
         "nom" : "   Roucoul",
         "type" : "Vol",
-        "defense" : "60",
-        "puissance attaque" : "30",
-        "point de vie" : "100",
+        "defense" : "25",
+        "puissance attaque" : "60",
+        "point de vie" : "50",
         "cri" : "musique/roucoul.ogg",
         "image" : "images/pokemon/roucoul.png",
         "evolution" : [
@@ -153,7 +153,7 @@
                 "type" : "Vol",
                 "defense" : "70",
                 "puissance attaque" : "40",
-                "point de vie" : "100",
+                "point de vie" : "65",
                 "cri" : "musique/roucoups.ogg",
                 "image" : "images/pokemon/roucoups.png"
             }
