@@ -4,7 +4,7 @@ import cv2
 import json
 import random
 
-with open("json/pokedex.json", "r") as fichier:
+with open("json/pokemon.json", "r") as fichier:
     donneesPokedex = json.load(fichier)
 
 class Nouvelle_partie:
@@ -100,10 +100,10 @@ class Nouvelle_partie:
             defense_pokemon = font.render(f"Défense : {pokemon['defense']}", True, (0, 0, 0))
             self.fenetre.blit(defense_pokemon, (220, 580))
 
-            puissance_pokemon = font.render(f"Puissance d'attaque : {pokemon['puissance attaque']}", True, (0, 0, 0))
+            puissance_pokemon = font.render(f"Puissance d'attaque : {pokemon['attaque']}", True, (0, 0, 0))
             self.fenetre.blit(puissance_pokemon, (220, 640))
 
-            pointDeVie_pokemon = font.render(f"Point de vie : {pokemon['point de vie']}", True, (0, 0, 0))
+            pointDeVie_pokemon = font.render(f"Point de vie : {pokemon['vie']}", True, (0, 0, 0))
             self.fenetre.blit(pointDeVie_pokemon, (220, 700))
 
             lancer_partie = font.render(f"Lancer", True, (0, 200, 0))
