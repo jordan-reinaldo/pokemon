@@ -1,8 +1,6 @@
 # importation des bibliothèques
 import pygame
 from pygame.locals import *
-import sys
-
 
 
 
@@ -15,6 +13,7 @@ class Menu_principal:
         # Créer la fenêtre
         self.__fenetre = pygame.display.set_mode((800, 800))
         pygame.display.set_caption("Pokemon Arena-Fighter")
+        pygame.display.set_icon(pygame.image.load("images/logo/logopokeball.png"))
         self.__bg = pygame.image.load("images/background/bg_menu_principal.png").convert()
         
     
@@ -38,20 +37,20 @@ class Menu_principal:
         self.lancer_jeu = self.police.render("Lancer le jeu", True, (0, 0, 0))
         self.lancer_jeu_rect = self.lancer_jeu.get_rect()
         self.lancer_jeu_rect.x = 300
-        self.lancer_jeu_rect.y = 250
+        self.lancer_jeu_rect.y = 260
 
         # Bouton ajouter pokemon
         
         self.ajouter_pokemon = self.police.render("Ajouter un pokemon", True, (0, 0, 0))
         self.ajouter_pokemon_rect = self.ajouter_pokemon.get_rect()
         self.ajouter_pokemon_rect.x = 300
-        self.ajouter_pokemon_rect.y = 300
+        self.ajouter_pokemon_rect.y = 310
 
         # bouton pokedex
         self.pokedex = self.police.render("Pokedex", True, (0, 0, 0))
         self.pokedex_rect = self.pokedex.get_rect()
         self.pokedex_rect.x = 300
-        self.pokedex_rect.y = 350
+        self.pokedex_rect.y = 360
 
         self.couleur_origine = (55, 93, 170)
         self.couleur_changement = (255, 255, 255) 
@@ -59,7 +58,7 @@ class Menu_principal:
     # ajout son boutons
         self.son_bouton = pygame.mixer.Sound("musique/voicy-pikachu01.mp3")
 
-
+        pass
     # méthode afficher
     def afficher_menu(self):
         self.__fenetre.blit(self.__bg, (0, 0))
@@ -88,60 +87,5 @@ class Menu_principal:
         pygame.display.flip()
 
 
-# test de la classe
-menu = Menu_principal()
 
 
-
-running = True
-while running:
-    menu.afficher_menu()
-    for event in pygame.event.get():
-        if event.type == QUIT:
-            running = False
-            pygame.quit()
-            sys.exit()
-        elif event.type == MOUSEBUTTONDOWN:
-            if event.button == 1:
-                if menu.lancer_jeu_rect.collidepoint(event.pos): 
-                    print("lancer le jeu")
-                    menu.son_bouton.play()
-                    
-                elif menu.ajouter_pokemon_rect.collidepoint(event.pos):
-                    print("ajouter un pokemon")
-                    menu.son_bouton.play()
-                    
-
-                elif menu.pokedex_rect.collidepoint(event.pos):
-                    print("pokedex")
-                    menu.son_bouton.play()
-
-
-        
-
-
-
-
-    
-
-            
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-       
-
-        
-        
-
-   
