@@ -112,6 +112,11 @@ class Nouvelle_partie:
             self.fenetre.blit(self.fleche_gauche, (200, 400))
             self.fenetre.blit(self.fleche_droite, (550, 400))
 
+            chemin_bouton_retour = "images/background/bouton-retour.png"
+            bouton_retour = pg.image.load(chemin_bouton_retour)
+            bouton_retour_redimensionne = pg.transform.scale(bouton_retour, (110, 50))
+            self.fenetre.blit(bouton_retour_redimensionne, (680, 720))
+
     # def gererDéfilementPokemon(self):
     #     for evenement in pg.event.get():
     #         if evenement.type == pg.QUIT:
@@ -165,6 +170,9 @@ class Nouvelle_partie:
                             self.choix_pokemon_joueur()
                             print("Lancer la partie")
                             return True
+                        elif 680 <= event.pos[0] <= 790 and 720 <= event.pos[1] <= 770:
+                            print("Retour")
+                            return False
 
             pg.display.flip()
 
