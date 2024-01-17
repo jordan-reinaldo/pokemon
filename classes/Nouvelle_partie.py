@@ -164,7 +164,9 @@ class Nouvelle_partie:
                             self.afficherPokemon(self.index_pokemon + 1)
                         elif 535 <= event.pos[0] <= 600 and 743 <= event.pos[1] <= 760:
                             pokemon_joueur = self.choix_pokemon_joueur()
+                  
                             pokemon_aleatoire = self.choix_pokemon_aleatoire(pokemon_joueur.nom)
+
                             if pokemon_joueur.attaque_de_base is None:
                                 pokemon_joueur.attaque_de_base = Attaque.assigner_attaque_base(pokemon_joueur)
 
@@ -172,8 +174,8 @@ class Nouvelle_partie:
                                 pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
 
                             combat = Combat()
-                            combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)  # Passez les objets Pokemon ici
-                            vainqueur = combat.lancer_combat(pokemon_joueur, pokemon_aleatoire) 
+                            vainqueur=combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)  # Passez les objets Pokemon ici
+                            
                             if vainqueur == pokemon_joueur.nom:
                                 print(f"{pokemon_joueur.nom} a gagné le combat !")
                                 return True
@@ -186,5 +188,5 @@ class Nouvelle_partie:
 
             pg.display.flip()
 
-fenetre = Nouvelle_partie(800, 800)
-fenetre.afficher_fenetre()
+#fenetre = Nouvelle_partie(800, 800)
+#fenetre.afficher_fenetre()

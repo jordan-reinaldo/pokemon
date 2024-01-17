@@ -63,6 +63,9 @@ class Combat:
         self.running = True
         self.tour_mon_pokemon = True
         pygame.init()
+        pygame.mixer.init()
+        pygame.mixer.music.load('musique/ostbattle.mp3')  # Remplacez par le chemin réel du fichier audio
+        pygame.mixer.music.play(-1)
         ecran = pygame.display.set_mode((800, 600))
         sprite_mon_pokemon = pygame.image.load(f"images/pokemon_de_dos/{mon_pokemon.nom}1.png")
         sprite_adversaire = pygame.image.load(f"images/pokemon/{adversaire.nom}1.png")
@@ -116,7 +119,7 @@ class Combat:
 
             if self.mon_pokemon.pv <= 0 or self.adversaire.pv <= 0:
                 self.running = False  # Fin du combat
-
+        pygame.mixer.music.stop() 
         pygame.quit()
 
         if self.mon_pokemon.pv <= 0:
