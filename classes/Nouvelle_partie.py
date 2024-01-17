@@ -106,8 +106,8 @@ class Nouvelle_partie:
             puissance_pokemon = font.render(f"Puissance d'attaque : {pokemon['attaque']}", True, (0, 0, 0))
             self.fenetre.blit(puissance_pokemon, (220, 640))
 
-            pointDeVie_pokemon = font.render(f"Point de vie : {pokemon['vie']}", True, (0, 0, 0))
-            self.fenetre.blit(pointDeVie_pokemon, (220, 700))
+            pointDepv_pokemon = font.render(f"Point de pv : {pokemon['pv']}", True, (0, 0, 0))
+            self.fenetre.blit(pointDepv_pokemon, (220, 700))
 
             lancer_partie = font.render(f"Lancer", True, (0, 200, 0))
             self.fenetre.blit(lancer_partie, (535, 743))
