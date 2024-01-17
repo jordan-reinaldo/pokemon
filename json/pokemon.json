@@ -7,7 +7,8 @@
         "defense": 50,
         "lvl": 5,
         "xp": 0,
-        "xp_necessaire": 20
+        "xp_necessaire": 20,
+        "image": "images/pokemon/salameche.png"
     },
     {
         "nom": "Reptincel",
@@ -17,7 +18,8 @@
         "defense": 65,
         "lvl": 7,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/reptincel.png"
     },
     {
         "nom": "Carapuce",
@@ -27,7 +29,8 @@
         "defense": 65,
         "lvl": 5,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/carapuce.png"
     },
     {
         "nom": "Carabaffe",
@@ -37,7 +40,8 @@
         "defense": 80,
         "lvl": 7,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/carabaffe.png"
     },
     {
         "nom": "Bulbizarre",
@@ -47,7 +51,8 @@
         "defense": 49,
         "lvl": 5,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/bulbizarre.png"
     },
     {
         "nom": "Herbizarre",
@@ -57,7 +62,8 @@
         "defense": 63,
         "lvl": 7,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/herbizarre.png"
     },
     {
         "nom": "Pikachu",
@@ -67,7 +73,8 @@
         "defense": 30,
         "lvl": 5,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/pikachu.png"
     },
     {
         "nom": "Raichu",
@@ -77,7 +84,8 @@
         "defense": 55,
         "lvl": 100,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/raichu.png"
     },
     {
         "nom": "Evoli",
@@ -87,7 +95,8 @@
         "defense": 50,
         "lvl": 5,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/evoli.png"
     },
     {
         "nom": "Phyllali",
@@ -97,6 +106,7 @@
         "defense": 110,
         "lvl": 7,
         "xp": 0,
-        "xp_necessaire": 50
+        "xp_necessaire": 50,
+        "image": "images/pokemon/phyllali.png"
     }
 ]
