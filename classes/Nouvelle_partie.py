@@ -129,10 +129,11 @@ class Nouvelle_partie:
 
     
 
-    def choix_pokemon_aleatoire(self):
-        pokemon_aleatoire = random.choice(self.pokemons)  # Sélectionnez un objet Pokemon aléatoire de la liste
+    def choix_pokemon_aleatoire(self, pokemon_joueur_nom):
+        pokemon_aleatoire = random.choice([p for p in self.pokemons if p.nom != pokemon_joueur_nom])
         print(f"Pokemon choisi aléatoirement : {pokemon_aleatoire.nom}")
         return pokemon_aleatoire
+
 
     def choix_pokemon_joueur(self):
         pokemon_joueur = self.pokemons[self.index_pokemon]  # Obtenez l'objet Pokemon du joueur à l'index actuel
@@ -163,7 +164,7 @@ class Nouvelle_partie:
                             self.afficherPokemon(self.index_pokemon + 1)
                         elif 535 <= event.pos[0] <= 600 and 743 <= event.pos[1] <= 760:
                             pokemon_joueur = self.choix_pokemon_joueur()
-                            pokemon_aleatoire = self.choix_pokemon_aleatoire()
+                            pokemon_aleatoire = self.choix_pokemon_aleatoire(pokemon_joueur.nom)
                             if pokemon_joueur.attaque_de_base is None:
                                 pokemon_joueur.attaque_de_base = Attaque.assigner_attaque_base(pokemon_joueur)
 
