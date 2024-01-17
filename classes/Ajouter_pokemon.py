@@ -126,12 +126,14 @@ class Ajouter_pokemon:
                         self.pour_ajouter_fichier()
                         
                         self.message_affiche = True
+                        break
                
             elif event.type == KEYDOWN:
                     if event.key == K_RETURN:
 
                         menu = Menu_principal()
                         menu.afficher_menu()
+                        self.message_affiche = False
                         if menu:
                             return "menu"
 
@@ -163,9 +165,9 @@ class Ajouter_pokemon:
         self.fenetre.blit(self.texte, (50, 565))
         self.texte = self.police2.render(f"Type : {self.type[0]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (50, 595))
-        self.texte = self.police2.render(f"Vie : {self.vie}", True, (0, 0, 0))
+        self.texte = self.police2.render(f"Vie : {self.vie[0]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (50, 625))
-        self.texte = self.police2.render(f"Niveau : {self.niveau}", True, (0, 0, 0))
+        self.texte = self.police2.render(f"Niveau : {self.niveau[0]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (50, 655))
         self.texte = self.police2.render(f"Attaque : {self.attaque[0]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (50, 685))
@@ -177,9 +179,9 @@ class Ajouter_pokemon:
         self.fenetre.blit(self.texte, (320, 565))
         self.texte = self.police2.render(f"Type : {self.type[1]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (320, 595))
-        self.texte = self.police2.render(f"Vie : {self.vie}", True, (0, 0, 0))
+        self.texte = self.police2.render(f"Vie : {self.vie[1]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (320, 625))
-        self.texte = self.police2.render(f"Niveau : {self.niveau}", True, (0, 0, 0))
+        self.texte = self.police2.render(f"Niveau : {self.niveau[1]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (320, 655))
         self.texte = self.police2.render(f"Attaque : {self.attaque[1]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (320, 685))
@@ -191,9 +193,9 @@ class Ajouter_pokemon:
         self.fenetre.blit(self.texte, (590, 565))
         self.texte = self.police2.render(f"Type : {self.type[2]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (590, 595))
-        self.texte = self.police2.render(f"Vie : {self.vie}", True, (0, 0, 0))
+        self.texte = self.police2.render(f"Vie : {self.vie[2]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (590, 625))
-        self.texte = self.police2.render(f"Niveau : {self.niveau}", True, (0, 0, 0))
+        self.texte = self.police2.render(f"Niveau : {self.niveau[2]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (590, 655))
         self.texte = self.police2.render(f"Attaque : {self.attaque[2]}", True, (0, 0, 0))
         self.fenetre.blit(self.texte, (590, 685))
@@ -205,15 +207,18 @@ class Ajouter_pokemon:
                     self.texte = self.police.render(f"Le Pokémon {self.nom[self.index_pokemon]} a été ajouté !", True, (0, 0, 0))
                     self.fenetre.blit(self.texte, (200, 350))
 
+        
+
                
     def lancer(self):
         while True:
+            
             resultat = self.gerer_evenements()
             if resultat == "menu":
                 return
             self.afficher()
             self.clock.tick(60)
-
+            
                
 
 if __name__ == "__main__":

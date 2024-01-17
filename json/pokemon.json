@@ -98,5 +98,38 @@
 "lvl": 7,
 "xp": 0,
 "xp_necessaire": 50
+},
+{
+"nom": "Osselait",
+"type": "sol",
+"vie": 45,
+"niveau": 5,
+"attaque": 45,
+"defense": 50,
+"xp": 0,
+"xp_necessaire": 50,
+"image": "images/pokemon/Osselait.png"
+},
+{
+"nom": "Rattata",
+"type": "Normal",
+"vie": 50,
+"niveau": 6,
+"attaque": 55,
+"defense": 30,
+"xp": 0,
+"xp_necessaire": 50,
+"image": "images/pokemon/Rattata.png"
+},
+{
+"nom": "Roucool",
+"type": "vol",
+"vie": 45,
+"niveau": 5,
+"attaque": 60,
+"defense": 25,
+"xp": 0,
+"xp_necessaire": 50,
+"image": "images/pokemon/Roucool.png"
 }
 ]

@@ -25,11 +25,12 @@ def lancer_jeu():
                         print("ajouter un pokemon")
                         menu.son_bouton.play()
                         ajouter.lancer()
+                        
                     elif menu.pokedex_rect.collidepoint(event.pos):
                         print("pokedex")
                         menu.son_bouton.play()
 
         menu.afficher_menu()
-
+        pygame.display.flip()
 if __name__ == "__main__":
     lancer_jeu()
