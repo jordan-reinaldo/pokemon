@@ -5,6 +5,7 @@ import json
 import random
 from classes.Combat import Combat 
 from classes.Pokemon import Pokemon
+from classes.Attaque import Attaque
 
 with open("json/pokemon.json", "r") as fichier:
     donneesPokemon = json.load(fichier)
@@ -163,6 +164,12 @@ class Nouvelle_partie:
                         elif 535 <= event.pos[0] <= 600 and 743 <= event.pos[1] <= 760:
                             pokemon_joueur = self.choix_pokemon_joueur()
                             pokemon_aleatoire = self.choix_pokemon_aleatoire()
+                            if pokemon_joueur.attaque_de_base is None:
+                                pokemon_joueur.attaque_de_base = Attaque.assigner_attaque_base(pokemon_joueur)
+
+                            if pokemon_aleatoire.attaque_de_base is None:           
+                                pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
+
                             combat = Combat()
                             vainqueur = combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)  # Passez les objets Pokemon ici
                             return True
