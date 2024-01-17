@@ -102,6 +102,7 @@ class Combat:
                     if bouton_attaque_rect.collidepoint(event.pos) and self.tour_mon_pokemon:
                         message = self.effectuer_attaque(self.mon_pokemon, self.adversaire)
                         self.afficher_message(ecran, message)
+                        pygame.time.delay(1000)
                         self.tour_mon_pokemon = False
                     elif bouton_fuite_rect.collidepoint(event.pos):
                         self.gerer_action_bouton_fuite(ecran)
@@ -113,6 +114,7 @@ class Combat:
             if not self.tour_mon_pokemon:
                 message = self.effectuer_attaque(self.adversaire, self.mon_pokemon)
                 self.afficher_message(ecran, message)
+                pygame.time.delay(1000)
                 self.tour_mon_pokemon = True
 
           
