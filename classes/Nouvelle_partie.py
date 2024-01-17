@@ -171,7 +171,13 @@ class Nouvelle_partie:
                                 pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
 
                             combat = Combat()
-                            vainqueur = combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)  # Passez les objets Pokemon ici
+                            combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)  # Passez les objets Pokemon ici
+                            vainqueur = combat.lancer_combat(pokemon_joueur, pokemon_aleatoire) 
+                            if vainqueur == pokemon_joueur.nom:
+                                print(f"{pokemon_joueur.nom} a gagné le combat !")
+                                return True
+                            else:
+                                print(f"{pokemon_joueur.nom} a perdu le combat !")
                             return True
                         elif 680 <= event.pos[0] <= 790 and 720 <= event.pos[1] <= 770:
                             print("Retour")
