@@ -61,6 +61,7 @@ class Ajouter_pokemon:
         self.attaque = [60, 55,45]
         self.defense = [25, 30, 50]
         self.xp = [0,0,0]
+        self.visible = [False, False, False]
 
         self.index_pokemon = None   
         self.surbrillance_silhouette = None  
@@ -93,7 +94,7 @@ class Ajouter_pokemon:
                 "xp": self.xp[self.index_pokemon],
                 "xp_necessaire": 50,
                 "image": f"images/pokemon/{self.nom[self.index_pokemon]}.png",
-                "visible": False
+                "visible": self.visible[self.index_pokemon]
             }
 
             pokemon.append(nouveau_pokemon)

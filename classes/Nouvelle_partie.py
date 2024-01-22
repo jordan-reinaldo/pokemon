@@ -10,12 +10,10 @@ from classes.Menu_principal import *
 with open("json/pokemon.json", "r") as fichier: # Ouvrir le fichier JSON en lecture seule et en mode texte (r) et écriture (w) 
     donneesPokemon = json.load(fichier)
 
-
 infoPokemon = Pokemon.import_json("json/pokemon.json")
 
 class Nouvelle_partie:
-
-    
+ 
     def __init__(self, largeur, hauteur):
         pg.init()
         self.largeur = largeur
