@@ -142,20 +142,30 @@ class Nouvelle_partie:
 
     
     def choix_pokemon_aleatoire(self):
+        self.mise_a_jour_fichier_json()
 
-        pokemon_aleatoire = random.choice(infoPokemon)  # Sélectionnez un objet Pokemon aléatoire de la liste
+        if not Pokemon.tous_pokemons:
+            print("Aucun Pokémon disponible.")
+            return None
+
+        pokemon_aleatoire = random.choice(Pokemon.tous_pokemons)
         print(f"Pokemon choisi aléatoirement : {pokemon_aleatoire.nom}")
-        
+
+        # Mettez à jour le statut "visible" dans le fichier JSON
         with open("json/pokedex.json", "r") as fichier:
             donneesPokemon = json.load(fichier)
 
-        index_pokemon_aleatoire = infoPokemon.index(pokemon_aleatoire)
-        donneesPokemon[index_pokemon_aleatoire]["visible"] = True
+        for donnee_pokemon in donneesPokemon:
+            if donnee_pokemon["nom"] == pokemon_aleatoire.nom:
+                donnee_pokemon["visible"] = True
 
         with open("json/pokedex.json", "w") as fichier:
             json.dump(donneesPokemon, fichier, indent=2)
 
         return pokemon_aleatoire
+
+
+
 
     def choix_pokemon_joueur(self):
         pokemon_joueur = infoPokemon[self.index_pokemon]
@@ -186,13 +196,13 @@ class Nouvelle_partie:
             self.fenetre.blit(self.image_carte_pokemon_redimensionne, (180, 170))
             self.fenetre_ecrire_nom()
             self.afficherPokemon(self.index_pokemon)
-            
+
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
                     quit()
                 self.zone_texte(event)
-                
+
                 if event.type == pg.MOUSEBUTTONDOWN:
                     if event.button == 1:
                         if 200 <= event.pos[0] <= 240 and 400 <= event.pos[1] <= 440:
@@ -202,11 +212,14 @@ class Nouvelle_partie:
                         elif 535 <= event.pos[0] <= 600 and 743 <= event.pos[1] <= 760:
                             pokemon_joueur = self.choix_pokemon_joueur()
                             pokemon_aleatoire = self.choix_pokemon_aleatoire()
+
+                            # Ajoutez une vérification supplémentaire avant d'accéder à attaque_de_base
                             if pokemon_joueur.attaque_de_base is None:
                                 pokemon_joueur.attaque_de_base = Attaque.assigner_attaque_base(pokemon_joueur)
 
-                            if pokemon_aleatoire.attaque_de_base is None:
+                            if pokemon_aleatoire and pokemon_aleatoire.attaque_de_base is None:
                                 pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
+
                             combat = Combat()
                             combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)
                             return True
@@ -216,6 +229,8 @@ class Nouvelle_partie:
                             menu.afficher_menu()
                             if menu:
                                 return "menu"
+
+
                             
                             
 

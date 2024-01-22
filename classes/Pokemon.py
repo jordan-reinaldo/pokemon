@@ -5,7 +5,7 @@ from classes.Attaque import *
 class Pokemon:
     tous_pokemons = []  # Attribut de classe pour stocker tous les Pokémon chargés
 
-    def __init__(self, nom, type_pokemon, pv, attaque, defense, lvl, xp, xp_necessaire, attaque_de_base=None):
+    def __init__(self, nom, type_pokemon, pv, attaque, defense, lvl, xp, xp_necessaire, attaque_de_base=None, visible = True):
         self.nom = nom
         self.type = type_pokemon
         self.pv = pv
@@ -16,7 +16,7 @@ class Pokemon:
         self.xp = xp
         self.xp_necessaire = xp_necessaire
         self.attaque_de_base = attaque_de_base
-
+        self.visible = visible
 
         Pokemon.tous_pokemons.append(self)  # Ajout du Pokémon nouvellement créé à la liste de tous les Pokémon
 

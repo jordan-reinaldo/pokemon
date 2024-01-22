@@ -8,7 +8,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 20,
-"image": "images/pokemon/salameche.png"
+"image": "images/pokemon/salameche.png",
+"visible": false
 },
 {
 "nom": "Reptincel",
@@ -19,7 +20,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/reptincel.png"
+"image": "images/pokemon/reptincel.png",
+"visible": false
 },
 {
 "nom": "Carapuce",
@@ -30,7 +32,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/carapuce.png"
+"image": "images/pokemon/carapuce.png",
+"visible": false
 },
 {
 "nom": "Carabaffe",
@@ -41,7 +44,8 @@
 "lvl": 7,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/carabaffe.png"
+"image": "images/pokemon/carabaffe.png",
+"visible": false
 },
 {
 "nom": "Bulbizarre",
@@ -52,7 +56,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/bulbizarre.png"
+"image": "images/pokemon/bulbizarre.png",
+"visible": false
 },
 {
 "nom": "Herbizarre",
@@ -63,7 +68,8 @@
 "lvl": 7,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/herbizarre.png"
+"image": "images/pokemon/herbizarre.png",
+"visible": false
 },
 {
 "nom": "Pikachu",
@@ -74,7 +80,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/pikachu.png"
+"image": "images/pokemon/pikachu.png",
+"visible": false
 },
 {
 "nom": "Raichu",
@@ -85,7 +92,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/raichu.png"
+"image": "images/pokemon/raichu.png",
+"visible": false
 },
 {
 "nom": "Evoli",
@@ -96,7 +104,8 @@
 "lvl": 5,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/evoli.png"
+"image": "images/pokemon/evoli.png",
+"visible": false
 },
 {
 "nom": "Phyllali",
@@ -107,18 +116,8 @@
 "lvl": 7,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/phyllali.png"
-},
-{
-"nom": "Roucool",
-"type": "vol",
-"pv": 45,
-"lvl": 5,
-"attaque": 60,
-"defense": 25,
-"xp": 0,
-"xp_necessaire": 50,
-"image": "images/pokemon/Roucool.png"
+"image": "images/pokemon/phyllali.png",
+"visible": false
 },
 {
 "nom": "Rattata",
@@ -129,17 +128,7 @@
 "defense": 30,
 "xp": 0,
 "xp_necessaire": 50,
-"image": "images/pokemon/Rattata.png"
-},
-{
-"nom": "Osselait",
-"type": "sol",
-"pv": 45,
-"lvl": 5,
-"attaque": 45,
-"defense": 50,
-"xp": 0,
-"xp_necessaire": 50,
-"image": "images/pokemon/Osselait.png"
+"image": "images/pokemon/Rattata.png",
+"visible": false
 }
 ]

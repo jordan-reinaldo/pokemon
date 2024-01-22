@@ -83,6 +83,7 @@ class Ajouter_pokemon:
                         return
 
             nouveau_pokemon = {
+
                 "nom": self.nom[self.index_pokemon],
                 "type": self.type[self.index_pokemon],
                 "pv": self.vie[self.index_pokemon],
@@ -91,7 +92,8 @@ class Ajouter_pokemon:
                 "defense": self.defense[self.index_pokemon],
                 "xp": self.xp[self.index_pokemon],
                 "xp_necessaire": 50,
-                "image": f"images/pokemon/{self.nom[self.index_pokemon]}.png"
+                "image": f"images/pokemon/{self.nom[self.index_pokemon]}.png",
+                "visible": False
             }
 
             pokemon.append(nouveau_pokemon)

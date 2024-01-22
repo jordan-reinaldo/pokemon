@@ -66,6 +66,9 @@ class Combat:
     def lancer_combat(self, mon_pokemon, adversaire):
         self.mon_pokemon = mon_pokemon
         self.adversaire = adversaire
+        if adversaire is None:
+            print("erreur: adversaire est None")
+            return
         self.running = True
         self.tour_mon_pokemon = True
         pygame.init()

@@ -157,6 +157,6 @@
     "point de vie": "65",
     "cri": "musique/roucoups.mp3",
     "image": "images/pokemon/roucoups.png",
-    "visible": false
+    "visible": true
   }
 ]
