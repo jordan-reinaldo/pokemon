@@ -108,38 +108,5 @@
 "xp": 0,
 "xp_necessaire": 50,
 "image": "images/pokemon/phyllali.png"
-},
-{
-"nom": "Roucool",
-"type": "vol",
-"pv": 45,
-"lvl": 5,
-"attaque": 60,
-"defense": 25,
-"xp": 0,
-"xp_necessaire": 50,
-"image": "images/pokemon/Roucool.png"
-},
-{
-"nom": "Rattata",
-"type": "Normal",
-"pv": 50,
-"lvl": 6,
-"attaque": 55,
-"defense": 30,
-"xp": 0,
-"xp_necessaire": 50,
-"image": "images/pokemon/Rattata.png"
-},
-{
-"nom": "Osselait",
-"type": "sol",
-"pv": 45,
-"lvl": 5,
-"attaque": 45,
-"defense": 50,
-"xp": 0,
-"xp_necessaire": 50,
-"image": "images/pokemon/Osselait.png"
 }
 ]
