@@ -1,6 +1,7 @@
 import pygame
 import pygame.time
 from classes.Menu_principal import *
+from classes.Nouvelle_partie import *
 import random
 
 
@@ -122,6 +123,8 @@ class Combat:
         bouton_attaque_rect = pygame.Rect(50, 500, 100, 50)
         bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
 
+        bouton_choix_pokemon_rect = pygame.Rect(265, 500, 100, 50)
+
         while self.running:
             self.effacer_message(ecran)
             ecran.blit(arriere_plan, (0, 0))  # Dessiner l'arrière-plan
@@ -129,6 +132,7 @@ class Combat:
             ecran.blit(sprite_adversaire, (600, 100))
             self.dessiner_bouton(ecran, "Attaquer", 50, 500, 100, 50, (255, 0, 0), (255, 100, 100))
             self.dessiner_bouton(ecran, "Fuite", 650, 500, 100, 50, (255, 0, 0), (255, 100, 100))
+            self.dessiner_bouton(ecran, "Changer de Pokemon", 265, 500, 250, 50, (255, 0, 0), (255, 100, 100))
 
             # Mettre à jour l'affichage des PV
             info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
