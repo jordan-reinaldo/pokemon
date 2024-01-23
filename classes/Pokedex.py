@@ -2,6 +2,7 @@ import pygame as pg
 import cv2
 import numpy as np
 import json
+from classes.Menu_principal import *
 
 with open("json/pokedex.json", "r") as fichier: # J'ouvre le fichier json
     donneesPokedex = json.load(fichier) # Je charge les données du fichier json dans une variable
@@ -54,6 +55,7 @@ class Pokedex: # Je crée une classe Pokedex
 
         self.afficher = True # Je crée une variable pour afficher la fenêtre
 
+
     def flouterImage(self, image): # Je crée une méthode pour flouter l'image
         image_np = pg.surfarray.array3d(image) # Je crée une variable pour l'image #surfarray.array3d(image) correspond à la conversion de l'image en tableau numpy
         image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR) # Je crée une variable pour l'image #cvtColor correspond à la méthode de conversion #RGB2BGR correspond à la conversion de RGB en BGR
@@ -65,6 +67,7 @@ class Pokedex: # Je crée une classe Pokedex
 
         return blurred_surface # Je retourne l'image floutée #return correspond à la valeur de retour
 
+
     def diminuerLuminositeFleche(self, fleche): # Je crée une méthode pour diminuer la luminosité de la flèche (il me servira à faire un effet lorsque je clique dessus)
         border_radius = 5 # Je crée une variable pour le rayon de la bordure (afin de faire un effet de clique)
         fleche_couleur_temp = tuple(max(component - 50, 0) for component in self.couleur_fleche_bas) # Je crée une variable pour la couleur temporaire de la flèche
@@ -72,6 +75,7 @@ class Pokedex: # Je crée une classe Pokedex
         pg.display.flip() # Je rafraîchis l'écran
         pg.time.wait(100) # Je fais une pause de 100 millisecondes
         pg.draw.rect(self.fenetre, self.couleur_fleche_bas, fleche, border_radius=border_radius) # Je crée un rectangle pour la flèche
+
 
     def gererDéfilementPokemon(self): # Je crée une méthode pour gérer le défilement des pokemon
         for evenement in pg.event.get(): # Je crée une boucle pour les évènements
@@ -112,8 +116,11 @@ class Pokedex: # Je crée une classe Pokedex
                         print("Clic gauche sur le cercle")
                     elif self.rect_retour_menu.collidepoint(evenement.pos): # Si le clic est sur le texte "Retour"
                         self.son_clic.play() # Je joue le son du clic
-                        self.menuPokedex() # Je retourne au menu du pokedex
+                        self.menuPokedex()
+                        if self.menuPokedex():
+                            return "menu"
                         print("Clic gauche sur retour")
+
 
     def afficherPokemon(self, index_pokemon): # Je crée une méthode pour afficher le pokemon
         if 0 <= index_pokemon < len(donneesPokedex): # Si l'index du pokemon est compris entre 0 et le nombre de pokemon dans le pokedex
@@ -145,43 +152,47 @@ class Pokedex: # Je crée une classe Pokedex
             retour = font.render(f"Retour", True, (0, 200, 0))
             self.fenetre.blit(retour, (450, 620))
 
-    def afficherEvolutionPokemon(self, index_pokemon, index_evolution):
+
+    def afficherPokemon(self, index_pokemon):
         if 0 <= index_pokemon < len(donneesPokedex):
             self.index_pokemon = index_pokemon
             pokemon = donneesPokedex[index_pokemon]
 
-            if 0 <= index_evolution < len(pokemon["evolution"]):
-                evolution = pokemon["evolution"][index_evolution]
-                chemin_image = evolution["image"]
-                image_pokemon = pg.image.load(chemin_image)
-                image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
-                self.fenetre.blit(image_redimensionnee, (310, 125))
+            if pokemon.get("visible", True):
+                try:
+                    chemin_image = pokemon["image"]
+                    image_pokemon = pg.image.load(chemin_image)
+                    image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
+                    self.fenetre.blit(image_redimensionnee, (310, 125))
 
-                font_chemin = "police/Retro_Gaming.ttf"
-                font = pg.font.Font(font_chemin, 16)
+                    font_chemin = "police/Retro_Gaming.ttf"
+                    font = pg.font.Font(font_chemin, 16)
 
-                nom_pokemon = font.render(f"Nom : {evolution['nom']}", True, (0, 0, 0))
-                self.fenetre.blit(nom_pokemon, (270, 460))
+                    nom_pokemon = font.render(f"Nom : {pokemon['nom']}", True, (0, 0, 0))
+                    self.fenetre.blit(nom_pokemon, (270, 460))
 
-                type_pokemon = font.render(f"Type : {evolution['type']}", True, (0, 0, 0))
-                self.fenetre.blit(type_pokemon, (270, 490))
+                    type_pokemon = font.render(f"Type : {pokemon['type']}", True, (0, 0, 0))
+                    self.fenetre.blit(type_pokemon, (270, 490))
 
-                defense_pokemon = font.render(f"Défense : {evolution['defense']}", True, (0, 0, 0))
-                self.fenetre.blit(defense_pokemon, (270, 520))
+                    defense_pokemon = font.render(f"Défense : {pokemon['defense']}", True, (0, 0, 0))
+                    self.fenetre.blit(defense_pokemon, (270, 520))
 
-                puissance_pokemon = font.render(f"Puissance d'attaque : {evolution['puissance attaque']}", True, (0, 0, 0))
-                self.fenetre.blit(puissance_pokemon, (270, 550))
+                    puissance_pokemon = font.render(f"Puissance d'attaque : {pokemon['puissance attaque']}", True, (0, 0, 0))
+                    self.fenetre.blit(puissance_pokemon, (270, 550))
 
-                pointDeVie_pokemon = font.render(f"Point de vie : {evolution['point de vie']}", True, (0, 0, 0))
-                self.fenetre.blit(pointDeVie_pokemon, (270, 580))
+                    pointDeVie_pokemon = font.render(f"Point de vie : {pokemon['point de vie']}", True, (0, 0, 0))
+                    self.fenetre.blit(pointDeVie_pokemon, (270, 580))
 
-                
-            
+                except pg.error as e: # Si il y a une erreur de chargement d'image #pg.error correspond à l'erreur de pygame    
+                    print(f"Erreur de chargement d'image : {e}")
+
+
     def cri_pokemon(self, index_pokemon):
         if "cri" in donneesPokedex[index_pokemon]:
             chemin_cri = donneesPokedex[index_pokemon]["cri"]
             cri = pg.mixer.Sound(chemin_cri)
             cri.play()
+
 
     def afficherPokedex(self):
         while self.afficher:
@@ -189,14 +200,24 @@ class Pokedex: # Je crée une classe Pokedex
             self.fenetre.blit(image_floue, (0, 0))
             self.fenetre.blit(self.imagePokedex_redimensionnee, (0, 80))
             self.afficherPokemon(self.pokemon_affiche)
+            
             border_radius = 10
             pg.draw.rect(self.fenetre, self.couleur_fleche_gauche, self.fleche_gauche, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas, border_radius=border_radius)
-            self.cercle = pg.draw.circle(self.fenetre, self.couleur_cercle, (705, 535), 35)
-            self.gererDéfilementPokemon()
+            
+            self.cercle = pg.draw.circle(self.fenetre, self.couleur_cercle, (705, 535), 35) # Bouton pour le cri du pokemon
+            
+            font_chemin = "police/Retro_Gaming.ttf" # Partie pour le bouton retour
+            font = pg.font.Font(font_chemin, 16)
+            retour = font.render(f"Retour", True, (0, 200, 0))
+            self.fenetre.blit(retour, (450, 620))
+            
+            self.gererDéfilementPokemon() # J'appelle la méthode pour gérer le défilement des pokemon
+            
             pg.display.flip()
+
 
     def menuPokedex(self):
         while self.afficher:
@@ -206,11 +227,13 @@ class Pokedex: # Je crée une classe Pokedex
             self.fenetre.blit(self.acces_pokedex, (270, 500))
             self.fenetre.blit(self.revenir_menu_pokedex, (270, 550))
             self.fenetre.blit(self.imageTitrePokedex_redimensionnee, (250, 185))
+            
             border_radius = 10
             pg.draw.rect(self.fenetre, self.couleur_fleche_gauche, self.fleche_gauche, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas, border_radius=border_radius)
+            
             self.cercle = pg.draw.circle(self.fenetre, self.couleur_cercle, (705, 535), 35)
 
             for evenement in pg.event.get():
@@ -225,8 +248,14 @@ class Pokedex: # Je crée une classe Pokedex
                         elif self.rect_quitter_pokedex.collidepoint(evenement.pos):
                             self.son_clic.play()
                             print("Clic sur Quitter")
+                            menu = Menu_principal()
+                            menu.afficher_menu()
+                            self.afficher = False
 
             pg.display.flip()
 
-fenetre = Pokedex(800, 800)
-fenetre.menuPokedex()
+
+if __name__ == "__main__":
+    fenetre = Pokedex(800, 800)
+    fenetre.menuPokedex()
+

@@ -5,7 +5,7 @@
         "pv": 50,
         "attaque": 60,
         "defense": 50,
-        "lvl": 1,
+        "lvl": 5,
         "xp": 0,
         "xp_necessaire": 20,
         "image": "images/pokemon/salameche.png"
@@ -80,7 +80,7 @@
         "nom": "Raichu",
         "type": "Electrik",
         "pv": 60,
-        "attaque": 90,
+        "attaque": 100000000,
         "defense": 55,
         "lvl": 100,
         "xp": 0,
@@ -108,5 +108,27 @@
         "xp": 0,
         "xp_necessaire": 50,
         "image": "images/pokemon/phyllali.png"
+    },
+    {
+        "nom": "Rattata",
+        "type": "Normal",
+        "pv": 50,
+        "lvl": 6,
+        "attaque": 55,
+        "defense": 30,
+        "xp": 0,
+        "xp_necessaire": 50,
+        "image": "images/pokemon/Rattata.png"
+    },
+    {
+        "nom": "Osselait",
+        "type": "sol",
+        "pv": 45,
+        "lvl": 5,
+        "attaque": 45,
+        "defense": 50,
+        "xp": 0,
+        "xp_necessaire": 50,
+        "image": "images/pokemon/Osselait.png"
     }
 ]

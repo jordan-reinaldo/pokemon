@@ -1,4 +1,4 @@
-from .Type import Type
+from classes.Type import Type
 
 class Attaque:
     def __init__(self, nom, puissance, type_attaque):
@@ -105,7 +105,7 @@ class Attaque:
             return Attaque("Psyko", 90, Type.psy())
         
     @classmethod
-    def assigner_attaque_base(cls, pokemon):
+    def assigner_attaque_base(cls, pokemon ):
         # Configuration de l'attaque de base du Pokémon en fonction de son type et du niveau du Pokémon
         type_pokemon = pokemon.type.nom.lower()
         niveau = pokemon.lvl

@@ -19,7 +19,7 @@ class Type:
 
     @staticmethod
     def electrik():
-        return Type("Electrik", forces=["Eau", "Vol"], faiblesses=["Sol"], nulle_defense=["Electrik"])
+        return Type("Electrik", forces=["Eau", "Vol","Electrik"], faiblesses=["Sol"])
 
     @staticmethod
     def glace():

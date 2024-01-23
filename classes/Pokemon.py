@@ -1,6 +1,6 @@
 import json
-from .Type import Type
-from .Attaque import Attaque
+from classes.Type import *
+from classes.Attaque import *
 
 class Pokemon:
     tous_pokemons = []  # Attribut de classe pour stocker tous les Pokémon chargés
@@ -16,7 +16,8 @@ class Pokemon:
         self.xp = xp
         self.xp_necessaire = xp_necessaire
         self.attaque_de_base = attaque_de_base
-    
+
+
         Pokemon.tous_pokemons.append(self)  # Ajout du Pokémon nouvellement créé à la liste de tous les Pokémon
 
     @staticmethod
