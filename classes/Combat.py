@@ -193,9 +193,6 @@ class Combat:
                     pygame.mixer.music.stop() 
                     return "menu"
                 
-           
-        
-
         if self.mon_pokemon.pv <= 0:
             return self.adversaire.nom
         else:
@@ -221,7 +218,7 @@ class Combat:
         self.tour_mon_pokemon = True
 
     def effectuer_attaque(self, attaquant, defenseur):
-        if random.random() <= 0.05:  # 5% de chance de rater
+        if random.random() <= 0.1:  # 5% de chance de rater
             message = f"{attaquant.nom} a raté son attaque."
 
         elif random.random() <= 0.05:
