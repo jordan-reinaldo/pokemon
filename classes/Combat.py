@@ -62,7 +62,7 @@ class Combat:
         texte = font.render(message, True, (255, 255, 255))
         ecran.blit(texte, (400 - texte.get_width() // 2, 550))
         pygame.display.flip()
-        pygame.time.delay(1000)  # Délai pour que le message soit visible
+        pygame.time.delay(1500)  # Délai pour que le message soit visible
 
     def effacer_message(self, ecran):
         message_background = pygame.Rect(0, 550, 800, 50)  # Ajustez la taille au besoin
@@ -223,6 +223,14 @@ class Combat:
     def effectuer_attaque(self, attaquant, defenseur):
         if random.random() <= 0.05:  # 5% de chance de rater
             message = f"{attaquant.nom} a raté son attaque."
+
+        elif random.random() <= 0.05:
+
+            degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
+            degats = int(degats)*2
+            self.appliquer_degats(defenseur, degats)
+            message = f"{attaquant.nom} fait une attaque critique et inflige {int(degats)} dégâts à {defenseur.nom}."
+
         else:
             degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
             self.appliquer_degats(defenseur, degats)
