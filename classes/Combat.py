@@ -1,6 +1,7 @@
 import pygame
 import pygame.time
 from classes.Menu_principal import *
+import random
 
 
 
@@ -75,9 +76,13 @@ class Combat:
             # Dessiner le message
             self.afficher_message(ecran, "Voulez-vous recommencer un combat ?")
     
-            # Dessiner les boutons et obtenir les rectangles
-            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", 200, 400, 100, 50, (0, 255, 0), (100, 255, 100))
-            bouton_non_rect = self.dessiner_bouton(ecran, "Non", 500, 400, 100, 50, (255, 0, 0), (255, 100, 100))
+            # Récupérer les coordonnées et les dimensions des boutons "Attaquer" et "Fuite"
+            bouton_attaquer_rect = pygame.Rect(50, 500, 100, 50)
+            bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
+
+            # Utiliser ces coordonnées et dimensions pour les boutons "Oui" et "Non"
+            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", bouton_attaquer_rect.x, bouton_attaquer_rect.y, bouton_attaquer_rect.width, bouton_attaquer_rect.height, (0, 255, 0), (100, 255, 100))
+            bouton_non_rect = self.dessiner_bouton(ecran, "Non", bouton_fuite_rect.x, bouton_fuite_rect.y, bouton_fuite_rect.width, bouton_fuite_rect.height, (255, 0, 0), (255, 100, 100))
 
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -89,6 +94,7 @@ class Combat:
                         return False
 
             pygame.display.flip()
+
 
 
 
@@ -143,11 +149,13 @@ class Combat:
                         self.tour_mon_pokemon = False
                     elif bouton_fuite_rect.collidepoint(event.pos):
                         self.gerer_action_bouton_fuite(ecran)
+                        mon_pokemon.soigner()
+                        adversaire.soigner()
                         menu = Menu_principal()
                         menu.afficher_menu()
                         if menu:
                             return "menu"
-              # Redessiner les sprites et les informations à chaque itération
+            # Redessiner les sprites et les informations à chaque itération
             
 
 
@@ -160,6 +168,13 @@ class Combat:
           
 
             if self.mon_pokemon.pv <= 0 or self.adversaire.pv <= 0:
+                info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
+                info_adversaire = font.render(f"{self.adversaire.nom} PV: {self.adversaire.pv}", True, (0, 0, 0))
+                cadre_texte = pygame.image.load("images/cadre_texte/cadre_texte_combat.png").convert_alpha()
+                ecran.blit(cadre_texte, (30, 200))
+                ecran.blit(cadre_texte, (500, 20))
+                ecran.blit(info_mon_pokemon, (70, 215))
+                ecran.blit(info_adversaire, (550, 40))
                 self.running = False
                 choix_recommencer = self.afficher_dialogue_fin_combat(ecran)
                 if choix_recommencer:
@@ -170,11 +185,15 @@ class Combat:
                         nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
                     self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
                 else:
+                    self.mon_pokemon.soigner()
+                    self.adversaire.soigner()
                     # Retourner au menu principal
                     menu = Menu_principal()
                     menu.afficher_menu()
                     pygame.mixer.music.stop() 
                     return "menu"
+                
+           
         
 
         if self.mon_pokemon.pv <= 0:
@@ -202,7 +221,10 @@ class Combat:
         self.tour_mon_pokemon = True
 
     def effectuer_attaque(self, attaquant, defenseur):
-        degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
-        self.appliquer_degats(defenseur, degats)
-        message = f"{attaquant.nom} attaque {attaquant.attaque_de_base.nom} et inflige {int(degats)} dégâts à {defenseur.nom}."
+        if random.random() <= 0.05:  # 5% de chance de rater
+            message = f"{attaquant.nom} a raté son attaque."
+        else:
+            degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
+            self.appliquer_degats(defenseur, degats)
+            message = f"{attaquant.nom} attaque {attaquant.attaque_de_base.nom} et inflige {int(degats)} dégâts à {defenseur.nom}."
         return message
