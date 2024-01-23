@@ -75,9 +75,13 @@ class Combat:
             # Dessiner le message
             self.afficher_message(ecran, "Voulez-vous recommencer un combat ?")
     
-            # Dessiner les boutons et obtenir les rectangles
-            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", 200, 400, 100, 50, (0, 255, 0), (100, 255, 100))
-            bouton_non_rect = self.dessiner_bouton(ecran, "Non", 500, 400, 100, 50, (255, 0, 0), (255, 100, 100))
+            # Récupérer les coordonnées et les dimensions des boutons "Attaquer" et "Fuite"
+            bouton_attaquer_rect = pygame.Rect(50, 500, 100, 50)
+            bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
+
+            # Utiliser ces coordonnées et dimensions pour les boutons "Oui" et "Non"
+            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", bouton_attaquer_rect.x, bouton_attaquer_rect.y, bouton_attaquer_rect.width, bouton_attaquer_rect.height, (0, 255, 0), (100, 255, 100))
+            bouton_non_rect = self.dessiner_bouton(ecran, "Non", bouton_fuite_rect.x, bouton_fuite_rect.y, bouton_fuite_rect.width, bouton_fuite_rect.height, (255, 0, 0), (255, 100, 100))
 
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -89,6 +93,7 @@ class Combat:
                         return False
 
             pygame.display.flip()
+
 
 
 
@@ -143,11 +148,13 @@ class Combat:
                         self.tour_mon_pokemon = False
                     elif bouton_fuite_rect.collidepoint(event.pos):
                         self.gerer_action_bouton_fuite(ecran)
+                        mon_pokemon.soigner()
+                        adversaire.soigner()
                         menu = Menu_principal()
                         menu.afficher_menu()
                         if menu:
                             return "menu"
-              # Redessiner les sprites et les informations à chaque itération
+            # Redessiner les sprites et les informations à chaque itération
             
 
 
@@ -177,6 +184,8 @@ class Combat:
                         nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
                     self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
                 else:
+                    self.mon_pokemon.soigner()
+                    self.adversaire.soigner()
                     # Retourner au menu principal
                     menu = Menu_principal()
                     menu.afficher_menu()
