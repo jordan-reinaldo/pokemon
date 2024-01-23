@@ -160,6 +160,13 @@ class Combat:
           
 
             if self.mon_pokemon.pv <= 0 or self.adversaire.pv <= 0:
+                info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
+                info_adversaire = font.render(f"{self.adversaire.nom} PV: {self.adversaire.pv}", True, (0, 0, 0))
+                cadre_texte = pygame.image.load("images/cadre_texte/cadre_texte_combat.png").convert_alpha()
+                ecran.blit(cadre_texte, (30, 200))
+                ecran.blit(cadre_texte, (500, 20))
+                ecran.blit(info_mon_pokemon, (70, 215))
+                ecran.blit(info_adversaire, (550, 40))
                 self.running = False
                 choix_recommencer = self.afficher_dialogue_fin_combat(ecran)
                 if choix_recommencer:
@@ -175,6 +182,8 @@ class Combat:
                     menu.afficher_menu()
                     pygame.mixer.music.stop() 
                     return "menu"
+                
+           
         
 
         if self.mon_pokemon.pv <= 0:
