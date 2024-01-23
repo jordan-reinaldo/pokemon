@@ -1,5 +1,6 @@
 [
   {
+    "numero": "1",
     "nom": "Salameche",
     "type": "Feu",
     "defense": "50",
@@ -7,9 +8,10 @@
     "point de vie": "50",
     "image": "images/pokemon/salameche.png",
     "cri": "musique/salameche.ogg",
-    "visible": true
+    "visible": false
   },
   {
+    "numero": "2",
     "nom": "Reptincel",
     "type": "Feu",
     "defense": "65",
@@ -20,6 +22,7 @@
     "visible": true
   },
   {
+    "numero": "3",
     "nom": " Carapuce",
     "type": "Eau",
     "defense": "65",
@@ -27,9 +30,10 @@
     "point de vie": "50",
     "image": "images/pokemon/carapuce.png",
     "cri": "musique/carapuce.mp3",
-    "visible": true
+    "visible": false
   },
   {
+    "numero": "4",
     "nom": "Carabaffe",
     "type": "Eau",
     "defense": "80",
@@ -40,6 +44,7 @@
     "visible": false
   },
   {
+    "numero": "5",
     "nom": "Bulbizarre",
     "type": "Plante",
     "defense": "49",
@@ -50,6 +55,7 @@
     "visible": false
   },
   {
+    "numero": "6",
     "nom": "Herbizarre",
     "type": "Plante",
     "defense": "63",
@@ -60,6 +66,7 @@
     "visible": false
   },
   {
+    "numero": "7",
     "nom": "   Pikachu",
     "type": "Electrique",
     "defense": "30",
@@ -67,9 +74,10 @@
     "point de vie": "35",
     "image": "images/pokemon/pikachu.png",
     "cri": "musique/pikachu.mp3",
-    "visible": true
+    "visible": false
   },
   {
+    "numero": "8",
     "nom": "Raichu",
     "type": "Electrique",
     "defense": "55",
@@ -80,6 +88,7 @@
     "visible": false
   },
   {
+    "numero": "9",
     "nom": "     Evoli",
     "type": "Normal",
     "defense": "50",
@@ -87,9 +96,10 @@
     "point de vie": "55",
     "image": "images/pokemon/evoli.png",
     "cri": "musique/evoli.ogg",
-    "visible": true
+    "visible": false
   },
   {
+    "numero": "10",
     "nom": "Phyllali",
     "type": "Eau",
     "defense": "110",
@@ -100,6 +110,7 @@
     "visible": false
   },
   {
+    "numero": "11",
     "nom": "  Osselait",
     "type": "Sol",
     "defense": "50",
@@ -110,6 +121,7 @@
     "visible": false
   },
   {
+    "numero": "12",
     "nom": "Ossatueur",
     "type": "Sol",
     "defense": "80",
@@ -117,9 +129,10 @@
     "point de vie": "60",
     "cri": "musique/ossatueur.mp3",
     "image": "images/pokemon/ossatueur.png",
-    "visible": true
+    "visible": false
   },
   {
+    "numero": "13",
     "nom": "   Rattata",
     "type": "Normal",
     "defense": "30",
@@ -130,6 +143,7 @@
     "visible": false
   },
   {
+    "numero": "14",
     "nom": "Rattatac",
     "type": "Normal",
     "defense": "90",
@@ -140,6 +154,7 @@
     "visible": false
   },
   {
+    "numero": "15",
     "nom": "   Roucoul",
     "type": "Vol",
     "defense": "25",
@@ -150,6 +165,7 @@
     "visible": false
   },
   {
+    "numero": "16",
     "nom": "Roucoups",
     "type": "Vol",
     "defense": "70",
