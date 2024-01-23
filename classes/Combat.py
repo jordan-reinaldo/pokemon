@@ -227,6 +227,14 @@ class Combat:
     def effectuer_attaque(self, attaquant, defenseur):
         if random.random() <= 0.05:  # 5% de chance de rater
             message = f"{attaquant.nom} a raté son attaque."
+
+        elif random.random() <= 0.05:
+
+            degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
+            degats = int(degats)*2
+            self.appliquer_degats(defenseur, degats)
+            message = f"{attaquant.nom} fait une attaque critique et inflige {int(degats)} dégâts à {defenseur.nom}."
+
         else:
             degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
             self.appliquer_degats(defenseur, degats)
