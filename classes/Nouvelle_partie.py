@@ -49,7 +49,6 @@ class Nouvelle_partie:
 
         self.index_pokemon = 0
 
-
         self.equipe_pokemon = []
 
     # methode mise a jour fichier json
@@ -74,7 +73,6 @@ class Nouvelle_partie:
         width = max(200, texte_surface.get_width() + 10)
         self.input_box.w = width
         self.fenetre.blit(texte_surface, (self.input_box.x + 5, self.input_box.y + 5))
-        
 
     def zone_texte(self, event):
 
@@ -162,6 +160,9 @@ class Nouvelle_partie:
         with open("json/pokedex.json", "w") as fichier:
             json.dump(donneesPokemon, fichier, indent=2)
 
+        if pokemon_aleatoire.attaque_de_base is None:
+            pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
+
         return pokemon_aleatoire
 
     def choix_pokemon_joueur(self):
@@ -189,8 +190,8 @@ class Nouvelle_partie:
         print(f"Pokémon ajouté à l'équipe de {self.texte} : {pokemon_choisi.nom}")
         return self.equipe_pokemon
 
+
     def afficher_fenetre(self):
-        # self.mise_a_jour_fichier_json()
         while True:
             image_floue = self.flouterImage(self.image_fond_redimensionne)
             self.fenetre.blit(image_floue, (0, 0))
@@ -198,44 +199,49 @@ class Nouvelle_partie:
             self.fenetre.blit(self.image_carte_pokemon_redimensionne, (180, 170))
             self.fenetre_ecrire_nom()
             self.afficherPokemon(self.index_pokemon)
-            
+
             for event in pg.event.get():
                 if event.type == pg.QUIT:
                     pg.quit()
                     quit()
+
                 self.zone_texte(event)
-                
+
                 if event.type == pg.MOUSEBUTTONDOWN:
                     if event.button == 1:
+                        # Bouton pour choisir un Pokémon précédent
                         if 200 <= event.pos[0] <= 240 and 400 <= event.pos[1] <= 440:
                             self.afficherPokemon(self.index_pokemon - 1)
+                        # Bouton pour choisir un Pokémon suivant
                         elif 550 <= event.pos[0] <= 590 and 400 <= event.pos[1] <= 440:
                             self.afficherPokemon(self.index_pokemon + 1)
+                        # Bouton pour ajouter le Pokémon à l'équipe
                         elif 530 <= event.pos[0] <= 600 and 643 <= event.pos[1] <= 660:
                             print("Pokemon ajouté à l'équipe")
                             equipe = self.creer_equipe()
                             print("Équipe actuelle :", [pokemon.nom for pokemon in equipe])
+                        # Bouton pour lancer un combat
                         elif 535 <= event.pos[0] <= 600 and 743 <= event.pos[1] <= 760:
                             pokemon_joueur = self.creer_equipe()[0]
                             pokemon_aleatoire = self.choix_pokemon_aleatoire()
                             if pokemon_joueur.attaque_de_base is None:
                                 pokemon_joueur.attaque_de_base = Attaque.assigner_attaque_base(pokemon_joueur)
-
                             if pokemon_aleatoire.attaque_de_base is None:
                                 pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
-                            combat = Combat()
+
+                            combat = Combat(self)  # Passez 'self' ici
                             combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)
                             return True
+                        # Bouton pour retourner au menu
                         elif 680 <= event.pos[0] <= 790 and 720 <= event.pos[1] <= 770:
                             print("Retour")
                             menu = Menu_principal()
                             menu.afficher_menu()
                             if menu:
                                 return "menu"
-                            
-                            
 
             pg.display.flip()
+
 
 if __name__ == "__main__":
     nouvelle_partie = Nouvelle_partie(800, 800)

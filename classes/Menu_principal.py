@@ -85,8 +85,3 @@ class Menu_principal:
         self.__fenetre.blit(self.pokedex, self.pokedex_rect)
 
         pygame.display.flip()
-
-
-
-
-

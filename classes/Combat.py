@@ -8,12 +8,13 @@ from classes.Menu_principal import *
 class Combat:
     XP_PAR_VICTOIRE = 20
 
-    def __init__(self):
+    def __init__(self, nouvelle_partie=None):
         self.running = True
         self.tour_mon_pokemon = True
         self.mon_pokemon = None
         self.adversaire = None
         self.derniere_attaque = 0  # Temps de la dernière attaque en millisecondes
+        self.nouvelle_partie = nouvelle_partie
 
     @staticmethod
     def calculer_degats(attaquant, attaque, defenseur):
@@ -37,15 +38,19 @@ class Combat:
 
     def dessiner_bouton(self, ecran, message, x, y, largeur, hauteur, couleur_inactive, couleur_active, border_radius=10):
         souris = pygame.mouse.get_pos()
-        
-        if x + largeur > souris[0] > x and y + hauteur > souris[1] > y:
-            pygame.draw.rect(ecran, couleur_active, (x, y, largeur, hauteur), border_radius=border_radius)
-        else:
-            pygame.draw.rect(ecran, couleur_inactive, (x, y, largeur, hauteur), border_radius=border_radius)
+        rect = pygame.Rect(x, y, largeur, hauteur)
 
-            font = pygame.font.Font("police/Retro_Gaming.ttf", 15)
-            text = font.render(message, True, (0, 0, 0))
-            ecran.blit(text, (x + (largeur / 2 - text.get_width() / 2), y + (hauteur / 2 - text.get_height() / 2)))
+        if rect.collidepoint(souris[0], souris[1]):
+            pygame.draw.rect(ecran, couleur_active, rect, border_radius=border_radius)
+        else:
+            pygame.draw.rect(ecran, couleur_inactive, rect, border_radius=border_radius)
+
+        font = pygame.font.Font("police/Retro_Gaming.ttf", 15)
+        text = font.render(message, True, (0, 0, 0))
+        ecran.blit(text, (x + (largeur / 2 - text.get_width() / 2), y + (hauteur / 2 - text.get_height() / 2)))
+
+        return rect  # Retourner le rectangle représentant le bouton
+
 
 
     def afficher_message(self, ecran, message):
@@ -62,6 +67,30 @@ class Combat:
         message_background = pygame.Rect(0, 550, 800, 50)  # Ajustez la taille au besoin
         pygame.draw.rect(ecran, (0, 0, 0), message_background)  # Utilisez la couleur de l'arrière-plan
         pygame.display.flip()
+
+        # Dans la classe Combat
+
+    def afficher_dialogue_fin_combat(self, ecran):
+        while True:
+            # Dessiner le message
+            self.afficher_message(ecran, "Voulez-vous recommencer un combat ?")
+    
+            # Dessiner les boutons et obtenir les rectangles
+            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", 200, 400, 100, 50, (0, 255, 0), (100, 255, 100))
+            bouton_non_rect = self.dessiner_bouton(ecran, "Non", 500, 400, 100, 50, (255, 0, 0), (255, 100, 100))
+
+            for event in pygame.event.get():
+                if event.type == pygame.MOUSEBUTTONDOWN:
+                    if bouton_oui_rect.collidepoint(event.pos):
+                        # Relancer un nouveau combat
+                        return True
+                    elif bouton_non_rect.collidepoint(event.pos):
+                        # Retourner au menu principal
+                        return False
+
+            pygame.display.flip()
+
+
 
     def lancer_combat(self, mon_pokemon, adversaire):
         self.mon_pokemon = mon_pokemon
@@ -132,12 +161,21 @@ class Combat:
 
             if self.mon_pokemon.pv <= 0 or self.adversaire.pv <= 0:
                 self.running = False
-                menu = Menu_principal()
-                menu.afficher_menu()
-                if menu:
+                choix_recommencer = self.afficher_dialogue_fin_combat(ecran)
+                if choix_recommencer:
+                    self.mon_pokemon.soigner()
+                    self.adversaire.soigner()
+                    nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
+                    if nouveau_adversaire == self.mon_pokemon:
+                        nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
+                    self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
+                else:
+                    # Retourner au menu principal
+                    menu = Menu_principal()
+                    menu.afficher_menu()
                     pygame.mixer.music.stop() 
-                    return "menu" 
-        pygame.quit()
+                    return "menu"
+        
 
         if self.mon_pokemon.pv <= 0:
             return self.adversaire.nom

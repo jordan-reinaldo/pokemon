@@ -41,7 +41,7 @@
     "point de vie": "65",
     "cri": "musique/carabaffe.ogg",
     "image": "images/pokemon/carabaffe.png",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "5",
@@ -52,7 +52,7 @@
     "point de vie": "45",
     "image": "images/pokemon/bulbizarre.png",
     "cri": "musique/bulbizarre.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "6",
@@ -74,7 +74,7 @@
     "point de vie": "35",
     "image": "images/pokemon/pikachu.png",
     "cri": "musique/pikachu.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "8",
@@ -85,7 +85,7 @@
     "point de vie": "60",
     "cri": "musique/raichu.ogg",
     "image": "images/pokemon/raichu.png",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "9",
@@ -96,7 +96,7 @@
     "point de vie": "55",
     "image": "images/pokemon/evoli.png",
     "cri": "musique/evoli.ogg",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "10",
@@ -118,7 +118,7 @@
     "point de vie": "50",
     "image": "images/pokemon/osselait.png",
     "cri": "musique/osselait.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "12",
@@ -129,7 +129,7 @@
     "point de vie": "60",
     "cri": "musique/ossatueur.mp3",
     "image": "images/pokemon/ossatueur.png",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "13",
