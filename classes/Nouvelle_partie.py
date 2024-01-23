@@ -192,6 +192,7 @@ class Nouvelle_partie:
 
 
     def afficher_fenetre(self):
+        
         while True:
             image_floue = self.flouterImage(self.image_fond_redimensionne)
             self.fenetre.blit(image_floue, (0, 0))
@@ -199,6 +200,7 @@ class Nouvelle_partie:
             self.fenetre.blit(self.image_carte_pokemon_redimensionne, (180, 170))
             self.fenetre_ecrire_nom()
             self.afficherPokemon(self.index_pokemon)
+            
 
             for event in pg.event.get():
                 if event.type == pg.QUIT:
@@ -229,9 +231,11 @@ class Nouvelle_partie:
                             if pokemon_aleatoire.attaque_de_base is None:
                                 pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
 
-                            combat = Combat(self)  # Passez 'self' ici
+                            combat = Combat(self) 
                             combat.lancer_combat(pokemon_joueur, pokemon_aleatoire)
-                            return True
+                            self.equipe_pokemon = [] # Je vide l'équipe du joueur après le combat
+                            return True 
+                            
                         # Bouton pour retourner au menu
                         elif 680 <= event.pos[0] <= 790 and 720 <= event.pos[1] <= 770:
                             print("Retour")

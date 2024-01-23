@@ -63,7 +63,7 @@
     "point de vie": "60",
     "cri": "musique/herbizarre.mp3",
     "image": "images/pokemon/herbizarre.png",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "7",
@@ -107,7 +107,7 @@
     "point de vie": "65",
     "image": "images/pokemon/phyllali.png",
     "cri": "musique/phyllali.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "11",
