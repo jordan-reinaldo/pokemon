@@ -1,6 +1,7 @@
 import pygame
 import pygame.time
 from classes.Menu_principal import *
+import random
 
 
 
@@ -220,7 +221,10 @@ class Combat:
         self.tour_mon_pokemon = True
 
     def effectuer_attaque(self, attaquant, defenseur):
-        degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
-        self.appliquer_degats(defenseur, degats)
-        message = f"{attaquant.nom} attaque {attaquant.attaque_de_base.nom} et inflige {int(degats)} dégâts à {defenseur.nom}."
+        if random.random() <= 0.05:  # 5% de chance de rater
+            message = f"{attaquant.nom} a raté son attaque."
+        else:
+            degats = self.calculer_degats(attaquant, attaquant.attaque_de_base, defenseur)
+            self.appliquer_degats(defenseur, degats)
+            message = f"{attaquant.nom} attaque {attaquant.attaque_de_base.nom} et inflige {int(degats)} dégâts à {defenseur.nom}."
         return message
