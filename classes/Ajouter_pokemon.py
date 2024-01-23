@@ -3,9 +3,7 @@ import pygame
 from pygame.locals import *
 import sys
 import json
-from Menu_principal import *
-
-
+from classes.Menu_principal import *
 
 
 class Ajouter_pokemon:
@@ -31,7 +29,7 @@ class Ajouter_pokemon:
 
         # Chargement des silhouettes
         self.silhouettes = [
-            pygame.image.load("images/pokemon/roucoul1.png").convert_alpha(),
+            pygame.image.load("images/pokemon/roucool1.png").convert_alpha(),
             pygame.image.load("images/pokemon/rattata1.png").convert_alpha(),
             pygame.image.load("images/pokemon/osselait1.png").convert_alpha()
         ]
@@ -87,8 +85,8 @@ class Ajouter_pokemon:
             nouveau_pokemon = {
                 "nom": self.nom[self.index_pokemon],
                 "type": self.type[self.index_pokemon],
-                "vie": self.vie[self.index_pokemon],
-                "niveau": self.niveau[self.index_pokemon],
+                "pv": self.vie[self.index_pokemon],
+                "lvl": self.niveau[self.index_pokemon],
                 "attaque": self.attaque[self.index_pokemon],
                 "defense": self.defense[self.index_pokemon],
                 "xp": self.xp[self.index_pokemon],
@@ -140,10 +138,6 @@ class Ajouter_pokemon:
         
         pygame.display.flip()
             
-
-        
-              
-
     def afficher(self):
         # Affiche le fond, le titre
         self.fenetre.blit(self.bg, (0, 0))
