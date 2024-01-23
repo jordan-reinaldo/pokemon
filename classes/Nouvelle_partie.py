@@ -49,6 +49,7 @@ class Nouvelle_partie:
 
         self.index_pokemon = 0
 
+
         self.equipe_pokemon = []
 
     # methode mise a jour fichier json
@@ -73,6 +74,7 @@ class Nouvelle_partie:
         width = max(200, texte_surface.get_width() + 10)
         self.input_box.w = width
         self.fenetre.blit(texte_surface, (self.input_box.x + 5, self.input_box.y + 5))
+        
 
     def zone_texte(self, event):
 
@@ -184,7 +186,7 @@ class Nouvelle_partie:
     def creer_equipe(self): # Méthode qui me permet de créer l'équipe du joueur
         pokemon_choisi = self.choix_pokemon_joueur()
         self.equipe_pokemon.append(pokemon_choisi)
-        print(f"Pokémon ajouté à l'équipe : {pokemon_choisi.nom}")
+        print(f"Pokémon ajouté à l'équipe de {self.texte} : {pokemon_choisi.nom}")
         return self.equipe_pokemon
 
     def afficher_fenetre(self):
