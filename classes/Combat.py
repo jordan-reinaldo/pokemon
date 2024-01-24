@@ -102,33 +102,37 @@ class Combat:
     def choisir_pokemon(self, ecran):
         equipe = self.nouvelle_partie.equipe_pokemon
 
-        liste_rect = pygame.Rect(200, 100, 400, 300)
-        pygame.draw.rect(ecran, (255, 255, 255), liste_rect)
+        pokemon_choisi = None
+        while not pokemon_choisi:
+            liste_rect = pygame.Rect(200, 100, 400, 300)
+            pygame.draw.rect(ecran, (255, 255, 255), liste_rect)
 
-        font_titre = pygame.font.Font("police/Retro_Gaming.ttf", 18)
-        texte_titre = font_titre.render("Choisir un Pokémon:", True, (0, 0, 0))
-        ecran.blit(texte_titre, (250, 110))
+            font_titre = pygame.font.Font("police/Retro_Gaming.ttf", 18)
+            texte_titre = font_titre.render("Choisir un Pokémon:", True, (0, 0, 0))
+            ecran.blit(texte_titre, (250, 110))
 
-        font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
-        for i, pokemon in enumerate(equipe):
-            texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
-            rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
-            pygame.draw.rect(ecran, (200, 200, 200), rect_pokemon)
-
-            ecran.blit(texte_pokemon, (260, 140 + i * 20))
-
-        pygame.display.flip()
-
-        # Attendre un événement de souris
-        mouse_event = pygame.event.wait()
-
-        if mouse_event.type == pygame.MOUSEBUTTONDOWN:
+            font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
             for i, pokemon in enumerate(equipe):
+                texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
                 rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
-                if rect_pokemon.collidepoint(mouse_event.pos):
-                    return pokemon
+                pygame.draw.rect(ecran, (200, 200, 200), rect_pokemon)
+                ecran.blit(texte_pokemon, (260, 140 + i * 20))
 
-        return None
+            pygame.display.flip()
+
+            for event in pygame.event.get():
+                if event.type == pygame.QUIT:
+                    pygame.quit()
+                    return None
+                elif event.type == pygame.MOUSEBUTTONDOWN:
+                    for i, pokemon in enumerate(equipe):
+                        rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
+                        if rect_pokemon.collidepoint(event.pos):
+                            pokemon_choisi = pokemon
+                            break
+
+        return pokemon_choisi
+
 
     def lancer_combat(self, mon_pokemon, adversaire):
         self.mon_pokemon = mon_pokemon
@@ -153,14 +157,12 @@ class Combat:
         # Définir les rectangles pour les boutons
         bouton_attaque_rect = pygame.Rect(50, 500, 100, 50)
         bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
-
         bouton_choix_pokemon_rect = pygame.Rect(270, 500, 250, 50)
 
         self.afficher_mon_equipe(ecran)
 
-        choisir_nouveau_pokemon = False
-
         while self.running:
+            self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
             self.effacer_message(ecran)
             ecran.blit(arriere_plan, (0, 0))  # Dessiner l'arrière-plan
             ecran.blit(sprite_mon_pokemon, (50, 280))
@@ -172,36 +174,26 @@ class Combat:
             self.afficher_mon_equipe(ecran)
 
             # Mettre à jour l'affichage des PV
-            info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
-            info_adversaire = font.render(f"{self.adversaire.nom} PV: {self.adversaire.pv}", True, (0, 0, 0))
-            cadre_texte = pygame.image.load("images/cadre_texte/cadre_texte_combat.png").convert_alpha()
-            ecran.blit(cadre_texte, (30, 200))
-            ecran.blit(cadre_texte, (500, 20))
-            ecran.blit(info_mon_pokemon, (70, 215))
-            ecran.blit(info_adversaire, (550, 40))
+            self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     self.running = False
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     if bouton_attaque_rect.collidepoint(event.pos) and self.tour_mon_pokemon:
-                        message = self.effectuer_attaque(self.mon_pokemon, self.adversaire)
-                        self.afficher_message(ecran, message)
-                        self.tour_mon_pokemon = False
+                        if self.mon_pokemon.pv > 0:
+                            message = self.effectuer_attaque(self.mon_pokemon, self.adversaire)
+                            self.afficher_message(ecran, message)
+                            self.tour_mon_pokemon = False
                     elif bouton_choix_pokemon_rect.collidepoint(event.pos):
-                        choisir_pokemon = True
-                        while choisir_pokemon:
-                            nouveau_pokemon = self.choisir_pokemon(ecran)
-                            if nouveau_pokemon:
-                                self.mon_pokemon = nouveau_pokemon
-                                sprite_mon_pokemon = pygame.image.load(f"images/pokemon_de_dos/{self.mon_pokemon.nom}1.png")
-                                sprite_mon_pokemon = pygame.transform.scale(sprite_mon_pokemon, taille_sprite_mon_pokemon)
-                                self.tour_mon_pokemon = False
-                                choisir_pokemon = False
+                        self.mon_pokemon = self.choisir_pokemon(ecran)
+                        if self.mon_pokemon:
+                            sprite_mon_pokemon = pygame.image.load(f"images/pokemon_de_dos/{self.mon_pokemon.nom}1.png")
+                            sprite_mon_pokemon = pygame.transform.scale(sprite_mon_pokemon, taille_sprite_mon_pokemon)
+                            self.tour_mon_pokemon = True
                     elif bouton_fuite_rect.collidepoint(event.pos):
                         self.gerer_action_bouton_fuite(ecran)
-                        mon_pokemon.soigner()
-                        adversaire.soigner()
+                        self.soigner_pokemons()
                         menu = Menu_principal()
                         menu.afficher_menu()
                         if menu:
@@ -209,41 +201,67 @@ class Combat:
 
             pygame.display.flip()
 
-            if not self.tour_mon_pokemon:
+            if not self.tour_mon_pokemon and self.adversaire.pv > 0:
                 message = self.effectuer_attaque(self.adversaire, self.mon_pokemon)
                 self.afficher_message(ecran, message)
                 self.tour_mon_pokemon = True
+                self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
 
-            if self.mon_pokemon.pv <= 0 or self.adversaire.pv <= 0:
-                info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
-                info_adversaire = font.render(f"{self.adversaire.nom} PV: {self.adversaire.pv}", True, (0, 0, 0))
-                cadre_texte = pygame.image.load("images/cadre_texte/cadre_texte_combat.png").convert_alpha()
-                ecran.blit(cadre_texte, (30, 200))
-                ecran.blit(cadre_texte, (500, 20))
-                ecran.blit(info_mon_pokemon, (70, 215))
-                ecran.blit(info_adversaire, (550, 40))
-                self.running = False
+            if self.mon_pokemon.pv <= 0 and not self.verifier_pokemon_restants(self.nouvelle_partie.equipe_pokemon):
+                self.afficher_message(ecran, "Tous vos Pokémon sont hors de combat !")
+                self.soigner_pokemons()
                 choix_recommencer = self.afficher_dialogue_fin_combat(ecran)
+                self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
+            
                 if choix_recommencer:
-                    self.mon_pokemon.soigner()
-                    self.adversaire.soigner()
                     nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
                     if nouveau_adversaire == self.mon_pokemon:
                         nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
                     self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
                 else:
-                    self.mon_pokemon.soigner()
-                    self.adversaire.soigner()
-                    # Retourner au menu principal
+                    menu = Menu_principal()
+                    menu.afficher_menu()
+                    pygame.mixer.music.stop()
+                    return "menu"
+            elif self.adversaire.pv <= 0:
+                self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
+                self.afficher_message(ecran, f"{self.adversaire.nom} est hors de combat !")
+                self.soigner_pokemons()
+                choix_recommencer = self.afficher_dialogue_fin_combat(ecran)
+            
+                if choix_recommencer:
+                    nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
+                    if nouveau_adversaire == self.mon_pokemon:
+                        nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
+                    self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
+                else:
                     menu = Menu_principal()
                     menu.afficher_menu()
                     pygame.mixer.music.stop()
                     return "menu"
 
-        if self.mon_pokemon.pv <= 0:
-            return self.adversaire.nom
-        else:
-            return self.mon_pokemon.nom
+    def soigner_pokemons(self):
+        """Soigner tous les Pokémon de l'équipe du joueur."""
+        for pokemon in self.nouvelle_partie.equipe_pokemon:
+            pokemon.soigner()
+
+    def verifier_pokemon_restants(self, equipe):
+        """Vérifie si au moins un Pokémon dans l'équipe a des PV supérieurs à 0."""
+        return any(pokemon.pv > 0 for pokemon in equipe)
+
+    def mettre_a_jour_info_pokemon(self, ecran, font, mon_pokemon, adversaire):
+        # Informations sur votre Pokémon
+        info_mon_pokemon = font.render(f"{mon_pokemon.nom} PV: {mon_pokemon.pv}", True, (0, 0, 0))
+        cadre_texte_mon_pokemon = pygame.image.load("images/cadre_texte/cadre_texte_combat.png").convert_alpha()
+        ecran.blit(cadre_texte_mon_pokemon, (30, 200))
+        ecran.blit(info_mon_pokemon, (70, 215))
+
+        # Informations sur le Pokémon adverse
+        info_adversaire = font.render(f"{adversaire.nom} PV: {adversaire.pv}", True, (0, 0, 0))
+        cadre_texte_adversaire = pygame.image.load("images/cadre_texte/cadre_texte_combat.png").convert_alpha()
+        ecran.blit(cadre_texte_adversaire, (500, 20))
+        ecran.blit(info_adversaire, (550, 40))
+
 
     def gerer_action_bouton_fuite(self, ecran):
         print(f"{self.mon_pokemon.nom} a fui le combat.")
