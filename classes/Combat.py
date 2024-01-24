@@ -3,9 +3,6 @@ import pygame.time
 from classes.Menu_principal import *
 import random
 
-
-
-
 class Combat:
     XP_PAR_VICTOIRE = 20
 
@@ -19,7 +16,7 @@ class Combat:
 
     @staticmethod
     def calculer_degats(attaquant, attaque, defenseur):
-        coefficient_eff = 1.0 
+        coefficient_eff = 1.0
         if attaque.type.nom in defenseur.type.faiblesses:
             coefficient_eff = 2
         elif attaque.type.nom in defenseur.type.forces:
@@ -52,13 +49,11 @@ class Combat:
 
         return rect  # Retourner le rectangle représentant le bouton
 
-
-
     def afficher_message(self, ecran, message):
         font = pygame.font.Font("police/Retro_Gaming.ttf", 17)
-    # Dessiner un rectangle de fond pour effacer le vieux message
+        # Dessiner un rectangle de fond pour effacer le vieux message
         message_background = pygame.Rect(0, 550, 800, 50)  # Ajustez la taille au besoin
-        pygame.draw.rect(ecran, (0, 0, 0), message_background)  
+        pygame.draw.rect(ecran, (0, 0, 0), message_background)
         texte = font.render(message, True, (255, 255, 255))
         ecran.blit(texte, (400 - texte.get_width() // 2, 550))
         pygame.display.flip()
@@ -69,20 +64,14 @@ class Combat:
         pygame.draw.rect(ecran, (0, 0, 0), message_background)  # Utilisez la couleur de l'arrière-plan
         pygame.display.flip()
 
-        # Dans la classe Combat
-
     def afficher_dialogue_fin_combat(self, ecran):
         while True:
             # Dessiner le message
             self.afficher_message(ecran, "Voulez-vous recommencer un combat ?")
-    
-            # Récupérer les coordonnées et les dimensions des boutons "Attaquer" et "Fuite"
-            bouton_attaquer_rect = pygame.Rect(50, 500, 100, 50)
-            bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
 
-            # Utiliser ces coordonnées et dimensions pour les boutons "Oui" et "Non"
-            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", bouton_attaquer_rect.x, bouton_attaquer_rect.y, bouton_attaquer_rect.width, bouton_attaquer_rect.height, (0, 255, 0), (100, 255, 100))
-            bouton_non_rect = self.dessiner_bouton(ecran, "Non", bouton_fuite_rect.x, bouton_fuite_rect.y, bouton_fuite_rect.width, bouton_fuite_rect.height, (255, 0, 0), (255, 100, 100))
+            # Récupérer les coordonnées et les dimensions des boutons "Oui" et "Non"
+            bouton_oui_rect = self.dessiner_bouton(ecran, "Oui", 50, 500, 100, 50, (0, 255, 0), (100, 255, 100))
+            bouton_non_rect = self.dessiner_bouton(ecran, "Non", 650, 500, 100, 50, (255, 0, 0), (255, 100, 100))
 
             for event in pygame.event.get():
                 if event.type == pygame.MOUSEBUTTONDOWN:
@@ -95,7 +84,51 @@ class Combat:
 
             pygame.display.flip()
 
+    def afficher_mon_equipe(self, ecran):
+        equipe = self.nouvelle_partie.equipe_pokemon
 
+        equipe_rect = pygame.Rect(10, 10, 180, 100)
+        pygame.draw.rect(ecran, (255, 255, 255), equipe_rect)
+
+        font_titre_equipe = pygame.font.Font("police/Retro_Gaming.ttf", 18)
+        texte_titre = font_titre_equipe.render("Mon Equipe :", True, (0, 0, 0))
+        ecran.blit(texte_titre, (20, 20))
+
+        font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
+        for i, pokemon in enumerate(equipe):
+            texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
+            ecran.blit(texte_pokemon, (20, 40 + i * 20))
+
+    def choisir_pokemon(self, ecran):
+        equipe = self.nouvelle_partie.equipe_pokemon
+
+        liste_rect = pygame.Rect(200, 100, 400, 300)
+        pygame.draw.rect(ecran, (255, 255, 255), liste_rect)
+
+        font_titre = pygame.font.Font("police/Retro_Gaming.ttf", 18)
+        texte_titre = font_titre.render("Choisir un Pokémon:", True, (0, 0, 0))
+        ecran.blit(texte_titre, (250, 110))
+
+        font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
+        for i, pokemon in enumerate(equipe):
+            texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
+            rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
+            pygame.draw.rect(ecran, (200, 200, 200), rect_pokemon)
+
+            ecran.blit(texte_pokemon, (260, 140 + i * 20))
+
+        pygame.display.flip()
+
+        # Attendre un événement de souris
+        mouse_event = pygame.event.wait()
+
+        if mouse_event.type == pygame.MOUSEBUTTONDOWN:
+            for i, pokemon in enumerate(equipe):
+                rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
+                if rect_pokemon.collidepoint(mouse_event.pos):
+                    return pokemon
+
+        return None
 
     def lancer_combat(self, mon_pokemon, adversaire):
         self.mon_pokemon = mon_pokemon
@@ -104,12 +137,12 @@ class Combat:
         self.tour_mon_pokemon = True
         pygame.init()
         pygame.mixer.init()
-        pygame.mixer.music.load('musique/ostbattle.mp3')  
-        pygame.mixer.music.play(-1) # -1 signifie que la musique va boucler
+        pygame.mixer.music.load('musique/ostbattle.mp3')
+        pygame.mixer.music.play(-1)  # -1 signifie que la musique va boucler
         ecran = pygame.display.set_mode((800, 600))
         sprite_mon_pokemon = pygame.image.load(f"images/pokemon_de_dos/{mon_pokemon.nom}1.png")
         sprite_adversaire = pygame.image.load(f"images/pokemon/{adversaire.nom}1.png")
-        arriere_plan = pygame.image.load('images/background/bg_areneCombat.png') 
+        arriere_plan = pygame.image.load('images/background/bg_areneCombat.png')
         font = pygame.font.Font("police/Retro_Gaming.ttf", 18)
         clock = pygame.time.Clock()
         taille_sprite_mon_pokemon = (190, 190)
@@ -117,11 +150,15 @@ class Combat:
         sprite_mon_pokemon = pygame.transform.scale(sprite_mon_pokemon, taille_sprite_mon_pokemon)
         sprite_adversaire = pygame.transform.scale(sprite_adversaire, taille_sprite_adversaire)
 
-    # Définir les rectangles pour les boutons
+        # Définir les rectangles pour les boutons
         bouton_attaque_rect = pygame.Rect(50, 500, 100, 50)
         bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
 
-        bouton_choix_pokemon_rect = pygame.Rect(270, 500, 100, 50)
+        bouton_choix_pokemon_rect = pygame.Rect(270, 500, 250, 50)
+
+        self.afficher_mon_equipe(ecran)
+
+        choisir_nouveau_pokemon = False
 
         while self.running:
             self.effacer_message(ecran)
@@ -131,6 +168,8 @@ class Combat:
             self.dessiner_bouton(ecran, "Attaquer", 50, 500, 100, 50, (255, 0, 0), (255, 100, 100))
             self.dessiner_bouton(ecran, "Fuite", 650, 500, 100, 50, (255, 0, 0), (255, 100, 100))
             self.dessiner_bouton(ecran, "Changer de Pokemon", 270, 500, 250, 50, (255, 0, 0), (255, 100, 100))
+
+            self.afficher_mon_equipe(ecran)
 
             # Mettre à jour l'affichage des PV
             info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
@@ -149,8 +188,16 @@ class Combat:
                         message = self.effectuer_attaque(self.mon_pokemon, self.adversaire)
                         self.afficher_message(ecran, message)
                         self.tour_mon_pokemon = False
-                    # elif bouton_choix_pokemon_rect.collidepoint(event.pos):
-
+                    elif bouton_choix_pokemon_rect.collidepoint(event.pos):
+                        choisir_pokemon = True
+                        while choisir_pokemon:
+                            nouveau_pokemon = self.choisir_pokemon(ecran)
+                            if nouveau_pokemon:
+                                self.mon_pokemon = nouveau_pokemon
+                                sprite_mon_pokemon = pygame.image.load(f"images/pokemon_de_dos/{self.mon_pokemon.nom}1.png")
+                                sprite_mon_pokemon = pygame.transform.scale(sprite_mon_pokemon, taille_sprite_mon_pokemon)
+                                self.tour_mon_pokemon = False
+                                choisir_pokemon = False
                     elif bouton_fuite_rect.collidepoint(event.pos):
                         self.gerer_action_bouton_fuite(ecran)
                         mon_pokemon.soigner()
@@ -159,17 +206,13 @@ class Combat:
                         menu.afficher_menu()
                         if menu:
                             return "menu"
-            # Redessiner les sprites et les informations à chaque itération
-            
 
+            pygame.display.flip()
 
-            pygame.display.flip()  # Met à jour l'écran
             if not self.tour_mon_pokemon:
                 message = self.effectuer_attaque(self.adversaire, self.mon_pokemon)
                 self.afficher_message(ecran, message)
                 self.tour_mon_pokemon = True
-
-          
 
             if self.mon_pokemon.pv <= 0 or self.adversaire.pv <= 0:
                 info_mon_pokemon = font.render(f"{self.mon_pokemon.nom} PV: {self.mon_pokemon.pv}", True, (0, 0, 0))
@@ -194,29 +237,19 @@ class Combat:
                     # Retourner au menu principal
                     menu = Menu_principal()
                     menu.afficher_menu()
-                    pygame.mixer.music.stop() 
+                    pygame.mixer.music.stop()
                     return "menu"
-                
-           
-        
 
         if self.mon_pokemon.pv <= 0:
             return self.adversaire.nom
         else:
             return self.mon_pokemon.nom
 
-    
-
-    def gerer_action_bouton_attaque(self, ecran, attaquant, defenseur):
-        message = self.effectuer_attaque(attaquant, defenseur)
-        self.afficher_message(ecran, message)
-        self.tour_mon_pokemon = False
-
-
     def gerer_action_bouton_fuite(self, ecran):
         print(f"{self.mon_pokemon.nom} a fui le combat.")
-        pygame.mixer.music.stop() 
+        pygame.mixer.music.stop()
         self.running = False
+
 
 
     def gerer_attaque_adversaire(self, ecran):

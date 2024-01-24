@@ -184,8 +184,13 @@ class Nouvelle_partie:
 
         return pokemon_joueur
     
-    def creer_equipe(self): # Méthode qui me permet de créer l'équipe du joueur
+    def creer_equipe(self):
         pokemon_choisi = self.choix_pokemon_joueur()
+        
+        # Assurez-vous que le Pokémon a une attaque de base assignée
+        if pokemon_choisi.attaque_de_base is None:
+            pokemon_choisi.attaque_de_base = Attaque.assigner_attaque_base(pokemon_choisi)
+
         self.equipe_pokemon.append(pokemon_choisi)
         print(f"Pokémon ajouté à l'équipe de {self.texte} : {pokemon_choisi.nom}")
         return self.equipe_pokemon
