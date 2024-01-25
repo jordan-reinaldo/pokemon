@@ -127,44 +127,12 @@ class Pokedex: # Je crée une classe Pokedex
                             return "menu"
                         print("Clic gauche sur retour")
 
-
-    # def affichePokemon(self, index_pokemon): # Je crée une méthode pour afficher le pokemon
-    #     if 0 <= index_pokemon < len(donneesPokedex): # Si l'index du pokemon est compris entre 0 et le nombre de pokemon dans le pokedex
-    #         self.index_pokemon = index_pokemon # Je crée une variable pour l'index du pokemon #self.index_pokemon = index_pokemon correspond à l'index du pokemon
-    #         pokemon = donneesPokedex[index_pokemon]
-    #         chemin_image = pokemon["image"]
-    #         image_pokemon = pg.image.load(chemin_image)
-    #         image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
-    #         self.fenetre.blit(image_redimensionnee, (310, 125))
-
-    #         font_chemin = "police/Retro_Gaming.ttf"
-    #         font = pg.font.Font(font_chemin, 16)
-
-    #         nom_pokemon = font.render(f"Nom : {pokemon['nom']}", True, (0, 0, 0))
-    #         self.fenetre.blit(nom_pokemon, (270, 460))
-
-    #         type_pokemon = font.render(f"Type : {pokemon['type']}", True, (0, 0, 0))
-    #         self.fenetre.blit(type_pokemon, (270, 490))
-
-    #         defense_pokemon = font.render(f"Défense : {pokemon['defense']}", True, (0, 0, 0))
-    #         self.fenetre.blit(defense_pokemon, (270, 520))
-
-    #         puissance_pokemon = font.render(f"Puissance d'attaque : {pokemon['puissance attaque']}", True, (0, 0, 0))
-    #         self.fenetre.blit(puissance_pokemon, (270, 550))
-
-    #         pointDeVie_pokemon = font.render(f"Point de vie : {pokemon['point de vie']}", True, (0, 0, 0))
-    #         self.fenetre.blit(pointDeVie_pokemon, (270, 580))
-
-    #         retour = font.render(f"Retour", True, (0, 200, 0))
-    #         self.fenetre.blit(retour, (450, 620))
-
-
     def afficherPokemonRencontre(self, index_pokemon): # Je crée une méthode pour afficher le pokemon rencontré
-        if 0 <= index_pokemon < len(donneesPokedex):
-            self.index_pokemon = index_pokemon
-            pokemon = donneesPokedex[index_pokemon]
+        if 0 <= index_pokemon < len(donneesPokedex): # Si l'index du pokemon est compris entre 0 et le nombre de pokemon dans le pokedex
+            self.index_pokemon = index_pokemon # Je crée une variable pour l'index du pokemon #self.index_pokemon = index_pokemon correspond à l'index du pokemon
+            pokemon = donneesPokedex[index_pokemon] # Je crée une variable pour le pokemon #donneesPokedex[index_pokemon] correspond au pokemon
 
-            if pokemon.get("visible", True):
+            if pokemon.get("visible", True): # Si le pokemon est visible
                 try:
                     chemin_image = pokemon["image"]
                     image_pokemon = pg.image.load(chemin_image)
