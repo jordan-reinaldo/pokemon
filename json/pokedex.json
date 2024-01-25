@@ -74,7 +74,7 @@
     "point de vie": "35",
     "image": "images/pokemon/pikachu.png",
     "cri": "musique/pikachu.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "8",
@@ -107,7 +107,7 @@
     "point de vie": "65",
     "image": "images/pokemon/phyllali.png",
     "cri": "musique/phyllali.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "11",
@@ -118,7 +118,7 @@
     "point de vie": "50",
     "image": "images/pokemon/osselait.png",
     "cri": "musique/osselait.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "12",
@@ -140,7 +140,7 @@
     "point de vie": "50",
     "image": "images/pokemon/rattata.png",
     "cri": "musique/rattata.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "14",

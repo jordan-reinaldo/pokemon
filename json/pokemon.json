@@ -130,5 +130,16 @@
         "xp": 0,
         "xp_necessaire": 50,
         "image": "images/pokemon/Osselait.png"
+    },
+    {
+        "nom": "Roucool",
+        "type": "vol",
+        "pv": 45,
+        "lvl": 5,
+        "attaque": 60,
+        "defense": 25,
+        "xp": 0,
+        "xp_necessaire": 50,
+        "image": "images/pokemon/Roucool.png"
     }
 ]
