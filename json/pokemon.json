@@ -47,7 +47,7 @@
         "nom": "Bulbizarre",
         "type": "Plante",
         "pv": 45,
-        "attaque": 10000000,
+        "attaque": 49,
         "defense": 49,
         "lvl": 5,
         "xp": 0,
