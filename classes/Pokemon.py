@@ -66,3 +66,72 @@ class Pokemon:
             print(f"{self.nom} est monté au niveau {self.lvl} et a appris une nouvelle attaque : {self.attaque_de_base.nom}!")
         else:
             print(f"{self.nom} est monté au niveau {self.lvl}")
+
+        if self.lvl == 7:
+            evolution = f"evolution_{self.nom.lower()}"
+            getattr(self, evolution)()
+
+
+    def evolution_salameche(self):
+        print(f"{self.nom} évolue en Reptincel!")
+        self.nom = "Reptincel"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max
+
+    def evolution_carapuce(self):
+        print(f"{self.nom} évolue en Carabaffe!")
+        self.nom = "Carabaffe"
+        self.pv_max += 20
+        self.attaque += 15
+        self.defense += 10
+        self.pv = self.pv_max
+
+    def evolution_bulbizarre(self):
+        print(f"{self.nom} évolue en Herbizarre!")
+        self.nom = "Herbizarre"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 15
+        self.pv = self.pv_max
+
+    def evolution_pikachu(self):
+        print(f"{self.nom} évolue en Raichu!")
+        self.nom = "Raichu"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max
+
+    def evolution_evoli(self):
+        print(f"{self.nom} évolue en Voltali!")
+        self.nom = "Phyllali"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max
+
+    def evolution_rattata(self):
+        print(f"{self.nom} évolue en Rattatac!")
+        self.nom = "Rattatac"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max
+
+    def evolution_roucool(self):
+        print(f"{self.nom} évolue en Roucoups!")
+        self.nom = "Roucoups"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max
+
+    def evolution_osselait(self):
+        print(f"{self.nom} évolue en Ossatueur!")
+        self.nom = "Ossatueur"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max

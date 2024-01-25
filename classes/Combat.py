@@ -228,6 +228,8 @@ class Combat:
                 self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
                 self.afficher_message(ecran, f"{self.adversaire.nom} est hors de combat !")
                 self.soigner_pokemons()
+                self.mon_pokemon.gagner_xp(Combat.XP_PAR_VICTOIRE)
+                self.soigner_pokemons()
                 choix_recommencer = self.afficher_dialogue_fin_combat(ecran)
             
                 if choix_recommencer:
@@ -247,6 +249,8 @@ class Combat:
         """Soigner tous les Pokémon de l'équipe du joueur."""
         for pokemon in self.nouvelle_partie.equipe_pokemon:
             pokemon.soigner()
+        self.adversaire.soigner()
+
 
     def verifier_pokemon_restants(self, equipe):
         """Vérifie si au moins un Pokémon dans l'équipe a des PV supérieurs à 0."""
