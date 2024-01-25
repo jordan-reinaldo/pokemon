@@ -66,3 +66,14 @@ class Pokemon:
             print(f"{self.nom} est monté au niveau {self.lvl} et a appris une nouvelle attaque : {self.attaque_de_base.nom}!")
         else:
             print(f"{self.nom} est monté au niveau {self.lvl}")
+
+        if self.nom == "Salameche" and self.lvl == 7:
+            self.evoluer_en_reptincel()
+
+    def evoluer_en_reptincel(self):
+        print(f"{self.nom} évolue en Reptincel!")
+        self.nom = "Reptincel"
+        self.pv_max += 20
+        self.attaque += 10
+        self.defense += 10
+        self.pv = self.pv_max
