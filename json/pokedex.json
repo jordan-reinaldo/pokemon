@@ -121,8 +121,8 @@
     "visible": true
   },
   {
-    "numero": "15",
-    "nom": "Roucoul",
+    "numero": "12",
+    "nom": "Roucool",
     "type": "Vol",
     "defense": "25",
     "puissance attaque": "60",
@@ -132,7 +132,7 @@
     "visible": true
   },
   {
-    "numero": "12",
+    "numero": "13",
     "nom": "Osselait",
     "type": "Sol",
     "defense": "50",
@@ -143,7 +143,7 @@
     "visible": true
   },
   {
-    "numero": "12",
+    "numero": "14",
     "nom": "Ossatueur",
     "type": "Sol",
     "defense": "80",
@@ -154,7 +154,7 @@
     "visible": false
   },
   {
-    "numero": "14",
+    "numero": "15",
     "nom": "Rattatac",
     "type": "Normal",
     "defense": "90",
