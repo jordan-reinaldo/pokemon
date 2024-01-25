@@ -147,23 +147,24 @@ class Nouvelle_partie:
 
     
     def choix_pokemon_aleatoire(self):
+        # Sélectionnez un objet Pokemon aléatoire de la liste
+        donnees_pokemon_aleatoire = random.choice(Pokemon.tous_pokemons)
 
-        pokemon_aleatoire = random.choice(infoPokemon)  # Sélectionnez un objet Pokemon aléatoire de la liste
-        print(f"Pokemon choisi aléatoirement : {pokemon_aleatoire.nom}")
-        
-        with open("json/pokedex.json", "r") as fichier:
-            donneesPokemon = json.load(fichier)
-
-        index_pokemon_aleatoire = infoPokemon.index(pokemon_aleatoire)
-        donneesPokemon[index_pokemon_aleatoire]["visible"] = True
-
-        with open("json/pokedex.json", "w") as fichier:
-            json.dump(donneesPokemon, fichier, indent=2)
-
-        if pokemon_aleatoire.attaque_de_base is None:
-            pokemon_aleatoire.attaque_de_base = Attaque.assigner_attaque_base(pokemon_aleatoire)
+        # Créez une nouvelle instance du Pokémon
+        pokemon_aleatoire = Pokemon(
+            nom=donnees_pokemon_aleatoire.nom,
+            type_pokemon=donnees_pokemon_aleatoire.type,
+            pv=donnees_pokemon_aleatoire.pv,
+            attaque=donnees_pokemon_aleatoire.attaque,
+            defense=donnees_pokemon_aleatoire.defense,
+            lvl=donnees_pokemon_aleatoire.lvl,
+            xp=donnees_pokemon_aleatoire.xp,
+            xp_necessaire=donnees_pokemon_aleatoire.xp_necessaire,
+            attaque_de_base=donnees_pokemon_aleatoire.attaque_de_base
+        )
 
         return pokemon_aleatoire
+
 
     def choix_pokemon_joueur(self):
         pokemon_joueur = infoPokemon[self.index_pokemon]
