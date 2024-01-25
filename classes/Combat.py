@@ -162,7 +162,6 @@ class Combat:
         self.afficher_mon_equipe(ecran)
 
         while self.running:
-            self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
             self.effacer_message(ecran)
             ecran.blit(arriere_plan, (0, 0))  # Dessiner l'arrière-plan
             ecran.blit(sprite_mon_pokemon, (50, 280))
