@@ -160,7 +160,7 @@ class Nouvelle_partie:
             lvl=donnees_pokemon_aleatoire.lvl,
             xp=donnees_pokemon_aleatoire.xp,
             xp_necessaire=donnees_pokemon_aleatoire.xp_necessaire,
-            attaque_de_base=donnees_pokemon_aleatoire.attaque_de_base
+            attaque_de_base=donnees_pokemon_aleatoire.attaque_de_base or Attaque.assigner_attaque_base(donnees_pokemon_aleatoire)
         )
 
         return pokemon_aleatoire
@@ -232,8 +232,6 @@ class Nouvelle_partie:
                         elif 535 <= event.pos[0] <= 600 and 743 <= event.pos[1] <= 760:
                             pokemon_joueur = self.creer_equipe()[0]
                             pokemon_aleatoire = self.choix_pokemon_aleatoire()
-                            if pokemon_aleatoire == pokemon_joueur:
-                                pokemon_aleatoire = self.choix_pokemon_aleatoire()
                             if pokemon_joueur.attaque_de_base is None:
                                 pokemon_joueur.attaque_de_base = Attaque.assigner_attaque_base(pokemon_joueur)
                             if pokemon_aleatoire.attaque_de_base is None:
