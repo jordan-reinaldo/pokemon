@@ -218,6 +218,8 @@ class Combat:
                         nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
                     self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
                 else:
+                    self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
+                    self.running = False
                     menu = Menu_principal()
                     menu.afficher_menu()
                     pygame.mixer.music.stop()
@@ -234,6 +236,8 @@ class Combat:
                         nouveau_adversaire = self.nouvelle_partie.choix_pokemon_aleatoire()
                     self.lancer_combat(self.mon_pokemon, nouveau_adversaire)
                 else:
+                    self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
+                    self.running = False
                     menu = Menu_principal()
                     menu.afficher_menu()
                     pygame.mixer.music.stop()
