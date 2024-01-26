@@ -8,7 +8,7 @@
     "point de vie": "50",
     "image": "images/pokemon/salameche.png",
     "cri": "musique/salameche.ogg",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "2",
@@ -19,7 +19,7 @@
     "point de vie": "80",
     "cri": "musique/reptincel.ogg",
     "image": "images/pokemon/reptincel.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "3",
@@ -30,7 +30,7 @@
     "point de vie": "50",
     "image": "images/pokemon/carapuce.png",
     "cri": "musique/carapuce.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "4",
@@ -41,7 +41,7 @@
     "point de vie": "65",
     "cri": "musique/carabaffe.ogg",
     "image": "images/pokemon/carabaffe.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "5",
@@ -63,7 +63,7 @@
     "point de vie": "60",
     "cri": "musique/herbizarre.mp3",
     "image": "images/pokemon/herbizarre.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "7",
@@ -74,7 +74,7 @@
     "point de vie": "35",
     "image": "images/pokemon/pikachu.png",
     "cri": "musique/pikachu.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "8",
@@ -85,7 +85,7 @@
     "point de vie": "60",
     "cri": "musique/raichu.ogg",
     "image": "images/pokemon/raichu.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "9",
@@ -96,7 +96,7 @@
     "point de vie": "55",
     "image": "images/pokemon/evoli.png",
     "cri": "musique/evoli.ogg",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "10",
@@ -107,7 +107,18 @@
     "point de vie": "65",
     "image": "images/pokemon/phyllali.png",
     "cri": "musique/phyllali.mp3",
-    "visible": true
+    "visible": false
+  },
+  {
+    "numero": "12",
+    "nom": "Roucool",
+    "type": "Vol",
+    "defense": "25",
+    "puissance attaque": "60",
+    "point de vie": "50",
+    "cri": "musique/roucoul.mp3",
+    "image": "images/pokemon/roucoul.png",
+    "visible": false
   },
   {
     "numero": "11",
@@ -121,17 +132,6 @@
     "visible": false
   },
   {
-    "numero": "12",
-    "nom": "Roucool",
-    "type": "Vol",
-    "defense": "25",
-    "puissance attaque": "60",
-    "point de vie": "50",
-    "cri": "musique/roucoul.mp3",
-    "image": "images/pokemon/roucoul.png",
-    "visible": true
-  },
-  {
     "numero": "13",
     "nom": "Osselait",
     "type": "Sol",
@@ -140,7 +140,7 @@
     "point de vie": "50",
     "image": "images/pokemon/osselait.png",
     "cri": "musique/osselait.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "14",
@@ -162,7 +162,7 @@
     "point de vie": "60",
     "cri": "musique/rattatac.mp3",
     "image": "images/pokemon/rattatac.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "16",
@@ -173,6 +173,6 @@
     "point de vie": "65",
     "cri": "musique/roucoups.mp3",
     "image": "images/pokemon/roucoups.png",
-    "visible": true
+    "visible": false
   }
 ]
