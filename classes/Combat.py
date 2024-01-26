@@ -84,39 +84,44 @@ class Combat:
 
             pygame.display.flip()
 
-    def afficher_mon_equipe(self, ecran):
-        equipe = self.nouvelle_partie.equipe_pokemon
+    # def afficher_mon_equipe(self, ecran):
+    #     equipe = self.nouvelle_partie.equipe_pokemon
 
-        equipe_rect = pygame.Rect(10, 10, 180, 100)
-        pygame.draw.rect(ecran, (255, 255, 255), equipe_rect)
+    #     equipe_rect = pygame.Rect(10, 10, 180, 100)
+    #     pygame.draw.rect(ecran, (255, 255, 255), equipe_rect)
 
-        font_titre_equipe = pygame.font.Font("police/Retro_Gaming.ttf", 18)
-        texte_titre = font_titre_equipe.render("Mon Equipe :", True, (0, 0, 0))
-        ecran.blit(texte_titre, (20, 20))
+    #     font_titre_equipe = pygame.font.Font("police/Retro_Gaming.ttf", 18)
+    #     texte_titre = font_titre_equipe.render("Mon Equipe :", True, (0, 0, 0))
+    #     ecran.blit(texte_titre, (20, 20))
 
-        font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
-        for i, pokemon in enumerate(equipe):
-            texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
-            ecran.blit(texte_pokemon, (20, 40 + i * 20))
+    #     font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
+    #     for i, pokemon in enumerate(equipe):
+    #         texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
+    #         ecran.blit(texte_pokemon, (20, 40 + i * 20))
 
     def choisir_pokemon(self, ecran):
         equipe = self.nouvelle_partie.equipe_pokemon
 
         pokemon_choisi = None
         while not pokemon_choisi:
+            # Charger l'image d'arrière-plan du rectangle
+            background_image = pygame.image.load("images/background/choix.png")
+            background_image = pygame.transform.scale(background_image, (400, 300))  # Ajustez la taille selon vos besoins
+
             liste_rect = pygame.Rect(200, 100, 400, 300)
-            pygame.draw.rect(ecran, (255, 255, 255), liste_rect)
+            # Dessiner l'image d'arrière-plan pour le rectangle
+            ecran.blit(background_image, (200, 100))
 
             font_titre = pygame.font.Font("police/Retro_Gaming.ttf", 18)
-            texte_titre = font_titre.render("Choisir un Pokémon:", True, (0, 0, 0))
-            ecran.blit(texte_titre, (250, 110))
+            texte_titre = font_titre.render("Choisir un Pokémon:", True, (255, 255, 255))
+            ecran.blit(texte_titre, (285, 110))
 
             font = pygame.font.Font("police/Retro_Gaming.ttf", 16)
             for i, pokemon in enumerate(equipe):
-                texte_pokemon = font.render(pokemon.nom, True, (0, 0, 0))
-                rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
-                pygame.draw.rect(ecran, (200, 200, 200), rect_pokemon)
-                ecran.blit(texte_pokemon, (260, 140 + i * 20))
+                texte_pokemon = font.render(pokemon.nom, True, (255, 255, 255))
+                rect_pokemon = pygame.Rect(345, 140 + i * 20, 150, 20)
+                #pygame.draw.rect(ecran, (200, 200, 200), rect_pokemon)
+                ecran.blit(texte_pokemon, (345, 140 + i * 20))
 
             pygame.display.flip()
 
@@ -126,12 +131,13 @@ class Combat:
                     return None
                 elif event.type == pygame.MOUSEBUTTONDOWN:
                     for i, pokemon in enumerate(equipe):
-                        rect_pokemon = pygame.Rect(250, 140 + i * 20, 150, 20)
+                        rect_pokemon = pygame.Rect(345, 140 + i * 20, 150, 20)
                         if rect_pokemon.collidepoint(event.pos):
                             pokemon_choisi = pokemon
                             break
 
         return pokemon_choisi
+
 
 
     def lancer_combat(self, mon_pokemon, adversaire):
@@ -159,7 +165,7 @@ class Combat:
         bouton_fuite_rect = pygame.Rect(650, 500, 100, 50)
         bouton_choix_pokemon_rect = pygame.Rect(270, 500, 250, 50)
 
-        self.afficher_mon_equipe(ecran)
+        #self.afficher_mon_equipe(ecran)
 
         while self.running:
             self.effacer_message(ecran)
@@ -170,7 +176,7 @@ class Combat:
             self.dessiner_bouton(ecran, "Fuite", 650, 500, 100, 50, (255, 0, 0), (255, 100, 100))
             self.dessiner_bouton(ecran, "Changer de Pokemon", 270, 500, 250, 50, (255, 0, 0), (255, 100, 100))
 
-            self.afficher_mon_equipe(ecran)
+            #self.afficher_mon_equipe(ecran)
 
             # Mettre à jour l'affichage des PV
             self.mettre_a_jour_info_pokemon(ecran, font, self.mon_pokemon, self.adversaire)
