@@ -8,7 +8,7 @@
     "point de vie": "50",
     "image": "images/pokemon/salameche.png",
     "cri": "musique/salameche.ogg",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "2",
@@ -85,7 +85,7 @@
     "point de vie": "60",
     "cri": "musique/raichu.ogg",
     "image": "images/pokemon/raichu.png",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "9",
@@ -96,7 +96,7 @@
     "point de vie": "55",
     "image": "images/pokemon/evoli.png",
     "cri": "musique/evoli.ogg",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "10",

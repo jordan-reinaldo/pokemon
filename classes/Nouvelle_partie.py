@@ -163,6 +163,19 @@ class Nouvelle_partie:
             attaque_de_base=donnees_pokemon_aleatoire.attaque_de_base
         )
 
+        print(f"Pokemon choisi aléatoirement : {pokemon_aleatoire.nom}")
+
+        with open("json/pokedex.json", "r") as fichier:
+            donnees_pokedex = json.load(fichier)
+
+        # Mettre à jour la visibilité du Pokémon choisi aléatoirement
+        index_pokemon_aleatoire = Pokemon.tous_pokemons.index(donnees_pokemon_aleatoire)
+        donnees_pokedex[index_pokemon_aleatoire]["visible"] = True
+
+        # Sauvegarder les données mises à jour dans le fichier JSON
+        with open("json/pokedex.json", "w") as fichier:
+            json.dump(donnees_pokedex, fichier, indent=2)
+
         return pokemon_aleatoire
 
 
