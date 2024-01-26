@@ -163,6 +163,18 @@ class Nouvelle_partie:
             attaque_de_base=donnees_pokemon_aleatoire.attaque_de_base or Attaque.assigner_attaque_base(donnees_pokemon_aleatoire)
         )
 
+        # Mettre à jour le statut "visible" dans pokedex.json
+        with open("json/pokedex.json", "r") as fichier:
+            donnees_pokedex = json.load(fichier)
+
+        for pokemon in donnees_pokedex:
+            if pokemon["nom"] == pokemon_aleatoire.nom:
+                pokemon["visible"] = True
+                break
+
+        with open("json/pokedex.json", "w") as fichier:
+            json.dump(donnees_pokedex, fichier, indent=2)
+
         return pokemon_aleatoire
 
 
