@@ -30,7 +30,7 @@
     "point de vie": "50",
     "image": "images/pokemon/carapuce.png",
     "cri": "musique/carapuce.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "4",
@@ -52,7 +52,7 @@
     "point de vie": "45",
     "image": "images/pokemon/bulbizarre.png",
     "cri": "musique/bulbizarre.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "6",
@@ -118,7 +118,7 @@
     "point de vie": "50",
     "image": "images/pokemon/rattata.png",
     "cri": "musique/rattata.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "12",
@@ -129,7 +129,7 @@
     "point de vie": "50",
     "cri": "musique/roucoul.mp3",
     "image": "images/pokemon/roucoul.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "13",
@@ -140,7 +140,7 @@
     "point de vie": "50",
     "image": "images/pokemon/osselait.png",
     "cri": "musique/osselait.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "14",
