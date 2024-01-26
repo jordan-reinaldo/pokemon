@@ -35,11 +35,11 @@ class Type:
 
     @staticmethod
     def sol():
-        return Type("Sol", forces=["Feu", "Electrik", "Poison", "Roche", "Acier"], faiblesses=["Eau", "Plante", "Glace"], nulle_defense=["Vol"])
+        return Type("Sol", forces=["Feu", "Electrik", "Poison", "Roche", "Acier"], faiblesses=["Eau", "Plante", "Glace"])
 
     @staticmethod
     def vol():
-        return Type("Vol", forces=["Plante", "Combat", "Insecte"], faiblesses=["Electrik", "Glace", "Roche"])
+        return Type("Vol", forces=["Plante", "Combat", "Insecte"], faiblesses=["Electrik", "Glace", "Roche"], nulle_defense=["Sol"])
 
     @staticmethod
     def psy():

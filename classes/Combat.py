@@ -120,6 +120,9 @@ class Combat:
             for i, pokemon in enumerate(equipe):
                 texte_pokemon = font.render(pokemon.nom, True, (255, 255, 255))
                 rect_pokemon = pygame.Rect(345, 140 + i * 20, 150, 20)
+                souris_x, souris_y = pygame.mouse.get_pos()  # Add this line to get the mouse position
+                if rect_pokemon.collidepoint(souris_x, souris_y):
+                    texte_pokemon = font.render(pokemon.nom, True, (255, 255, 0))  # Texte en jaune
                 #pygame.draw.rect(ecran, (200, 200, 200), rect_pokemon)
                 ecran.blit(texte_pokemon, (345, 140 + i * 20))
 
