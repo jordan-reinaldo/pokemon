@@ -128,11 +128,11 @@ class Pokedex: # Je crée une classe Pokedex
 
 
     def afficherPokemonRencontre(self, index_pokemon): # Je crée une méthode pour afficher le pokemon rencontré
-        if 0 <= index_pokemon < len(donneesPokedex):
-            self.index_pokemon = index_pokemon
-            pokemon = donneesPokedex[index_pokemon]
+        if 0 <= index_pokemon < len(donneesPokedex): # Si l'index du pokemon est compris entre 0 et le nombre de pokemon dans le pokedex
+            self.index_pokemon = index_pokemon # Je crée une variable pour l'index du pokemon #self.index_pokemon = index_pokemon correspond à l'index du pokemon
+            pokemon = donneesPokedex[index_pokemon] # Je crée une variable pour le pokemon #donneesPokedex[index_pokemon] correspond au pokemon
 
-            if pokemon.get("visible", True):
+            if pokemon.get("visible", True): # Si le pokemon est visible
                 try:
                     chemin_image = pokemon["image"]
                     image_pokemon = pg.image.load(chemin_image)
