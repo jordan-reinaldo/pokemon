@@ -85,7 +85,7 @@
     "point de vie": "60",
     "cri": "musique/raichu.ogg",
     "image": "images/pokemon/raichu.png",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "9",
@@ -96,7 +96,7 @@
     "point de vie": "55",
     "image": "images/pokemon/evoli.png",
     "cri": "musique/evoli.ogg",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "10",
@@ -129,7 +129,7 @@
     "point de vie": "50",
     "cri": "musique/roucoul.mp3",
     "image": "images/pokemon/roucoul.png",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "13",
@@ -140,7 +140,7 @@
     "point de vie": "50",
     "image": "images/pokemon/osselait.png",
     "cri": "musique/osselait.mp3",
-    "visible": false
+    "visible": true
   },
   {
     "numero": "14",
