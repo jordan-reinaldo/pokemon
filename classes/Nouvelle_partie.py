@@ -11,7 +11,7 @@ from classes.Menu_principal import *
 #     donneesPokemon = json.load(fichier)
 
 
-infoPokemon = Pokemon.import_json("json/pokemon.json")
+infoPokemon = Pokemon.import_json("json/pokemon.json") # Importer les données du fichier JSON
 
 class Nouvelle_partie:
 
@@ -21,85 +21,84 @@ class Nouvelle_partie:
         self.largeur = largeur
         self.hauteur = hauteur
         self.fenetre = pg.display.set_mode((self.largeur, self.hauteur))
-        pg.display.set_caption("Pokemon Arena-Fighter")
-        pg.display.set_icon(pg.image.load("images/logo/logopokeball.png"))
-        self.image_fond = pg.image.load("images/background/paysage_pokemon_nouvelle_partie.jpg")
-        self.image_fond_redimensionne = pg.transform.scale(self.image_fond, (800, 800))
+        pg.display.set_caption("Pokemon Arena-Fighter") # Titre de la fenêtre
+        pg.display.set_icon(pg.image.load("images/logo/logopokeball.png")) # Icone de la fenêtre
+        self.image_fond = pg.image.load("images/background/paysage_pokemon_nouvelle_partie.jpg") # Image de fond
+        self.image_fond_redimensionne = pg.transform.scale(self.image_fond, (800, 800)) # Redimensionner l'image de fond
 
-        self.image_carte_pokemon = pg.image.load("images/background/cadre carte vide.png")
+        self.image_carte_pokemon = pg.image.load("images/background/cadre carte vide.png") # Image de la carte Pokémon
         self.image_carte_pokemon_redimensionne = pg.transform.scale(self.image_carte_pokemon, (450, 620))
 
-        font_chemin = "police/Pokemon Solid.ttf"
-        font = pg.font.Font(font_chemin, 30)
+        font_chemin = "police/Pokemon Solid.ttf" # Chemin de la police
+        font = pg.font.Font(font_chemin, 30) # Police et taille de la police
 
         self.nom_dresseur = pg.image.load("titre/nom-dresseur.png")
         self.nom_dresseur = pg.transform.scale(self.nom_dresseur, (400, 100))
         
-        self.input_box = pg.Rect(300, 100, 270, 40)
-        self.is_input_active = False
-        self.texte = ""
+        self.input_box = pg.Rect(300, 100, 270, 40) # Position et taille de la zone de texte pour écrire le nom du dresseur
+        self.is_input_active = False 
+        self.texte = "" # Texte à écrire dans la zone de texte
         self.font = pg.font.Font(None, 36)
 
-        self.fleche_gauche = pg.image.load("images/bouton/fleche-gauche.png")
+        self.fleche_gauche = pg.image.load("images/bouton/fleche-gauche.png") # Image de la flèche gauche
         self.fleche_gauche = pg.transform.scale(self.fleche_gauche, (40, 40))
 
-        self.fleche_droite = pg.image.load("images/bouton/fleche-droite.png")
+        self.fleche_droite = pg.image.load("images/bouton/fleche-droite.png") # Image de la flèche droite
         self.fleche_droite = pg.transform.scale(self.fleche_droite, (40, 40))
        
 
-        self.index_pokemon = 0
+        self.index_pokemon = 0 # Index du Pokémon actuellement affiché
 
-        self.equipe_pokemon = []
+        self.equipe_pokemon = [] # Liste des Pokémon dans l'équipe du joueur
 
-    # methode mise a jour fichier json
-    def mise_a_jour_fichier_json(self):
+    def mise_a_jour_fichier_json(self): # Mettre à jour le fichier JSON # Actuellement inutilisé
         Pokemon.import_json("json/pokemon.json")
 
         
-    def flouterImage(self, image):
-        image_np = pg.surfarray.array3d(image)
-        image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)
+    def flouterImage(self, image): # Flouter l'image de fond
+        image_np = pg.surfarray.array3d(image) # Je convertis la surface Pygame en tableau numpy
+        image_np = cv2.cvtColor(image_np, cv2.COLOR_RGB2BGR)  # Je convertis l'image en BGR
 
-        blurred_image = cv2.GaussianBlur(image_np, (25, 25), 0)
+        blurred_image = cv2.GaussianBlur(image_np, (25, 25), 0) # Je floute l'image avec un noyau de 25x25 # Un noyau plus grand donne un flou plus important
 
-        blurred_image = cv2.cvtColor(blurred_image, cv2.COLOR_BGR2RGB)
-        blurred_surface = pg.surfarray.make_surface(blurred_image)
+        blurred_image = cv2.cvtColor(blurred_image, cv2.COLOR_BGR2RGB) # Je reconverti l'image en RGB #RGB signifie Rouge, Vert, Bleu
+        blurred_surface = pg.surfarray.make_surface(blurred_image) # Je reconverti l'image en surface Pygame
 
-        return blurred_surface
+        return blurred_surface # Je retourne l'image floutée
     
-    def fenetre_ecrire_nom(self):
-        pg.draw.rect(self.fenetre, (255, 255, 255), self.input_box, 2)
+    def fenetre_ecrire_nom(self): # Afficher la fenêtre pour écrire le nom du dresseur
+        pg.draw.rect(self.fenetre, (255, 255, 255), self.input_box, 2) # Rectangle blanc pour la zone de texte , 2 pour l'épaisseur de la bordure
         texte_surface = self.font.render(self.texte, True, (200, 0, 0))
-        width = max(200, texte_surface.get_width() + 10)
-        self.input_box.w = width
+        width = max(200, texte_surface.get_width() + 10) # .Get_width() + 10 pour que la zone de texte soit plus grande que le texte
+        self.input_box.w = width # Largeur de la zone de texte
         self.fenetre.blit(texte_surface, (self.input_box.x + 5, self.input_box.y + 5))
 
-    def zone_texte(self, event):
+    def zone_texte(self, event): # Zone de texte pour écrire le nom du dresseur
 
-        if event.type == pg.MOUSEBUTTONDOWN:
-            if self.input_box.collidepoint(event.pos):
-                self.is_input_active = not self.is_input_active
+        if event.type == pg.MOUSEBUTTONDOWN: # Si on clique
+            if self.input_box.collidepoint(event.pos): # Si on clique sur la zone de texte .collidepoint() permet de savoir si un point est dans un rectangle
+                self.is_input_active = not self.is_input_active # Activer ou désactiver la zone de texte
             else:
-                self.is_input_active = False
+                self.is_input_active = False # Désactiver la zone de texte
 
-        if event.type == pg.KEYDOWN:
-            if self.is_input_active:
-                if event.key == pg.K_RETURN:
-                    print(self.texte)
-                    self.texte = ""
-                elif event.key == pg.K_BACKSPACE:
-                    self.texte = self.texte[:-1]
+        if event.type == pg.KEYDOWN: # Si on appuie sur une touche
+            if self.is_input_active: # Si la zone de texte est active
+                if event.key == pg.K_RETURN: # Si on appuie sur la touche entrée
+                    print(self.texte) # Afficher le texte
+                    self.texte = "" # Réinitialiser le texte
+                elif event.key == pg.K_BACKSPACE: # Si on appuie sur la touche retour
+                    self.texte = self.texte[:-1] # Supprimer le dernier caractère
                 else:
-                    self.texte += event.unicode
+                    self.texte += event.unicode # Ajouter le caractère à la fin du texte
 
-    def afficherPokemon(self, index_pokemon):
+    def afficherPokemon(self, index_pokemon): # Afficher les informations du Pokémon
         
         
-        if 0 <= index_pokemon < len(Pokemon.tous_pokemons):
-            self.index_pokemon = index_pokemon
+        if 0 <= index_pokemon < len(Pokemon.tous_pokemons): # Si l'index du pokémon est dans la liste des pokémons
+            self.index_pokemon = index_pokemon # Mettre à jour l'index du pokémon
             pokemon = infoPokemon[self.index_pokemon]  # Obtenir l'objet Pokemon spécifique
 
-            try:
+            try: # Essayer de charger l'image du Pokémon
                 # Charger et afficher l'image du Pokémon
                 image_pokemon = pg.image.load(f"images/pokemon/{pokemon.nom}1.png")
                 image_redimensionnee = pg.transform.scale(image_pokemon, (270, 270))
@@ -143,10 +142,10 @@ class Nouvelle_partie:
                 self.fenetre.blit(bouton_retour_redimensionne, (680, 720))
 
             except pg.error as e:
-                print(f"Erreur de chargement d'image : {e}")
+                print(f"Erreur de chargement d'image : {e}") # Afficher l'erreur si le chargement de l'image échoue
 
     
-    def choix_pokemon_aleatoire(self):
+    def choix_pokemon_aleatoire(self): 
         # Sélectionnez un objet Pokemon aléatoire de la liste
         donnees_pokemon_aleatoire = random.choice(Pokemon.tous_pokemons)
 
@@ -178,10 +177,10 @@ class Nouvelle_partie:
         return pokemon_aleatoire
 
 
-    def choix_pokemon_joueur(self):
-        pokemon_joueur = infoPokemon[self.index_pokemon]
+    def choix_pokemon_joueur(self): # Choisir un Pokémon pour le joueur
+        pokemon_joueur = infoPokemon[self.index_pokemon] # Obtenir l'objet Pokemon spécifique
         
-        print(f"Pokemon choisi par le joueur : {pokemon_joueur.nom}")
+        print(f"Pokemon choisi par le joueur : {pokemon_joueur.nom}") # Afficher le nom du Pokémon choisi par le joueur
 
         # Charger les données du Pokédex depuis le fichier JSON
         with open("json/pokedex.json", "r") as fichier:
@@ -209,7 +208,7 @@ class Nouvelle_partie:
         return self.equipe_pokemon
 
 
-    def afficher_fenetre(self):
+    def afficher_fenetre(self): # Afficher la fenêtre ### METHODE PRINCIPALE ###
         
         while True:
             image_floue = self.flouterImage(self.image_fond_redimensionne)
@@ -265,6 +264,6 @@ class Nouvelle_partie:
             pg.display.flip()
 
 
-if __name__ == "__main__":
-    nouvelle_partie = Nouvelle_partie(800, 800)
-    nouvelle_partie.afficher_fenetre()
+if __name__ == "__main__": # Si le fichier est exécuté directement
+    nouvelle_partie = Nouvelle_partie(800, 800) # Créer une nouvelle instance de la classe Nouvelle_partie
+    nouvelle_partie.afficher_fenetre() # Afficher la fenêtre

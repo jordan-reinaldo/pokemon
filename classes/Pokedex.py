@@ -133,11 +133,11 @@ class Pokedex: # Je crée une classe Pokedex
             pokemon = donneesPokedex[index_pokemon] # Je crée une variable pour le pokemon #donneesPokedex[index_pokemon] correspond au pokemon
 
             if pokemon.get("visible", True): # Si le pokemon est visible
-                try:
-                    chemin_image = pokemon["image"]
-                    image_pokemon = pg.image.load(chemin_image)
-                    image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210))
-                    self.fenetre.blit(image_redimensionnee, (310, 125))
+                try: # J'essaie de charger l'image du pokemon #try correspond à l'essai
+                    chemin_image = pokemon["image"] # Je crée une variable pour le chemin de l'image du pokemon
+                    image_pokemon = pg.image.load(chemin_image) # Je crée une variable pour l'image du pokemon
+                    image_redimensionnee = pg.transform.scale(image_pokemon, (210, 210)) # Je crée une variable pour l'image du pokemon #pg.transform.scale(image_pokemon, (210, 210)) correspond à la redimension de l'image du pokemon
+                    self.fenetre.blit(image_redimensionnee, (310, 125)) # J'affiche l'image du pokemon
 
                     font_chemin = "police/Retro_Gaming.ttf"
                     font = pg.font.Font(font_chemin, 16)
@@ -161,24 +161,24 @@ class Pokedex: # Je crée une classe Pokedex
                     print(f"Erreur de chargement d'image : {e}")
 
 
-    def cri_pokemon(self, index_pokemon):
-        if "cri" in donneesPokedex[index_pokemon]:
-            chemin_cri = donneesPokedex[index_pokemon]["cri"]
-            cri = pg.mixer.Sound(chemin_cri)
-            cri.play()
+    def cri_pokemon(self, index_pokemon): # Je crée une méthode pour le cri du pokemon
+        if "cri" in donneesPokedex[index_pokemon]: # Si le cri du pokemon est dans les données du pokedex
+            chemin_cri = donneesPokedex[index_pokemon]["cri"] # Je crée une variable pour le chemin du cri du pokemon
+            cri = pg.mixer.Sound(chemin_cri) # Je crée une variable pour le cri du pokemon
+            cri.play() # Je joue le cri du pokemon
 
 
-    def afficherPokedex(self):
+    def afficherPokedex(self): # Je crée une méthode pour afficher le pokedex
         
-        while self.afficher:
+        while self.afficher: # Tant que la variable pour afficher est vraie
             
-            image_floue = self.flouterImage(self.image_fond)
-            self.fenetre.blit(image_floue, (0, 0))
-            self.fenetre.blit(self.imagePokedex_redimensionnee, (0, 80))
-            self.afficherPokemonRencontre(self.pokemon_affiche)
+            image_floue = self.flouterImage(self.image_fond) # J'appelle la méthode pour flouter l'image
+            self.fenetre.blit(image_floue, (0, 0)) # J'affiche l'image floutée
+            self.fenetre.blit(self.imagePokedex_redimensionnee, (0, 80)) # J'affiche l'image du pokedex
+            self.afficherPokemonRencontre(self.pokemon_affiche) # J'appelle la méthode pour afficher le pokemon rencontré
             
-            border_radius = 10
-            pg.draw.rect(self.fenetre, self.couleur_fleche_gauche, self.fleche_gauche, border_radius=border_radius)
+            border_radius = 10 # Je crée une variable pour le rayon de la bordure
+            pg.draw.rect(self.fenetre, self.couleur_fleche_gauche, self.fleche_gauche, border_radius=border_radius) # Je crée un rectangle pour la flèche gauche
             pg.draw.rect(self.fenetre, self.couleur_fleche_droite, self.fleche_droite, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_haut, self.fleche_haut, border_radius=border_radius)
             pg.draw.rect(self.fenetre, self.couleur_fleche_bas, self.fleche_bas, border_radius=border_radius)
@@ -233,6 +233,6 @@ class Pokedex: # Je crée une classe Pokedex
             pg.display.flip()
 
 
-if __name__ == "__main__":
-    fenetre = Pokedex(800, 800)
-    fenetre.menuPokedex()
+if __name__ == "__main__": # Si le fichier est exécuté
+    fenetre = Pokedex(800, 800) # Je crée une variable pour la fenêtre
+    fenetre.menuPokedex() # J'appelle la méthode pour le menu du pokedex
