@@ -8,7 +8,7 @@
     "point de vie": "50",
     "image": "images/pokemon/salameche.png",
     "cri": "musique/salameche.ogg",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "2",
@@ -52,7 +52,7 @@
     "point de vie": "45",
     "image": "images/pokemon/bulbizarre.png",
     "cri": "musique/bulbizarre.mp3",
-    "visible": true
+    "visible": false
   },
   {
     "numero": "6",
