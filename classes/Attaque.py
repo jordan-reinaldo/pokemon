@@ -111,9 +111,7 @@ class Attaque:
         niveau = pokemon.lvl
         method_name = f'attaque_{type_pokemon}'
     
-        # On récupère la méthode correspondant au type du Pokémon si elle existe
         if hasattr(cls, method_name):
             return getattr(cls, method_name)(niveau)
         else:
-        # Retourne None ou une attaque par défaut si le type n'est pas géré
             return None
